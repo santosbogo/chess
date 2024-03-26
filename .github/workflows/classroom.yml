@@ -1,0 +1,31 @@
+name: Autograding Tests
+'on':
+- push
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Build
+      id: build
+      uses: education/autograding-command-grader@v1
+      with:
+        test-name: Build
+        setup-command: ''
+        command: "./gradlew build"
+        timeout: 10
+        max-score: 10
+    - name: Autograding Reporter
+      uses: education/autograding-grading-reporter@v1
+      env:
+        BUILD_RESULTS: "${{steps.build.outputs.result}}"
+      with:
+        runners: build
