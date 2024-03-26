@@ -1,0 +1,106 @@
+import static org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+
+plugins {
+    // Apply the java Plugin to add support for Java.
+    id 'java'
+
+    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
+    id 'org.jetbrains.kotlin.jvm'
+
+    // Apply the spotless Plugin to add support for code coverage in Java and Kotlin with Spotless.
+    id 'com.diffplug.spotless'
+
+    // Apply the kover Plugin to add support for code coverage in Java and Kotlin with Kover
+    id 'org.jetbrains.kotlinx.kover'
+
+    // Apply the checkstyle Plugin to add support for code coverage in Java with Checkstyle
+    id 'checkstyle'
+
+    // Apply the checkstyle Plugin to add support for code coverage in Java with Checkstyle
+    id 'io.gitlab.arturbosch.detekt'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    constraints {
+        // Define dependency versions as constraints
+        implementation 'org.apache.commons:commons-text:1.11.0'
+    }
+
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Kotlin settings
+kotlin {
+    compilerOptions {
+        freeCompilerArgs = [
+                // `-Xjsr305=strict` enables the strict mode for JSR-305 annotations (Nullability)
+                // https://kotlinlang.org/docs/java-interop.html#compiler-configuration
+                '-Xjsr305=strict',
+        ]
+        jvmTarget = JVM_21
+    }
+}
+
+// Test settings
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+// Code formatting configuration
+spotless {
+    java {
+        googleJavaFormat()
+    }
+    kotlin {
+        ktlint()
+    }
+}
+
+// Coverage configuration
+kover {
+    // JacocoEngine is used
+    useJacoco()
+}
+
+koverReport {
+    verify {
+        rule('Minimal line coverage rate') {
+            minBound(80)
+        }
+    }
+    defaults {
+        html {
+            onCheck = true
+        }
+    }
+}
+
+// Static code analysis configuration
+checkstyle {
+    toolVersion = '10.3.3'
+
+    ignoreFailures = false
+    maxWarnings = 0
+}
+detekt {
+    // Uses the default configuration and only overrides the configurations in "detekt-config.yaml"
+    buildUponDefaultConfig = true
+    config.from("${rootDir}/config/detekt-config.yaml")
+}
+

@@ -1,0 +1,31 @@
+build:
+  maxIssues: 0
+
+complexity:
+  LongParameterList:
+    functionThreshold: 10
+    constructorThreshold: 10
+  TooManyFunctions:
+    thresholdInFiles: 15
+    thresholdInClasses: 15
+    thresholdInInterfaces: 15
+    thresholdInObjects: 15
+    thresholdInEnums: 15
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+  TooGenericExceptionThrown:
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+
+style:
+  ForbiddenComment:
+    active: false
+  MaxLineLength:
+    maxLineLength: 130
+  WildcardImport:
+    excludeImports:
+      - 'java.util.*'
+      - 'org.mockito.kotlin.*'
+      - 'kotlinx.coroutines.flow.*'
+      - 'org.hamcrest.Matchers.*'

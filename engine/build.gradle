@@ -1,0 +1,13 @@
+plugins {
+    id 'application-conventions'
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-text'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'edu.austral.dissis.chess.engine.App'
+//    mainClass = 'edu.austral.dissis.chess.engine.AppKt'
+}
