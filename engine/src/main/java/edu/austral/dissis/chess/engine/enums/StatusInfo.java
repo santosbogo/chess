@@ -1,5 +1,5 @@
 package edu.austral.dissis.chess.engine.enums;
 
-public enum GameStatus {
+public enum StatusInfo {
     NORMAL ,CHECK, CHECKMATE, DRAW
 }

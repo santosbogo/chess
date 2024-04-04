@@ -1,7 +1,9 @@
 package edu.austral.dissis.chess.engine.pieces;
 
+import edu.austral.dissis.chess.engine.boards.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
+import edu.austral.dissis.chess.engine.moves.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +11,29 @@ import java.util.List;
 public class Bishop extends Piece {
     private boolean dead = false;
 
-    public Bishop(PieceColor pieceColor){
-        super(pieceColor);
+    public Bishop(PieceColor pieceColor, Coordinates coordinates){
+        super(pieceColor, coordinates);
     }
 
     @Override
-    public List<Coordinates> possibleMoves() {
-        List<Coordinates> posibleMoves = new ArrayList<>();
+    public boolean isBlocked(Board board, Move move) {
+        Coordinates from = move.getFrom();
+        Coordinates to = move.getTo();
+        int xDistance = Math.abs(to.getX() - from.getX());
+        int yDistance = Math.abs(to.getY() - from.getY());
 
-        //TODO RULES
+        int verticalDirection = xDistance > 0 ? 1 : -1;
+        int horizontalDirection = yDistance > 0 ? 1 : -1;
 
-        return posibleMoves;
+        for(int i = 1; i < xDistance; ++i) {
+            int x = from.getX() + i * verticalDirection;
+            int y = from.getY() + i * horizontalDirection;
+            if (!board.isEmptySquare(new Coordinates(x, y))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

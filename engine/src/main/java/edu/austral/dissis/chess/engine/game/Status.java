@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.engine.game;
 
 import edu.austral.dissis.chess.engine.boards.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
-import edu.austral.dissis.chess.engine.enums.GameStatus;
+import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.Piece;
 import edu.austral.dissis.chess.engine.player.Player;
@@ -16,17 +16,17 @@ public class Status {
         this.playerTurn = playerTurn;
     }
 
-    public GameStatus getStatus(){
+    public StatusInfo getStatusInfo(){
         if(isCheck()){
-            return GameStatus.CHECK;
+            return StatusInfo.CHECK;
         }
         if(isCheckMate()){
-            return GameStatus.CHECKMATE;
+            return StatusInfo.CHECKMATE;
         }
         if(isDraw()){
-            return GameStatus.DRAW;
+            return StatusInfo.DRAW;
         }
-        return GameStatus.NORMAL;
+        return StatusInfo.NORMAL;
     }
 
     public Player getPlayerTurn() {
@@ -45,7 +45,7 @@ public class Status {
                 if (i == 0 && j == 0)
                     continue;
                 Coordinates next = new Coordinates(kingCoordinates.getX() + i, kingCoordinates.getY() + j);
-                if (new Move(board, board.getPieceAt(kingCoordinates), kingCoordinates, next).isMoveValid()
+                if (new Move(board, kingCoordinates, next).isMoveValid()
                         && !board.isSquareThreatened(next)) {
                     return false;
                 }
@@ -73,7 +73,6 @@ public class Status {
                         && piece.getColor().equals(playerTurn.getColor())
                         && piece.canMove(board, tempCoordinates))
                     return false;
-
             }
         }
         return true;

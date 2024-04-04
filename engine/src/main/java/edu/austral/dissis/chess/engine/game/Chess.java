@@ -2,8 +2,9 @@ package edu.austral.dissis.chess.engine.game;
 
 import edu.austral.dissis.chess.engine.boards.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
-import edu.austral.dissis.chess.engine.enums.GameStatus;
+import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
+import edu.austral.dissis.chess.engine.interactor.Interactor;
 import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.*;
 import edu.austral.dissis.chess.engine.player.Player;
@@ -11,46 +12,67 @@ import edu.austral.dissis.chess.engine.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Chess {
     private final Player whitePlayer;
     private final Player blackPlayer;
     private final List<Board> boardHistory = new ArrayList<>();
-    private Status status;
+    private final Interactor interactor = new Interactor();
 
     public Chess(){
         this.whitePlayer = new Player(PieceColor.WHITE);
         this.blackPlayer = new Player(PieceColor.BLACK);
         
-        setBoard(8, 8);
+        setBoard(8, 8, new Status(peekLastBoard(), whitePlayer));
         startingPosition();
-        
-        this.status = new Status(peekLastBoard(), whitePlayer);
+
     }
     
     public void play(){
-        Player playerTurn = whitePlayer;
-        
-        while(status.getStatus() != GameStatus.CHECKMATE || status.getStatus() != GameStatus.DRAW){
+        Board board = peekLastBoard();
+
+        while(board.getStatusInfo() != StatusInfo.CHECKMATE || board.getStatusInfo() != StatusInfo.DRAW){
+            board = peekLastBoard(); //Queda medio feo repetir. Buscar si existe una mejor forma de hacerlo
+            Player playerTurn = board.getStatus().getPlayerTurn();
+
+            interactor.colorTurnMessage(playerTurn.getColor());
             playTurn(playerTurn);
-            changeTurn();
+            //Change player turn and generate new status
         }
     }
     
     private void playTurn(Player player){
-    }
+        Move move = new Move(peekLastBoard(), interactor.getInputFromCoordinates(), interactor.getInputToCoordinates());
+        Board board = peekLastBoard();
 
-    public void changeTurn(){
-        if(status.getPlayerTurn() == whitePlayer){
-            status = new Status(peekLastBoard(), blackPlayer);
+        if (!move.isMoveValid()) {
+            interactor.invalidMoveMessage();
+            playTurn(player);
         } else {
-            status = new Status(peekLastBoard(), whitePlayer);
+            updateBoardHistory(board, board.movePiece(move));
         }
     }
 
+    public Player switchPlayer(Player player) {
+        if(player == whitePlayer) {
+            return blackPlayer;
+        } else {
+            return whitePlayer;
+        }
+    }
 
-    private void setBoard(int xSize, int ySize) {
-        boardHistory.add(new Board(xSize, ySize, startingPosition()));
+    private Status generateNewStatus(Board board){
+        Player otherPlayer = switchPlayer(board.getStatus().getPlayerTurn());
+        return new Status(board, otherPlayer);
+    }
+
+    private void updateBoardHistory(Board oldBoard, Board newBoard){
+        boardHistory.add(new Board(oldBoard.getXSize(), oldBoard.getYSize(), newBoard.getBoard(), generateNewStatus(newBoard)));
+    }
+
+    private void setBoard(int xSize, int ySize, Status status) {
+        boardHistory.add(new Board(xSize, ySize, startingPosition(), status));
     }
 
     private Board peekLastBoard(){
@@ -61,34 +83,34 @@ public class Chess {
         return new ArrayList<>(boardHistory);
     }
 
-    public HashMap<Coordinates, Piece> startingPosition() {
-        HashMap<Coordinates, Piece> startingPosition = new HashMap<>();
+    public Map<Coordinates, Piece> startingPosition() {
+        Map<Coordinates, Piece> startingPosition = new HashMap<>();
 
         //White pieces
         for(int i = 1; i <= 8; i++){
-            startingPosition.put(new Coordinates(i, 2), new Pawn(PieceColor.WHITE));
+            startingPosition.put(new Coordinates(i, 2), new Pawn(PieceColor.WHITE, new Coordinates(i, 2)));
         }
-        startingPosition.put(new Coordinates(1, 2), new Rook(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(8, 2), new Rook(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(2, 2), new Horse(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(7, 2), new Horse(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(3, 2), new Bishop(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(6, 2), new Bishop(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(4, 2), new Queen(PieceColor.WHITE));
-        startingPosition.put(new Coordinates(5, 2), new King(PieceColor.WHITE));
+        startingPosition.put(new Coordinates(1, 1), new Rook(PieceColor.WHITE, new Coordinates(1, 1)));
+        startingPosition.put(new Coordinates(8, 1), new Rook(PieceColor.WHITE, new Coordinates(8, 1)));
+        startingPosition.put(new Coordinates(2, 1), new Horse(PieceColor.WHITE, new Coordinates(2, 1)));
+        startingPosition.put(new Coordinates(7, 1), new Horse(PieceColor.WHITE, new Coordinates(7, 1)));
+        startingPosition.put(new Coordinates(3, 1), new Bishop(PieceColor.WHITE, new Coordinates(3, 1)));
+        startingPosition.put(new Coordinates(6, 1), new Bishop(PieceColor.WHITE, new Coordinates(6, 1)));
+        startingPosition.put(new Coordinates(4, 1), new Queen(PieceColor.WHITE, new Coordinates(4, 1)));
+        startingPosition.put(new Coordinates(5, 1), new King(PieceColor.WHITE, new Coordinates(5, 1)));
 
         //Black pieces
         for(int i = 1; i <= 8; i++){
-            startingPosition.put(new Coordinates(i, 7), new Pawn(PieceColor.BLACK));
+            startingPosition.put(new Coordinates(i, 7), new Pawn(PieceColor.BLACK, new Coordinates(i, 7)));
         }
-        startingPosition.put(new Coordinates(1, 7), new Rook(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(8, 7), new Rook(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(2, 7), new Horse(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(7, 7), new Horse(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(3, 7), new Bishop(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(6, 7), new Bishop(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(4, 7), new Queen(PieceColor.BLACK));
-        startingPosition.put(new Coordinates(5, 7), new King(PieceColor.BLACK));
+        startingPosition.put(new Coordinates(1, 8), new Rook(PieceColor.BLACK, new Coordinates(1, 8)));
+        startingPosition.put(new Coordinates(8, 8), new Rook(PieceColor.BLACK, new Coordinates(8, 8)));
+        startingPosition.put(new Coordinates(2, 8), new Horse(PieceColor.BLACK, new Coordinates(2, 8)));
+        startingPosition.put(new Coordinates(7, 8), new Horse(PieceColor.BLACK, new Coordinates(7, 8)));
+        startingPosition.put(new Coordinates(3, 8), new Bishop(PieceColor.BLACK, new Coordinates(3, 8)));
+        startingPosition.put(new Coordinates(6, 8), new Bishop(PieceColor.BLACK, new Coordinates(6, 8)));
+        startingPosition.put(new Coordinates(4, 8), new Queen(PieceColor.BLACK, new Coordinates(4, 8)));
+        startingPosition.put(new Coordinates(5, 8), new King(PieceColor.BLACK, new Coordinates(5, 8)));
 
         return startingPosition;
     }

@@ -1,7 +1,9 @@
 package edu.austral.dissis.chess.engine.pieces;
 
+import edu.austral.dissis.chess.engine.boards.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
+import edu.austral.dissis.chess.engine.moves.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,13 @@ public class Pawn extends Piece {
     boolean itsFirstMove = true;
 
 
-    public Pawn(PieceColor pieceColor){
-        super(pieceColor);
+    public Pawn(PieceColor pieceColor, Coordinates coordinates){
+        super(pieceColor, coordinates);
     }
 
     @Override
-    public List<Coordinates> possibleMoves() {
-        List<Coordinates> posibleMoves = new ArrayList<>();
-
-        //TODO RULES
-
-        return posibleMoves;
+    public boolean isBlocked(Board board, Move move) {
+        return false;
     }
 
     @Override

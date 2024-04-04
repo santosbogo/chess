@@ -2,6 +2,8 @@ package edu.austral.dissis.chess.engine.boards;
 
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
+import edu.austral.dissis.chess.engine.enums.StatusInfo;
+import edu.austral.dissis.chess.engine.game.Status;
 import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.King;
 import edu.austral.dissis.chess.engine.pieces.Piece;
@@ -13,26 +15,28 @@ public class Board{
     private final Map<Coordinates, Piece> board;
     private final int xSize;
     private final int ySize;
+    private final Status status;
 
-    public Board(int xSize, int ySize, HashMap<Coordinates, Piece> startingPosition) {
-        this.board = startingPosition;
+    public Board(int xSize, int ySize, Map<Coordinates, Piece> board, Status status) {
+        this.board = board;
         this.xSize = xSize;
         this.ySize = ySize;
+        this.status = status;
     }
 
-    public void movePiece(Move move) {
+    public Board movePiece(Move move) {
         Coordinates from = move.getFrom();
         Coordinates to = move.getTo();
 
-        if(!move.isMoveValid())
-            throw new UnsupportedOperationException("Invalid move");
-
-        if (!isEmptySquare(to))
-            capturePiece(to);
+        if (!isEmptySquare(to)) {
+            getPieceAt(to).kill();
+            setPiece(move.getPiece(), to);
+        }
 
         setPiece(move.getPiece(), to);
+        removePiece(from);
 
-        removeFromSquare(from);
+        return this;
     }
 
     public Piece getPieceAt(Coordinates coordinates) {
@@ -54,8 +58,8 @@ public class Board{
                 Piece enemyPiece = getPieceAt(tempEnemyCoordinates);
 
                 if (!isEmptySquare(tempEnemyCoordinates)
-                        && enemyPiece.getColor() != getColor(coordinates)
-                        && new Move(this, enemyPiece, tempEnemyCoordinates, coordinates).isMoveValid()) {
+                        && enemyPiece.getColor() != getColorAt(coordinates)
+                        && new Move(this, tempEnemyCoordinates, coordinates).isMoveValid()) {
 
                     return true; //Chequea amenaza desde casilla NO vacia, con pieza de otro color y movimiento valido
                 }
@@ -75,21 +79,16 @@ public class Board{
         return null;
     }
 
-    public PieceColor getColor(Coordinates coordinates) {
+    public PieceColor getColorAt(Coordinates coordinates) {
         return getPieceAt(coordinates).getColor();
     }
 
-    private void capturePiece(Coordinates coordinates) {
-        getPieceAt(coordinates).kill();
-        board.remove(coordinates);
-    }
-
-    private void setPiece(Piece piece, Coordinates coordinates) {
+    public void setPiece(Piece piece, Coordinates coordinates) {
         board.put(coordinates, piece);
     }
 
-    private void removeFromSquare(Coordinates from) {
-        board.remove(from);
+    public void removePiece(Coordinates coordinates) {
+        board.remove(coordinates);
     }
 
     public int getXSize() {
@@ -98,5 +97,17 @@ public class Board{
 
     public int getYSize() {
         return ySize;
+    }
+
+    public Map<Coordinates, Piece> getBoard() {
+        return board;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public StatusInfo getStatusInfo() {
+        return status.getStatusInfo();
     }
 }
