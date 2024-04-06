@@ -29,10 +29,10 @@ public class Move {
             return false;
         if(leavesKingThreatened()) //Check if the move leaves the king in check
             return false;
-//        if(!piece.possibleMoves().contains(to)) //Check if the move is in the possible moves dictionary of the piece
-//            return false;
-        if(piece.isBlocked(board, this)) //TODO: Check if the move is blocked by another piece
+        if(piece.canDoThisMove(board, this))
             return false;
+//        if(!piece.possibleMoves().contains(to)) //Check if the move is in the possible moves list of the piece
+//            return false;
 
         return true;
     }

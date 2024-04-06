@@ -16,8 +16,43 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean isBlocked(Board board, Move move) {
-        return false;
+    public boolean canDoThisMove(Board board, Move move) {
+        Coordinates from = move.getFrom();
+        Coordinates to = move.getTo();
+        int xDistance = Math.abs(to.getX() - from.getX());
+        int yDistance = Math.abs(to.getY() - from.getY());
+
+        int verticalDirection = (to.getY() - from.getY()) > 0 ? 1 : -1;
+        int horizontalDirection = (to.getX() - from.getX()) > 0 ? 1 : -1;
+
+        if (xDistance != 0 && yDistance == 0) {
+            for(int x = 1; x < xDistance; x++) {
+                if (!board.isEmptySquare(new Coordinates(from.getX() + x * horizontalDirection, from.getY()))) {
+                    return false;
+                }
+            }
+        }
+        else if (xDistance == 0 && yDistance != 0) {
+            for(int y = 1; y < yDistance; y++) {
+                if (!board.isEmptySquare(new Coordinates(from.getX(), from.getY() + y * verticalDirection))) {
+                    return false;
+                }
+            }
+        }
+        else if (xDistance == yDistance && xDistance != 0) {
+            for(int i = 1; i < xDistance; ++i) {
+                int x = from.getX() + i * horizontalDirection;
+                int y = from.getY() + i * verticalDirection;
+                if (!board.isEmptySquare(new Coordinates(x, y))) {
+                    return false;
+                }
+            }
+        }
+        else {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

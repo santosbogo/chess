@@ -6,6 +6,7 @@ import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.game.Status;
 import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.King;
+import edu.austral.dissis.chess.engine.pieces.Pawn;
 import edu.austral.dissis.chess.engine.pieces.Piece;
 
 import java.util.HashMap;
@@ -84,6 +85,9 @@ public class Board{
     }
 
     public void setPiece(Piece piece, Coordinates coordinates) {
+        if (piece instanceof Pawn) {
+            ((Pawn) piece).alreadyMoved();
+        }
         board.put(coordinates, piece);
     }
 

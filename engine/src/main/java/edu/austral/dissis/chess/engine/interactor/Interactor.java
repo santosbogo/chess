@@ -24,18 +24,18 @@ public class Interactor {
     }
 
     private Coordinates inputFromCoordinates(){
-        System.out.println("Input x from: ");
+        System.out.print("\nInput x from: ");
         int x = Integer.parseInt(System.console().readLine());
-        System.out.println("\nInput y from: ");
+        System.out.print("\nInput y from: ");
         int y = Integer.parseInt(System.console().readLine());
 
         return new Coordinates(x, y);
     }
 
     private Coordinates inputToCoordinates(){
-        System.out.println("Input x to: ");
+        System.out.print("\nInput x to: ");
         int x = Integer.parseInt(System.console().readLine());
-        System.out.println("\nInput y to: ");
+        System.out.print("\nInput y to: ");
         int y = Integer.parseInt(System.console().readLine());
 
         return new Coordinates(x, y);

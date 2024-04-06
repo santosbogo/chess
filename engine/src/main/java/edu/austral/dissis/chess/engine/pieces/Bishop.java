@@ -16,16 +16,20 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean isBlocked(Board board, Move move) {
+    public boolean canDoThisMove(Board board, Move move) {
         Coordinates from = move.getFrom();
         Coordinates to = move.getTo();
         int xDistance = Math.abs(to.getX() - from.getX());
         int yDistance = Math.abs(to.getY() - from.getY());
 
-        int verticalDirection = xDistance > 0 ? 1 : -1;
-        int horizontalDirection = yDistance > 0 ? 1 : -1;
+        int verticalDirection = (to.getX() - from.getX()) > 0 ? 1 : -1;
+        int horizontalDirection = (to.getY() - from.getY()) > 0 ? 1 : -1;
 
-        for(int i = 1; i < xDistance; ++i) {
+        if(!(xDistance == yDistance && xDistance != 0)) {
+            return false;
+        }
+
+        for(int i = 1; i < xDistance; i++) {
             int x = from.getX() + i * verticalDirection;
             int y = from.getY() + i * horizontalDirection;
             if (!board.isEmptySquare(new Coordinates(x, y))) {

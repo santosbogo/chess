@@ -16,8 +16,13 @@ public class Horse extends Piece {
     }
 
     @Override
-    public boolean isBlocked(Board board, Move move) {
-        return false;
+    public boolean canDoThisMove(Board board, Move move) {
+        Coordinates from = move.getFrom();
+        Coordinates to = move.getTo();
+        int xDistance = Math.abs(to.getX() - from.getX());
+        int yDistance = Math.abs(to.getY() - from.getY());
+
+        return xDistance * yDistance == 2;
     }
 
     @Override

@@ -17,11 +17,11 @@ public class Status {
     }
 
     public StatusInfo getStatusInfo(){
-        if(isCheck()){
-            return StatusInfo.CHECK;
-        }
         if(isCheckMate()){
             return StatusInfo.CHECKMATE;
+        }
+        if(isCheck()){
+            return StatusInfo.CHECK;
         }
         if(isDraw()){
             return StatusInfo.DRAW;
@@ -60,18 +60,15 @@ public class Status {
     }
 
     private boolean isDraw(){
-        if (isCheck())
-            return false;
+        for (int x = 0; x < board.getXSize(); x++) {
+            for (int y = 0; y < board.getYSize(); y++) {
 
-        for (int i = 0; i < board.getXSize(); i++) {
-            for (int j = 0; j < board.getYSize(); j++) {
-
-                Coordinates tempCoordinates = new Coordinates(i, j);
+                Coordinates tempCoordinates = new Coordinates(x, y);
                 Piece piece = board.getPieceAt(tempCoordinates);
 
                 if (piece != null
                         && piece.getColor().equals(playerTurn.getColor())
-                        && piece.canMove(board, tempCoordinates))
+                        && !piece.isBlocked(board, tempCoordinates))
                     return false;
             }
         }

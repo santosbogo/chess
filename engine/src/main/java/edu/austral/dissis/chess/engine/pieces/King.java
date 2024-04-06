@@ -15,8 +15,13 @@ public class King extends Piece {
     }
 
     @Override
-    public boolean isBlocked(Board board, Move move) {
-        return false;
+    public boolean canDoThisMove(Board board, Move move) {
+        Coordinates from = move.getFrom();
+        Coordinates to = move.getTo();
+        int xDistance = Math.abs(to.getX() - from.getX());
+        int yDistance = Math.abs(to.getY() - from.getY());
+
+        return xDistance <= 1 && yDistance <= 1;
     }
 
     @Override

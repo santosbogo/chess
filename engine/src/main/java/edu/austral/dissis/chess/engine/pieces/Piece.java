@@ -22,7 +22,7 @@ public abstract class Piece {
         return this.pieceColor == piece.pieceColor;
     }
 
-    public abstract boolean isBlocked(Board board, Move move);
+    public abstract boolean canDoThisMove(Board board, Move move);
 
     public List<Coordinates> possibleMoves(Board board){
         List<Coordinates> possibleMoves = new LinkedList<>();
@@ -36,20 +36,15 @@ public abstract class Piece {
         return possibleMoves;
     }
 
-    public boolean canMove(Board board, Coordinates from) { //Capaz se podria hacer de una manera mas sencilla con la lista de piece.possibleMoves()
+    public boolean isBlocked(Board board, Coordinates from) { //Capaz se podria hacer de una manera mas sencilla con la lista de piece.possibleMoves()
         Piece piece = board.getPieceAt(from);
 
-        for (int i = 0; i < board.getXSize(); i++)
-            for (int j = 0; j < board.getYSize(); j++) {
-                Coordinates tempToCoordinates = new Coordinates(i, j);
+        for (int x = 0; x < board.getXSize(); x++)
+            for (int y = 0; y < board.getYSize(); y++) {
+                Coordinates tempToCoordinates = new Coordinates(x, y);
 
-                if (board.getPieceAt(from) instanceof King) {
-                    if (new Move(board, from, tempToCoordinates).isMoveValid() &&
-                            !board.isSquareThreatened(tempToCoordinates))
-                        return true; //Si es el rey, el movimiento es valido y no esta amenazado
-
-                } else if (new Move(board, from, tempToCoordinates).isMoveValid())
-                    return true; //Si no es el rey y el movimiento es valido
+                if (new Move(board, from, tempToCoordinates).isMoveValid())
+                    return true;
             }
         return false;
     }
