@@ -40,17 +40,14 @@ public class Status {
         if (!isCheck())
             return false;
 
-        for (int i = -1; i < 2; i++)
-            for (int j = -1; j < 2; j++) {
-                if (i == 0 && j == 0)
-                    continue;
-                Coordinates next = new Coordinates(kingCoordinates.getX() + i, kingCoordinates.getY() + j);
-                if (new Move(board, kingCoordinates, next).isMoveValid()
-                        && !board.isSquareThreatened(next)) {
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                Coordinates next = new Coordinates(kingCoordinates.getX() + x, kingCoordinates.getY() + y);
+                if (new Move(board, kingCoordinates, next).isMoveValid() && !board.isSquareThreatened(next)) {
                     return false;
                 }
             }
-
+        }
         return true;
     }
 
@@ -74,5 +71,4 @@ public class Status {
         }
         return true;
     }
-
 }

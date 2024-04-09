@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Rook extends Piece {
     private boolean dead = false;
+    private boolean itsFirstMove = true;
 
     public Rook(PieceColor pieceColor, Coordinates coordinates){
         super(pieceColor, coordinates);
@@ -62,5 +63,13 @@ public class Rook extends Piece {
     @Override
     public boolean isDead() {
         return dead;
+    }
+
+    public void alreadyMoved() {
+        itsFirstMove = false;
+    }
+
+    public boolean hasMoved() {
+        return !itsFirstMove;
     }
 }

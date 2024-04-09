@@ -12,5 +12,4 @@ public class Player {
     public PieceColor getColor() {
         return pieceColor;
     }
-
 }

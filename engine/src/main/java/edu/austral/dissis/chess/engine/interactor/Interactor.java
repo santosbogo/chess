@@ -23,6 +23,14 @@ public class Interactor {
         return inputToCoordinates();
     }
 
+    public Coordinates FromCoordinates(){
+        return inputFromCoordinates();
+    }
+
+    public Coordinates ToCoordinates(){
+        return inputToCoordinates();
+    }
+
     private Coordinates inputFromCoordinates(){
         System.out.print("\nInput x from: ");
         int x = Integer.parseInt(System.console().readLine());

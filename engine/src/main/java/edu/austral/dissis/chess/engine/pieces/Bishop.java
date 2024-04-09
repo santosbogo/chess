@@ -25,7 +25,7 @@ public class Bishop extends Piece {
         int verticalDirection = (to.getX() - from.getX()) > 0 ? 1 : -1;
         int horizontalDirection = (to.getY() - from.getY()) > 0 ? 1 : -1;
 
-        if(!(xDistance == yDistance && xDistance != 0)) {
+        if(xDistance != yDistance || xDistance == 0) {
             return false;
         }
 

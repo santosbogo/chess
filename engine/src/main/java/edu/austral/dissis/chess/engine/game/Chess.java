@@ -23,12 +23,12 @@ public class Chess {
     public Chess(){
         this.whitePlayer = new Player(PieceColor.WHITE);
         this.blackPlayer = new Player(PieceColor.BLACK);
-        
-        setBoard(8, 8, new Status(peekLastBoard(), whitePlayer));
+
+        boardHistory.add(setBoard(8, 8, new Status(peekLastBoard(), whitePlayer)));
         startingPosition();
 
     }
-    
+
     public void play(){
         Board board = peekLastBoard();
 
@@ -38,10 +38,9 @@ public class Chess {
 
             interactor.colorTurnMessage(playerTurn.getColor());
             playTurn(playerTurn);
-            //Change player turn and generate new status
         }
     }
-    
+
     private void playTurn(Player player){
         Move move = new Move(peekLastBoard(), interactor.getInputFromCoordinates(), interactor.getInputToCoordinates());
         Board board = peekLastBoard();
@@ -71,8 +70,8 @@ public class Chess {
         boardHistory.add(new Board(oldBoard.getXSize(), oldBoard.getYSize(), newBoard.getBoard(), generateNewStatus(newBoard)));
     }
 
-    private void setBoard(int xSize, int ySize, Status status) {
-        boardHistory.add(new Board(xSize, ySize, startingPosition(), status));
+    private Board setBoard(int xSize, int ySize, Status status) {
+        return new Board(xSize, ySize, startingPosition(), status);
     }
 
     private Board peekLastBoard(){
@@ -114,6 +113,4 @@ public class Chess {
 
         return startingPosition;
     }
-    
-
 }

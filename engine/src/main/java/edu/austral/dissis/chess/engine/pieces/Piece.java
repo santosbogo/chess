@@ -60,6 +60,4 @@ public abstract class Piece {
     public boolean isDead(){
         return dead;
     }
-
-
 }

@@ -31,8 +31,6 @@ public class Move {
             return false;
         if(piece.canDoThisMove(board, this))
             return false;
-//        if(!piece.possibleMoves().contains(to)) //Check if the move is in the possible moves list of the piece
-//            return false;
 
         return true;
     }

@@ -8,6 +8,7 @@ import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.King;
 import edu.austral.dissis.chess.engine.pieces.Pawn;
 import edu.austral.dissis.chess.engine.pieces.Piece;
+import edu.austral.dissis.chess.engine.pieces.Rook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +27,21 @@ public class Board{
     }
 
     public Board movePiece(Move move) {
-        Coordinates from = move.getFrom();
-        Coordinates to = move.getTo();
+        if (move.getPiece() instanceof King && ((King) move.getPiece()).isCastlingMove(move)) {
+            // Move both the king and the rook
+            // Update the board accordingly
+        } else {
+            Coordinates from = move.getFrom();
+            Coordinates to = move.getTo();
 
-        if (!isEmptySquare(to)) {
-            getPieceAt(to).kill();
+            if (!isEmptySquare(to)) {
+                getPieceAt(to).kill();
+                setPiece(move.getPiece(), to);
+            }
+
             setPiece(move.getPiece(), to);
+            removePiece(from);
         }
-
-        setPiece(move.getPiece(), to);
-        removePiece(from);
 
         return this;
     }
@@ -53,25 +59,25 @@ public class Board{
     }
 
     public boolean isSquareThreatened(Coordinates coordinates) {
-        for (int i = 0; i < getXSize(); i++)
-            for (int j = 0; j < getYSize(); j++) {
-                Coordinates tempEnemyCoordinates = new Coordinates(i, j);
+        for (int x = 1; x <= getXSize(); x++)
+            for (int y = 1; y <= getYSize(); y++) {
+                Coordinates tempEnemyCoordinates = new Coordinates(x, y);
                 Piece enemyPiece = getPieceAt(tempEnemyCoordinates);
 
                 if (!isEmptySquare(tempEnemyCoordinates)
                         && enemyPiece.getColor() != getColorAt(coordinates)
                         && new Move(this, tempEnemyCoordinates, coordinates).isMoveValid()) {
 
-                    return true; //Chequea amenaza desde casilla NO vacia, con pieza de otro color y movimiento valido
+                    return true;
                 }
             }
         return false;
     }
 
     public Coordinates getKingLocation(PieceColor color) {
-        for (int i = 0; i < getXSize(); i++)
-            for (int j = 0; j < getYSize(); j++) {
-                Coordinates tempCoordinates = new Coordinates(i, j);
+        for (int x = 1; x <= getXSize(); x++)
+            for (int y = 1; y <= getYSize(); y++) {
+                Coordinates tempCoordinates = new Coordinates(x, y);
                 Piece tempPiece = getPieceAt(tempCoordinates);
 
                 if (tempPiece instanceof King && tempPiece.getColor() == color)
@@ -85,9 +91,13 @@ public class Board{
     }
 
     public void setPiece(Piece piece, Coordinates coordinates) {
-        if (piece instanceof Pawn) {
+        if (piece instanceof Pawn)
             ((Pawn) piece).alreadyMoved();
-        }
+        if (piece instanceof King)
+            ((King) piece).alreadyMoved();
+        if (piece instanceof Rook)
+            ((Rook) piece).alreadyMoved();
+
         board.put(coordinates, piece);
     }
 
