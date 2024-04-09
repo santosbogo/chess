@@ -20,9 +20,21 @@ plugins {
     id 'io.gitlab.arturbosch.detekt'
 }
 
+def githubUser = project.findProperty("github.user") ?: System.getenv("GITHUB_USER")
+def githubToken = project.findProperty("github.token") ?: System.getenv("GITHUB_TOKEN")
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+
+    // Maven repository for
+    maven {
+        url = uri("https://maven.pkg.github.com/austral-ingsis/chess-test-framework")
+        credentials {
+            username = githubUser
+            password = githubToken
+        }
+    }
 }
 
 dependencies {
@@ -35,6 +47,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Chess test framework
+    testImplementation 'edu.austral.dissis.chess:test-framework:1.0.0'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
