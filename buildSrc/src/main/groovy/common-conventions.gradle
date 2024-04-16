@@ -35,6 +35,13 @@ repositories {
             password = githubToken
         }
     }
+    maven {
+        url = uri("https://maven.pkg.github.com/austral-ingsis/chess-ui")
+        credentials {
+            username = githubUser
+            password = githubToken
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +57,8 @@ dependencies {
 
     // Chess test framework
     testImplementation 'edu.austral.dissis.chess:test-framework:1.0.0'
+
+    implementation("edu.austral.dissis.chess:chess-ui:1.0.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
