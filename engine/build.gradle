@@ -10,7 +10,7 @@ dependencies {
 
 javafx {
     // Define the JavaFX version to use.
-    version = "18"
+    version = "21"
     modules = ['javafx.graphics']
 
 }
