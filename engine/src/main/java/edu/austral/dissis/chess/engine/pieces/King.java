@@ -1,12 +1,9 @@
 package edu.austral.dissis.chess.engine.pieces;
 
-import edu.austral.dissis.chess.engine.boards.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.moves.Move;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class King extends Piece {
     private boolean itsFirstMove = true;
@@ -48,7 +45,7 @@ public class King extends Piece {
             Coordinates rookCoordinates = new Coordinates(direction == 1 ? 8 : 1, from.getY()); //FIXME: this only works for standard chess
             Piece rook = board.getPieceAt(rookCoordinates);
 
-            if (!(rook instanceof Rook) || ((Rook)rook).hasMoved())
+            if (!(rook instanceof Rook) || ((Rook)rook).isFirstMove())
                 return false;
 
             int pathLength = direction == 1 ? 2 : 3; // Kingside has 2 squares to check, queenside has 3
@@ -78,11 +75,11 @@ public class King extends Piece {
         return false;
     }
 
-    public void alreadyMoved() {
+    public void firstMoveSet() {
         itsFirstMove = false;
     }
 
-    public boolean hasMoved() {
-        return !itsFirstMove;
+    public boolean isFirstMove() {
+        return itsFirstMove;
     }
 }

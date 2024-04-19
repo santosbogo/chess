@@ -4,6 +4,11 @@ public class Coordinates {
     private final int x;
     private final int y;
 
+    public Coordinates(char x, int y){
+        this.x = x - 'A';
+        this.y = y;
+    }
+
     public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;

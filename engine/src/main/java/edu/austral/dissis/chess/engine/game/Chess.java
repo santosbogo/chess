@@ -1,10 +1,10 @@
 package edu.austral.dissis.chess.engine.game;
 
-import edu.austral.dissis.chess.engine.boards.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
-import edu.austral.dissis.chess.engine.interactor.Interactor;
+import edu.austral.dissis.chess.engine.components.Interactor;
 import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.*;
 import edu.austral.dissis.chess.engine.player.Player;
@@ -67,7 +67,7 @@ public class Chess {
     }
 
     private void updateBoardHistory(Board oldBoard, Board newBoard){
-        boardHistory.add(new Board(oldBoard.getXSize(), oldBoard.getYSize(), newBoard.getBoard(), generateNewStatus(newBoard)));
+        boardHistory.add(new Board(oldBoard.getXSize(), oldBoard.getYSize(), newBoard.getPieceDistribution(), generateNewStatus(newBoard)));
     }
 
     private Board setBoard(int xSize, int ySize, Status status) {

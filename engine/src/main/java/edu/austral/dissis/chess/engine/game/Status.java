@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine.game;
 
-import edu.austral.dissis.chess.engine.boards.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.moves.Move;

@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.boards;
+package edu.austral.dissis.chess.engine.components;
 
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
@@ -8,46 +8,55 @@ import edu.austral.dissis.chess.engine.moves.Move;
 import edu.austral.dissis.chess.engine.pieces.King;
 import edu.austral.dissis.chess.engine.pieces.Pawn;
 import edu.austral.dissis.chess.engine.pieces.Piece;
-import edu.austral.dissis.chess.engine.pieces.Rook;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Board{
-    private final Map<Coordinates, Piece> board;
+    private final Map<Coordinates, Piece> pieceDistribution;
     private final int xSize;
     private final int ySize;
     private final Status status;
 
+    public Board(int xSize, int ySize, Map<Coordinates, Piece> pieceDistribution) {
+        this.pieceDistribution = pieceDistribution;
+        this.xSize = xSize;
+        this.ySize = ySize;
+    }
+
     public Board(int xSize, int ySize, Map<Coordinates, Piece> board, Status status) {
-        this.board = board;
+        this.pieceDistribution = board;
         this.xSize = xSize;
         this.ySize = ySize;
         this.status = status;
     }
 
     public Board movePiece(Move move) {
-        if (move.getPiece() instanceof King && ((King) move.getPiece()).isCastlingMove(move)) {
-            // Move both the king and the rook
-            // Update the board accordingly
-        } else {
-            Coordinates from = move.getFrom();
-            Coordinates to = move.getTo();
 
-            if (!isEmptySquare(to)) {
-                getPieceAt(to).kill();
-                setPiece(move.getPiece(), to);
-            }
+        //
+        Piece piece = move.getPiece();
+        if (piece instanceof Pawn && ((Pawn) piece).isFirstMove())
+            ((Pawn) piece).firstMoveSet();
+        if (piece instanceof King && ((King) piece).isFirstMove())
+            ((King) piece).firstMoveSet();
+        if (piece instanceof Rook && ((Rook) piece).isFirstMove())
+            ((Rook) piece).firstMoveSet();
 
-            setPiece(move.getPiece(), to);
-            removePiece(from);
-        }
+//        if () { TODO Check if the move is a castling move ?? Corresponde al board o al move?
+//            // Move both the king and the rook
+//            // Update the board accordingly
+//        }
+//        else {
+        Coordinates from = move.getFrom();
+        Coordinates to = move.getTo();
+        setPiece(move.getPiece(), to);
+        removePiece(from);
+//        }
 
         return this;
     }
 
     public Piece getPieceAt(Coordinates coordinates) {
-        return board.get(coordinates);
+        return pieceDistribution.get(coordinates);
     }
 
     public boolean isInBounds(Coordinates coordinates) {
@@ -55,7 +64,7 @@ public class Board{
     }
 
     public boolean isEmptySquare(Coordinates coordinates) {
-        return !board.containsKey(coordinates);
+        return !pieceDistribution.containsKey(coordinates);
     }
 
     public boolean isSquareThreatened(Coordinates coordinates) {
@@ -91,18 +100,11 @@ public class Board{
     }
 
     public void setPiece(Piece piece, Coordinates coordinates) {
-        if (piece instanceof Pawn)
-            ((Pawn) piece).alreadyMoved();
-        if (piece instanceof King)
-            ((King) piece).alreadyMoved();
-        if (piece instanceof Rook)
-            ((Rook) piece).alreadyMoved();
-
-        board.put(coordinates, piece);
+        pieceDistribution.put(coordinates, piece);
     }
 
     public void removePiece(Coordinates coordinates) {
-        board.remove(coordinates);
+        pieceDistribution.remove(coordinates);
     }
 
     public int getXSize() {
@@ -113,8 +115,8 @@ public class Board{
         return ySize;
     }
 
-    public Map<Coordinates, Piece> getBoard() {
-        return board;
+    public Map<Coordinates, Piece> getPieceDistribution() {
+        return pieceDistribution;
     }
 
     public Status getStatus() {

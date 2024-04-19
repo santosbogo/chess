@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine.pieces;
 
-import edu.austral.dissis.chess.engine.boards.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.moves.Move;
@@ -52,7 +52,11 @@ public class Pawn extends Piece {
         return dead;
     }
 
-    public void alreadyMoved() {
+    public void firstMoveSet() {
         itsFirstMove = false;
+    }
+
+    public boolean isFirstMove() {
+        return itsFirstMove;
     }
 }

@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine.moves;
 
-import edu.austral.dissis.chess.engine.boards.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
 import edu.austral.dissis.chess.engine.game.Status;
 import edu.austral.dissis.chess.engine.pieces.Piece;
@@ -29,8 +29,8 @@ public class Move {
             return false;
         if(leavesKingThreatened()) //Check if the move leaves the king in check
             return false;
-        if(piece.canDoThisMove(board, this))
-            return false;
+//        if(piece.canDoThisMove(board, this))
+//            return false;
 
         return true;
     }
@@ -40,7 +40,7 @@ public class Move {
     }
 
     private boolean leavesKingThreatened() {
-        Board newBoard = new Board(board.getXSize(), board.getYSize(), board.getBoard(), new Status(board, board.getStatus().getPlayerTurn()));
+        Board newBoard = new Board(board.getXSize(), board.getYSize(), board.getPieceDistribution(), new Status(board, board.getStatus().getPlayerTurn()));
         newBoard.movePiece(this);
         return newBoard.isSquareThreatened(newBoard.getKingLocation(piece.getColor()));
     }
