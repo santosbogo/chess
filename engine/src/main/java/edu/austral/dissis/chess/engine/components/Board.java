@@ -1,12 +1,10 @@
 package edu.austral.dissis.chess.engine.components;
 
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
+import edu.austral.dissis.chess.engine.coordinates.referee.MoveReferee;
+import edu.austral.dissis.chess.engine.coordinates.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
-import edu.austral.dissis.chess.engine.enums.StatusInfo;
-import edu.austral.dissis.chess.engine.game.Status;
-import edu.austral.dissis.chess.engine.moves.Move;
-import edu.austral.dissis.chess.engine.pieces.Pawn;
-import edu.austral.dissis.chess.engine.pieces.Piece;
+import edu.austral.dissis.chess.engine.enums.PieceName;
 
 import java.util.Map;
 
@@ -14,42 +12,20 @@ public class Board{
     private final Map<Coordinates, Piece> pieceDistribution;
     private final int xSize;
     private final int ySize;
-    private final Status status;
 
-    public Board(int xSize, int ySize, Map<Coordinates, Piece> pieceDistribution) {
-        this.pieceDistribution = pieceDistribution;
-        this.xSize = xSize;
-        this.ySize = ySize;
-    }
-
-    public Board(int xSize, int ySize, Map<Coordinates, Piece> board, Status status) {
+    public Board(int xSize, int ySize, Map<Coordinates, Piece> board) {
         this.pieceDistribution = board;
         this.xSize = xSize;
         this.ySize = ySize;
-        this.status = status;
     }
 
-    public Board movePiece(Move move) {
+    public Board movePiece(MoveReferee moveReferee) {
+//        TODO: SETEAR EL PRIMER MOVIMIENTO SI ES QUE ESTA PIEZA NO SE MOVIO
 
-        //
-        Piece piece = move.getPiece();
-        if (piece instanceof Pawn && ((Pawn) piece).isFirstMove())
-            ((Pawn) piece).firstMoveSet();
-        if (piece instanceof King && ((King) piece).isFirstMove())
-            ((King) piece).firstMoveSet();
-        if (piece instanceof Rook && ((Rook) piece).isFirstMove())
-            ((Rook) piece).firstMoveSet();
-
-//        if () { TODO Check if the move is a castling move ?? Corresponde al board o al move?
-//            // Move both the king and the rook
-//            // Update the board accordingly
-//        }
-//        else {
-        Coordinates from = move.getFrom();
-        Coordinates to = move.getTo();
-        setPiece(move.getPiece(), to);
+        Coordinates from = moveReferee.getFrom();
+        Coordinates to = moveReferee.getTo();
+        setPiece(moveReferee.getPiece(), to);
         removePiece(from);
-//        }
 
         return this;
     }
@@ -74,7 +50,7 @@ public class Board{
 
                 if (!isEmptySquare(tempEnemyCoordinates)
                         && enemyPiece.getColor() != getColorAt(coordinates)
-                        && new Move(this, tempEnemyCoordinates, coordinates).isMoveValid()) {
+                        && new MoveReferee(this, tempEnemyCoordinates, coordinates).isValid()) {
 
                     return true;
                 }
@@ -88,7 +64,7 @@ public class Board{
                 Coordinates tempCoordinates = new Coordinates(x, y);
                 Piece tempPiece = getPieceAt(tempCoordinates);
 
-                if (tempPiece instanceof King && tempPiece.getColor() == color)
+                if (tempPiece.getPieceName() == PieceName.KING && tempPiece.getColor() == color)
                     return tempCoordinates;
             }
         return null;
@@ -116,13 +92,5 @@ public class Board{
 
     public Map<Coordinates, Piece> getPieceDistribution() {
         return pieceDistribution;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public StatusInfo getStatusInfo() {
-        return status.getStatusInfo();
     }
 }

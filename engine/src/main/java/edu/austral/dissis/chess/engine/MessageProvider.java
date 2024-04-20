@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine;
 
-import edu.austral.dissis.chess.engine.game.Chess;
+import edu.austral.dissis.chess.engine.components.Chess;
 
 class MessageProvider {
 

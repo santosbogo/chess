@@ -1,0 +1,21 @@
+package edu.austral.dissis.chess.engine.validators.gameValidators;
+
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.coordinates.Player;
+
+public class StalemateStatus implements GameStatus{
+    @Override
+    public boolean gameStatus(Player playerTurn, Board board) {
+        return false;
+    }
+
+    @Override
+    public boolean isEndOfGame(Player playerTurn, Board board) {
+        return true;
+    }
+
+    private boolean isStalemate(Player playerTurn, Board board){
+//        TODO: PARA TODAS LAS PIEZAS DEL JUGADOR QUE TIENE EL TURNO, SI NO HAY MOVIMIENTOS POSIBLES, ES STALEMATE
+        return false;
+    }
+}
