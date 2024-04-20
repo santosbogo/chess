@@ -1,25 +1,21 @@
 package edu.austral.dissis.chess.engine.generator.classicChessGenerator;
 
 import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.generator.BoardGenerator;
 import edu.austral.dissis.chess.engine.generator.GameGenerator;
-import edu.austral.dissis.chess.engine.pieces.Piece;
 
-import java.util.List;
-
-public class ClassicChessGenerator implements GameGenerator {
+public class ClassicChess implements GameGenerator {
 
     @Override
     public Board generateBoard() {
-        return null;
-    }
-
-    @Override
-    public List<Piece> generatePieces() {
-        return null;
+        BoardGenerator boardGenerator = new ClassicChessBoardGenerator();
+        return boardGenerator.generateBoard();
     }
 
     @Override
     public void generateRules() {
         
     }
+
+
 }

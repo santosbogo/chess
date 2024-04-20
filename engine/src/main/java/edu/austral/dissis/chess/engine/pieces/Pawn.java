@@ -15,7 +15,6 @@ public class Pawn extends Piece {
         super(pieceColor, coordinates);
     }
 
-    @Override
     public boolean canDoThisMove(Board board, Move move) {
         Coordinates from = move.getFrom();
         Coordinates to = move.getTo();
@@ -37,17 +36,14 @@ public class Pawn extends Piece {
         return false;
     }
 
-    @Override
     public PieceColor getColor() {
         return pieceColor;
     }
 
-    @Override
     public void kill() {
         dead = true;
     }
 
-    @Override
     public boolean isDead() {
         return dead;
     }

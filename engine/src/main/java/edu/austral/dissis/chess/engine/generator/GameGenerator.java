@@ -9,7 +9,5 @@ public interface GameGenerator {
 
     public Board generateBoard();
 
-    public List<Piece> generatePieces();
-
     public void generateRules();
 }

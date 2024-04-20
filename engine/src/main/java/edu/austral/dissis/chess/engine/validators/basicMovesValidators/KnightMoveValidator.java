@@ -1,8 +1,9 @@
-package edu.austral.dissis.chess.engine.validators;
+package edu.austral.dissis.chess.engine.validators.basicMovesValidators;
 
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
+import edu.austral.dissis.chess.engine.validators.MoveValidator;
 
-public class KnightMoveValidator implements MoveValidator{
+public class KnightMoveValidator implements MoveValidator {
 
     @Override
     public boolean validMove(Coordinates from, Coordinates to) {

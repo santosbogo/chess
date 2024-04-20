@@ -1,17 +1,15 @@
-package edu.austral.dissis.chess.engine.validators;
+package edu.austral.dissis.chess.engine.validators.basicMovesValidators;
 
 import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.coordinates.Coordinates;
+import edu.austral.dissis.chess.engine.validators.MoveValidator;
 
-public class ClearPathValidator implements MoveValidator{
-    private final Board board;
-
-    public ClearPathValidator(Board board) {
-        this.board = board;
-    }
+public class ClearPathValidator implements MoveValidator {
+    private Board board ;
 
     @Override
     public boolean validMove(Coordinates from, Coordinates to) {
+//        board = FIXME: DE DONDE SACO EL BOARD????
         if (from.getX() == to.getX()) {
             return hasPieceBetweenVertical(from, to);
         } else if (from.getY() == to.getY()) {

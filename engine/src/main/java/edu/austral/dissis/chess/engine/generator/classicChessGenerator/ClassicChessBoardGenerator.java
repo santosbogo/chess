@@ -9,52 +9,64 @@ import edu.austral.dissis.chess.engine.pieces.Piece;
 
 import java.util.HashMap;
 
-public class ClassicChessBoardGenerator implements BoardGenerator {
-    ClassicChessPieceGenerator pieceGenerator = new ClassicChessPieceGenerator();
 
+public class ClassicChessBoardGenerator implements BoardGenerator {
     @Override
     public Board generateBoard() {
 
         return null;
     }
 
-    private void generateUpperPieces(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        generatePawns(pieceColor, pieceGenerator);
-        generateRooks(pieceColor, pieceGenerator);
-        generateKnights(pieceColor, pieceGenerator);
-        generateBishops(pieceColor, pieceGenerator);
-        generateQueen(pieceColor, pieceGenerator);
-        generateKing(pieceColor, pieceGenerator);
+    private HashMap<Coordinates, Piece> generateStartingPosition(){
+        ClassicChessPieceGenerator pieceGenerator = new ClassicChessPieceGenerator();
+        HashMap<Coordinates, Piece> pieces = new HashMap<>();
+        generatePieces(PieceColor.WHITE, pieceGenerator, pieces);
+        generatePieces(PieceColor.BLACK, pieceGenerator, pieces);
+
+        return pieces;
     }
 
-    private void generatePawns(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
+    private void generatePieces(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        generatePawns(pieceColor, pieceGenerator, pieces);
+        generateRooks(pieceColor, pieceGenerator, pieces);
+        generateKnights(pieceColor, pieceGenerator, pieces);
+        generateBishops(pieceColor, pieceGenerator, pieces);
+        generateQueen(pieceColor, pieceGenerator, pieces);
+        generateKing(pieceColor, pieceGenerator, pieces);
+    }
+
+    private void generatePawns(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 2 : 7;
         for (char i = 'A'; i <= 'H'; i++) {
-            pieces.put(new Coordinates(i, 1), pieceGenerator.generatePiece(PieceName.PAWN, pieceColor));
+            pieces.put(new Coordinates(i, row), pieceGenerator.generatePiece(PieceName.PAWN, pieceColor));
         }
     }
 
-    private void generateRooks(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        pieces.put(new Coordinates('A', 0), pieceGenerator.generatePiece(PieceName.ROOK, pieceColor));
-        pieces.put(new Coordinates('H', 0), pieceGenerator.generatePiece(PieceName.ROOK, pieceColor));
+    private void generateRooks(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
+        pieces.put(new Coordinates('A', row), pieceGenerator.generatePiece(PieceName.ROOK, pieceColor));
+        pieces.put(new Coordinates('H', row), pieceGenerator.generatePiece(PieceName.ROOK, pieceColor));
     }
 
-    private void generateKnights(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        pieces.put(new Coordinates('B', 0), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
-        pieces.put(new Coordinates('G', 0), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
+    private void generateKnights(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
+        pieces.put(new Coordinates('B', row), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
+        pieces.put(new Coordinates('G', row), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
     }
 
-    private void generateBishops(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        pieces.put(new Coordinates('C', 0), pieceGenerator.generatePiece(PieceName.BISHOP, pieceColor));
-        pieces.put(new Coordinates('F', 0), pieceGenerator.generatePiece(PieceName.BISHOP, pieceColor));
+    private void generateBishops(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
+        pieces.put(new Coordinates('C', row), pieceGenerator.generatePiece(PieceName.BISHOP, pieceColor));
+        pieces.put(new Coordinates('F', row), pieceGenerator.generatePiece(PieceName.BISHOP, pieceColor));
     }
 
-    private void generateQueen(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        pieces.put(new Coordinates('D', 0), pieceGenerator.generatePiece(PieceName.QUEEN, pieceColor));
+    private void generateQueen(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
+        pieces.put(new Coordinates('D', row), pieceGenerator.generatePiece(PieceName.QUEEN, pieceColor));
     }
 
-    private void generateKing(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator) {
-        pieces.put(new Coordinates('E', 0), pieceGenerator.generatePiece(PieceName.KING, pieceColor));
+    private void generateKing(PieceColor pieceColor, ClassicChessPieceGenerator pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+        int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
+        pieces.put(new Coordinates('E', row), pieceGenerator.generatePiece(PieceName.KING, pieceColor));
     }
-
-
 }

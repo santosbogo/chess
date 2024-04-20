@@ -5,7 +5,6 @@ import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.StatusInfo;
 import edu.austral.dissis.chess.engine.game.Status;
 import edu.austral.dissis.chess.engine.moves.Move;
-import edu.austral.dissis.chess.engine.pieces.King;
 import edu.austral.dissis.chess.engine.pieces.Pawn;
 import edu.austral.dissis.chess.engine.pieces.Piece;
 
