@@ -1,9 +1,18 @@
 plugins {
     id 'application-conventions'
+    id("org.openjfx.javafxplugin").version("0.0.13")
+
 }
 
 dependencies {
     implementation 'org.apache.commons:commons-text'
+}
+
+javafx {
+    // Define the JavaFX version to use.
+    version = "21"
+    modules = ['javafx.graphics']
+
 }
 
 application {
