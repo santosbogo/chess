@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.engine.validators.gameValidators;
 
-import edu.austral.dissis.chess.engine.components.Board;
-import edu.austral.dissis.chess.engine.coordinates.Player;
-import edu.austral.dissis.chess.engine.coordinates.Coordinates;
+import edu.austral.dissis.chess.engine.buenos.Board;
+import edu.austral.dissis.chess.engine.buenos.Player;
+import edu.austral.dissis.chess.engine.buenos.Coordinates;
 
 public class CheckStatus implements GameStatus{
 

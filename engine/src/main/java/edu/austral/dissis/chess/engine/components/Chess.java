@@ -1,8 +1,9 @@
 package edu.austral.dissis.chess.engine.components;
 
+import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.coordinates.Interactor;
-import edu.austral.dissis.chess.engine.coordinates.referee.MoveReferee;
-import edu.austral.dissis.chess.engine.coordinates.Player;
+import edu.austral.dissis.chess.engine.components.referee.MoveReferee;
+import edu.austral.dissis.chess.engine.buenos.Player;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 

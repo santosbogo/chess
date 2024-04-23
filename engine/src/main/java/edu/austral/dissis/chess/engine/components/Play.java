@@ -1,10 +1,10 @@
 package edu.austral.dissis.chess.engine.components;
 
+import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.coordinates.Interactor;
-import edu.austral.dissis.chess.engine.coordinates.Player;
-import edu.austral.dissis.chess.engine.coordinates.Rules;
-import edu.austral.dissis.chess.engine.coordinates.referee.MoveReferee;
-import edu.austral.dissis.chess.engine.coordinates.referee.RuleReferee;
+import edu.austral.dissis.chess.engine.buenos.Player;
+import edu.austral.dissis.chess.engine.components.referee.MoveReferee;
+import edu.austral.dissis.chess.engine.components.referee.RuleReferee;
 
 import java.util.ArrayList;
 import java.util.List;
