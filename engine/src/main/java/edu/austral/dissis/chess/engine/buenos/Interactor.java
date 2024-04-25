@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.coordinates;
+package edu.austral.dissis.chess.engine.buenos;
 
 import edu.austral.dissis.chess.engine.buenos.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;

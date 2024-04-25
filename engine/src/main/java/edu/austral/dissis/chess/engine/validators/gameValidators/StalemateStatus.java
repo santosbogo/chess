@@ -9,11 +9,6 @@ public class StalemateStatus implements GameStatus{
         return false;
     }
 
-    @Override
-    public boolean isEndOfGame(Player playerTurn, Board board) {
-        return true;
-    }
-
     private boolean isStalemate(Player playerTurn, Board board){
 //        TODO: PARA TODAS LAS PIEZAS DEL JUGADOR QUE TIENE EL TURNO, SI NO HAY MOVIMIENTOS POSIBLES, ES STALEMATE
         return false;

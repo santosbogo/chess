@@ -2,11 +2,11 @@ package edu.austral.dissis.chess.engine.games.classicChess;
 
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
-import edu.austral.dissis.chess.engine.games.PieceGenerator;
+import edu.austral.dissis.chess.engine.games.PieceFactory;
 import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.validators.moveValidators.classicChess.*;
 
-public class ClassicChessPieceGenerator implements PieceGenerator {
+public class ClassicChessPieceFactory implements PieceFactory {
 
     @Override
     public Piece generatePiece(PieceName pieceName, PieceColor pieceColor) {

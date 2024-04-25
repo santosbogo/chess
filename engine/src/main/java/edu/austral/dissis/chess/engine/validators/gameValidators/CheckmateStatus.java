@@ -3,7 +3,6 @@ package edu.austral.dissis.chess.engine.validators.gameValidators;
 import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.buenos.Player;
 import edu.austral.dissis.chess.engine.buenos.Coordinates;
-import edu.austral.dissis.chess.engine.components.referee.MoveReferee;
 
 import java.util.HashMap;
 
@@ -28,20 +27,11 @@ public class CheckmateStatus implements GameStatus{
                 if (!board.isEmptySquare(tempFrom)  && board.getPieceAt(tempFrom).getColor().equals(playerTurn.getColor())){
                     for (int toX = 1; toX <= board.getXSize(); toX++) {
                         for (int toY = 1; toY <= board.getYSize(); toY++) {
-
                             Coordinates tempTo = new Coordinates(toX, toY);
 
-                            if (new MoveReferee(board, tempFrom, tempTo).isValid() && !isCheck(playerTurn, board, kingCoordinates)) {
-                                Board newBoard = new Board(board.getXSize(), board.getYSize(), new HashMap<>(board.getPieceDistribution()));
-                                newBoard.movePiece(tempFrom, tempTo);
-                                return false;
-                                //TODO: HAY QUE SIMULAR UN MOVIMIENTO PARA CADDA PIEZA Y VER SI CON ESE MOVIMIENTO SE SALE DEL JAQUE
-                            }
+                            //TODO: SIMULAR UN MOVIMIENTO PARA CADDA PIEZA Y VER SI CON ESE MOVIMIENTO SE SALE DEL JAQUE
                         }
                     }
-                }
-                if (new MoveReferee(board, kingCoordinates, next).isValid() && !isCheck(playerTurn, board, next)) {
-                    return false;
                 }
             }
         }

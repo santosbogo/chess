@@ -3,7 +3,6 @@ package edu.austral.dissis.chess.engine.games.classicChess;
 import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.buenos.Player;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
-import edu.austral.dissis.chess.engine.components.Play;
 import edu.austral.dissis.chess.engine.games.BoardGenerator;
 import edu.austral.dissis.chess.engine.games.GameGenerator;
 

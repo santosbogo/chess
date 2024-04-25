@@ -1,6 +1,5 @@
 package edu.austral.dissis.chess.engine.buenos;
 
-import edu.austral.dissis.chess.engine.components.referee.MoveReferee;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 
@@ -35,12 +34,8 @@ public class Board{
                 Coordinates tempEnemyCoordinates = new Coordinates(x, y);
                 Piece enemyPiece = getPieceAt(tempEnemyCoordinates);
 
-                if (!isEmptySquare(tempEnemyCoordinates)
-                        && enemyPiece.getColor() != getColorAt(coordinates)
-                        && new MoveReferee(this, tempEnemyCoordinates, coordinates).isValid()) {
+//                TODO: Simlar movimientos de las piezas y ver si alguna puede llegar a la casilla
 
-                    return true;
-                }
             }
         return false;
     }
