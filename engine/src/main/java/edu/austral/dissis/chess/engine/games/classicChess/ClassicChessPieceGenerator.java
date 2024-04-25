@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.games.classicChessGenerator;
+package edu.austral.dissis.chess.engine.games.classicChess;
 
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;

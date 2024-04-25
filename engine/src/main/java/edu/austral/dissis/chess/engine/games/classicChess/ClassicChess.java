@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.games.classicChessGenerator;
+package edu.austral.dissis.chess.engine.games.classicChess;
 
 import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.buenos.Player;
@@ -18,7 +18,6 @@ public class ClassicChess implements GameGenerator {
 
     @Override
     public void play(){
-        Play play = new Play(generateBoard(), whitePlayer, blackPlayer);
     }
 
     @Override
