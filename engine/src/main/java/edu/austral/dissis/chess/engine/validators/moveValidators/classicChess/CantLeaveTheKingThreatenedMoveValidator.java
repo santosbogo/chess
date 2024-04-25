@@ -6,12 +6,12 @@ import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
 public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
 
-    @Override
-    public boolean validMove(Coordinates from, Coordinates to, Board board) {
-        Board newBoard = board.getCopy();
+  @Override
+  public boolean validMove(Coordinates from, Coordinates to, Board board) {
+    Board newBoard = board.getCopy();
 
-//        newBoard.movePiece(new MoveReferee(newBoard, from, to)); // TODO: Simular movimiento
+    //        newBoard.movePiece(new MoveReferee(newBoard, from, to)); // TODO: Simular movimiento
 
-        return !newBoard.isKingThreatened(newBoard.getPieceAt(from).getColor());
-    }
+    return !newBoard.isKingThreatened(newBoard.getPieceAt(from).getColor());
+  }
 }

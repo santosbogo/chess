@@ -6,8 +6,8 @@ import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
 public class DiferentColorInTargetMoveValidator implements MoveValidator {
 
-    @Override
-    public boolean validMove(Coordinates from, Coordinates to, Board board) {
-        return board.getPieceAt(from).getColor() != board.getPieceAt(to).getColor();
-    }
+  @Override
+  public boolean validMove(Coordinates from, Coordinates to, Board board) {
+    return board.getPieceAt(from).getColor() != board.getPieceAt(to).getColor();
+  }
 }

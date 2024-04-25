@@ -4,7 +4,7 @@ import edu.austral.dissis.chess.engine.buenos.Board;
 
 public interface GameGenerator {
 
-    public Board generateBoard();
+  public Board generateBoard();
 
-    public void play();
+  public void play();
 }

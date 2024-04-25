@@ -5,6 +5,5 @@ import edu.austral.dissis.chess.engine.buenos.Player;
 
 public interface GameStatus {
 
-    boolean gameStatus(Player playerTurn, Board board);
-
+  boolean gameStatus(Player playerTurn, Board board);
 }

@@ -8,7 +8,10 @@ import edu.austral.dissis.chess.test.game.TestMoveResult
 import edu.austral.dissis.chess.test.game.TestMoveSuccess
 
 class DummyTestGameRunner : TestGameRunner {
-    override fun executeMove(from: TestPosition, to: TestPosition): TestMoveResult {
+    override fun executeMove(
+        from: TestPosition,
+        to: TestPosition,
+    ): TestMoveResult {
         return TestMoveSuccess(this)
     }
 
@@ -19,5 +22,4 @@ class DummyTestGameRunner : TestGameRunner {
     override fun withBoard(board: TestBoard): TestGameRunner {
         return this
     }
-
 }

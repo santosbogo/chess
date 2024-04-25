@@ -4,6 +4,17 @@ plugins {
 
 }
 
+repositories {
+    mavenCentral() // If not already included, add this to handle other dependencies.
+    maven {
+        url = uri("https://maven.pkg.github.com/austral-ingsis/chess-test-framework")
+        credentials {
+            username = findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+            password = findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
 dependencies {
     implementation 'org.apache.commons:commons-text'
 }
