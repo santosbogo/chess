@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.validators.gameValidators;
+package edu.austral.dissis.chess.engine.validators.status;
 
 import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.buenos.Player;

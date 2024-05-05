@@ -4,7 +4,7 @@ import edu.austral.dissis.chess.engine.buenos.Board;
 import edu.austral.dissis.chess.engine.buenos.Coordinates;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
-public class ClearPathValidator implements MoveValidator {
+public class ByClearPathMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
@@ -22,7 +22,7 @@ public class ClearPathValidator implements MoveValidator {
     int distance = Math.abs(to.getY() - from.getY());
 
     for (int i = 1; i < distance; ++i) {
-      if (!board.isEmptySquare(new Coordinates(from.getX(), from.getY() + i * direction))) {
+      if (board.isNotEmptySquare(new Coordinates(from.getX(), from.getY() + i * direction))) {
         return false;
       }
     }
@@ -34,7 +34,7 @@ public class ClearPathValidator implements MoveValidator {
     int distance = Math.abs(to.getX() - from.getX());
 
     for (int i = 1; i < distance; ++i) {
-      if (!board.isEmptySquare(new Coordinates(from.getX() + i * direction, from.getY()))) {
+      if (board.isNotEmptySquare(new Coordinates(from.getX() + i * direction, from.getY()))) {
         return false;
       }
     }
@@ -49,7 +49,7 @@ public class ClearPathValidator implements MoveValidator {
     for (int i = 1; i < distance; i++) {
       int x = from.getX() + i * verticalDirection;
       int y = from.getY() + i * horizontalDirection;
-      if (!board.isEmptySquare(new Coordinates(x, y))) {
+      if (board.isNotEmptySquare(new Coordinates(x, y))) {
         return false;
       }
     }

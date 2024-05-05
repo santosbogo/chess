@@ -4,9 +4,18 @@ import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.games.PieceFactory;
+import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 import edu.austral.dissis.chess.engine.validators.moveValidators.classicChess.*;
 
+import java.util.List;
+
 public class ClassicChessPieceFactory implements PieceFactory {
+
+  private final List<MoveValidator> sharedMoveValidators = List.of(
+          new InBoundsMoveValidator(),
+          new CantLeaveTheKingThreatenedMoveValidator(),
+          new DiferentColorInTargetMoveValidator()
+  );
 
   @Override
   public Piece generatePiece(PieceName pieceName, PieceColor pieceColor) {
@@ -23,13 +32,12 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generatePawn(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.PAWN, pieceColor);
 
-    piece.addMoveValidator(new HorizontalMoveValidator(1));
-    piece.addMoveValidator(new ClearPathValidator());
-    piece.addMoveValidator(new JustForwardMoveValidator(pieceColor));
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
-    piece.addMoveValidator(new FirstTwoStepsMoveValidator());
-    piece.addMoveValidator(new EnPassantMoveValidator());
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new HorizontalMoveValidator(1));
+    piece.addMoveValidators(new ByClearPathMoveValidator());
+    piece.addMoveValidators(new JustForwardMoveValidator(pieceColor));
+    piece.addMoveValidators(new FirstTwoStepsMoveValidator());
+    piece.addMoveValidators(new EnPassantMoveValidator());
 
     return piece;
   }
@@ -37,11 +45,10 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generateRook(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.ROOK, pieceColor);
 
-    piece.addMoveValidator(new HorizontalMoveValidator());
-    piece.addMoveValidator(new VerticalMoveValidator());
-    piece.addMoveValidator(new ClearPathValidator());
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new HorizontalMoveValidator());
+    piece.addMoveValidators(new VerticalMoveValidator());
+    piece.addMoveValidators(new ByClearPathMoveValidator());
 
     return piece;
   }
@@ -49,9 +56,8 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generateKnight(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.KNIGHT, pieceColor);
 
-    piece.addMoveValidator(new ClassicKnightMoveValidator());
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new ClassicKnightMoveValidator());
 
     return piece;
   }
@@ -59,10 +65,9 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generateBishop(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.BISHOP, pieceColor);
 
-    piece.addMoveValidator(new DiagonalMoveValidator());
-    piece.addMoveValidator(new ClearPathValidator());
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new DiagonalMoveValidator());
+    piece.addMoveValidators(new ByClearPathMoveValidator());
 
     return piece;
   }
@@ -70,12 +75,11 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generateQueen(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.QUEEN, pieceColor);
 
-    piece.addMoveValidator(new HorizontalMoveValidator());
-    piece.addMoveValidator(new VerticalMoveValidator());
-    piece.addMoveValidator(new DiagonalMoveValidator());
-    piece.addMoveValidator(new ClearPathValidator());
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new HorizontalMoveValidator());
+    piece.addMoveValidators(new VerticalMoveValidator());
+    piece.addMoveValidators(new DiagonalMoveValidator());
+    piece.addMoveValidators(new ByClearPathMoveValidator());
 
     return piece;
   }
@@ -83,13 +87,12 @@ public class ClassicChessPieceFactory implements PieceFactory {
   private Piece generateKing(PieceColor pieceColor) {
     Piece piece = new Piece(PieceName.KING, pieceColor);
 
-    piece.addMoveValidator(new HorizontalMoveValidator(1));
-    piece.addMoveValidator(new VerticalMoveValidator(1));
-    piece.addMoveValidator(new DiagonalMoveValidator(1));
-    piece.addMoveValidator(new ClearPathValidator());
-    piece.addMoveValidator(new DiferentColorInTargetMoveValidator());
-    piece.addMoveValidator(new CantLeaveTheKingThreatenedMoveValidator());
-    piece.addMoveValidator(new ClassicCastleMoveValidator(pieceColor));
+    piece.addMoveValidators(sharedMoveValidators);
+    piece.addMoveValidators(new HorizontalMoveValidator(1));
+    piece.addMoveValidators(new VerticalMoveValidator(1));
+    piece.addMoveValidators(new DiagonalMoveValidator(1));
+    piece.addMoveValidators(new ByClearPathMoveValidator());
+    piece.addMoveValidators(new ClassicCastleMoveValidator(pieceColor));
 
     return piece;
   }

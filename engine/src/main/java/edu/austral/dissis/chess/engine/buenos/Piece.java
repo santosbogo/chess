@@ -15,9 +15,14 @@ public class Piece {
     this.pieceColor = pieceColor;
   }
 
-  public void addMoveValidator(MoveValidator moveValidator) {
+  public void addMoveValidators(MoveValidator moveValidator) {
     moveValidators.add(moveValidator);
   }
+
+  public void addMoveValidators(List<MoveValidator> moveValidator) {
+    moveValidators.addAll(moveValidator);
+  }
+
 
   public void setFirstMove() {
     isFirstMove = false;

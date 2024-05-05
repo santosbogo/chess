@@ -8,10 +8,9 @@ public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
-    Board newBoard = board.getCopy();
+    Board simulatedBoard = board.getCopy();
+    simulatedBoard.setPiece(simulatedBoard.getPieceAt(from), to);
 
-    //        newBoard.movePiece(new MoveReferee(newBoard, from, to)); // TODO: Simular movimiento
-
-    return !newBoard.isKingThreatened(newBoard.getPieceAt(from).getColor());
+    return !simulatedBoard.isKingThreatened(simulatedBoard.getPieceAt(from).getColor());
   }
 }

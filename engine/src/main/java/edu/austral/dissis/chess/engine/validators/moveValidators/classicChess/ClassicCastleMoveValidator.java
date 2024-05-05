@@ -35,18 +35,18 @@ public class ClassicCastleMoveValidator implements MoveValidator {
 
     if (board.isSquareThreatened(new Coordinates(4, to.getY()))) return false;
 
-    ClearPathValidator clearPathValidator = new ClearPathValidator();
+    ByClearPathMoveValidator byClearPathMoveValidator = new ByClearPathMoveValidator();
     Piece queenRook = board.getPieceAt(new Coordinates(to.getX(), to.getY() - 2));
     return canCastle(from, to, queenRook, board);
   }
 
   private boolean canCastle(Coordinates from, Coordinates to, Piece kingRook, Board board) {
-    ClearPathValidator clearPathValidator = new ClearPathValidator();
+    ByClearPathMoveValidator byClearPathMoveValidator = new ByClearPathMoveValidator();
     Piece king = board.getPieceAt(from);
 
     if (kingRook == null) return false;
     if (!kingRook.isFirstMove() && !king.isFirstMove()) return false;
-    if (!clearPathValidator.validMove(from, to, board)) return false;
+    if (!byClearPathMoveValidator.validMove(from, to, board)) return false;
 
     return true;
   }

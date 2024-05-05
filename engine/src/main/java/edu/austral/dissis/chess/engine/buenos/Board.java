@@ -2,6 +2,8 @@ package edu.austral.dissis.chess.engine.buenos;
 
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
+import edu.austral.dissis.chess.engine.moves.MoveReferee;
+
 import java.util.Map;
 
 public class Board {
@@ -19,15 +21,12 @@ public class Board {
     return pieceDistribution.get(coordinates);
   }
 
-  public boolean isOutOfBounds(Coordinates coordinates) {
-    return coordinates.getX() < 1
-        || coordinates.getX() > xSize
-        || coordinates.getY() < 1
-        || coordinates.getY() > ySize;
+  public boolean isInBounds(Coordinates coordinates) {
+    return coordinates.getX() > 0 && coordinates.getX() < xSize && coordinates.getY() > 0  && coordinates.getY() > ySize;
   }
 
-  public boolean isEmptySquare(Coordinates coordinates) {
-    return !pieceDistribution.containsKey(coordinates);
+  public boolean isNotEmptySquare(Coordinates coordinates) {
+    return pieceDistribution.containsKey(coordinates);
   }
 
   public boolean isSquareThreatened(Coordinates coordinates) {
@@ -59,21 +58,41 @@ public class Board {
     return isSquareThreatened(getKingLocation(color));
   }
 
-  public boolean wasLastMoveDoubleStepPawn(Coordinates enemyPosition) {
-    //        TODO: Implementar
-    return false;
-  }
-
   public PieceColor getColorAt(Coordinates coordinates) {
     return getPieceAt(coordinates).getColor();
   }
 
-  public void setPiece(Piece piece, Coordinates coordinates) {
+  public Board setPiece(Piece piece, Coordinates coordinates) {
     pieceDistribution.put(coordinates, piece);
+    return new Board(xSize, ySize, pieceDistribution);
   }
 
   public void removePiece(Coordinates coordinates) {
     pieceDistribution.remove(coordinates);
+  }
+
+  public boolean canAnyPieceMove(PieceColor color) {
+    for (int fromX = 1; fromX <= getXSize(); fromX++) {
+      for (int fromY = 1; fromY <= getYSize(); fromY++) {
+        Coordinates tempFrom = new Coordinates(fromX, fromY);
+
+        if (isNotEmptySquare(tempFrom) && getPieceAt(tempFrom).getColor().equals(color)) {
+
+          for (int toX = 1; toX <= getXSize(); toX++) {
+            for (int toY = 1; toY <= getYSize(); toY++) {
+              Coordinates tempTo = new Coordinates(toX, toY);
+
+              MoveReferee moveReferee = new MoveReferee();
+              if (moveReferee.isValidMove(tempFrom, tempTo, this)) {
+                return false;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   public int getXSize() {
