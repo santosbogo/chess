@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Piece {
-  List<MoveValidator> moveValidators = new ArrayList<>();
-  PieceColor pieceColor;
+  private final List<MoveValidator> moveValidators = new ArrayList<>();
+  private final PieceColor pieceColor;
+  private final PieceName pieceName;
   boolean isFirstMove = true;
 
   public Piece(PieceName pieceName, PieceColor pieceColor) {
+    this.pieceName = pieceName;
     this.pieceColor = pieceColor;
   }
 
@@ -37,7 +39,7 @@ public class Piece {
   }
 
   public PieceName getPieceName() {
-    return null;
+    return pieceName;
   }
 
   public List<MoveValidator> getMoveValidators() {

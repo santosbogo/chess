@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.engine.buenos;
 
+import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 
 public class Interactor {

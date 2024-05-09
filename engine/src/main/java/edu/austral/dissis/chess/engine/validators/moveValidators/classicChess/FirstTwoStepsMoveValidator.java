@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.buenos.Board;
-import edu.austral.dissis.chess.engine.buenos.Coordinates;
+import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 

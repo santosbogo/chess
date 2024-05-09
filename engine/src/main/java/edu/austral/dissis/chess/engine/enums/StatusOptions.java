@@ -2,7 +2,8 @@ package edu.austral.dissis.chess.engine.enums;
 
 public enum StatusOptions {
   NORMAL,
-  CHECK,
-  CHECKMATE,
-  DRAW
+  FAILURE,
+  WHITE_CHECKMATE,
+  BLACK_CHECKMATE,
+  STALEMATE
 }

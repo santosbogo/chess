@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.buenos.Board;
-import edu.austral.dissis.chess.engine.buenos.Coordinates;
+import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
@@ -15,7 +15,7 @@ public class ClassicCastleMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
-    int row = pieceColor == PieceColor.WHITE ? 1 : 8;
+    int row = pieceColor == PieceColor.BLACK ? 1 : 8;
 
     if (to.getX() == 7 && to.getY() == row) return canCastleKingSide(from, to, board);
     else if (to.getX() == 3 && to.getY() == row) return canCastleQueenSide(from, to, board);

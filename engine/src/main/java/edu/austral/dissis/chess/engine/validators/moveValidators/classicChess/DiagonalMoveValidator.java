@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.buenos.Board;
-import edu.austral.dissis.chess.engine.buenos.Coordinates;
+import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
 public class DiagonalMoveValidator implements MoveValidator {
@@ -20,8 +20,8 @@ public class DiagonalMoveValidator implements MoveValidator {
     return isDiagonalMove(from, to) && isInRange(from, to);
   }
 
-  private boolean isDiagonalMove(Coordinates from, Coordinates move) {
-    return from.getX() - move.getX() == from.getY() - move.getY();
+  private boolean isDiagonalMove(Coordinates from, Coordinates to) {
+    return Math.abs(from.getX() - to.getX()) == Math.abs(from.getY() - to.getY());
   }
 
   private boolean isInRange(Coordinates from, Coordinates to) {

@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators;
 
-import edu.austral.dissis.chess.engine.buenos.Board;
-import edu.austral.dissis.chess.engine.buenos.Coordinates;
+import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.board.Coordinates;
 
 public interface MoveValidator {
 

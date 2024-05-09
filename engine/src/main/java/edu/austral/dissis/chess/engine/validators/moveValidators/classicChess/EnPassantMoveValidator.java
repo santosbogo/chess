@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.buenos.Board;
-import edu.austral.dissis.chess.engine.buenos.Coordinates;
+import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
@@ -15,7 +15,7 @@ public class EnPassantMoveValidator implements MoveValidator {
       return false;
     }
 
-    int enemyY = board.getPieceAt(from).getColor() == PieceColor.WHITE ? from.getY() - 1 : from.getY() + 1;
+    int enemyY = board.getColorAt(from).equals(PieceColor.BLACK) ? from.getY() - 1 : from.getY() + 1;
     Coordinates enemyPosition = new Coordinates(to.getX(), enemyY);
     Piece movingPiece = board.getPieceAt(from);
     Piece enemyPiece = board.getPieceAt(enemyPosition);
@@ -29,7 +29,8 @@ public class EnPassantMoveValidator implements MoveValidator {
 
   public boolean wasLastMoveDoubleStepPawn(Coordinates enemyPosition) {
     //        TODO: Implementar
-    return false;
+    // Necesito obtener el Board anterior y ver si el ultimo movimiento fue un doble paso de peon
+    return true;
   }
 
 
