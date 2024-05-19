@@ -39,7 +39,9 @@ public class Game {
   public StatusOptions playTurn(Coordinates from, Coordinates to) {
     MoveReferee moveReferee = new MoveReferee(playerTurn, peekBoard());
 
-    checkColorTurn(from);
+    if (!isYourTurn(from)) {
+      return StatusOptions.FAILURE;
+    }
 
     if (moveReferee.isValidMove(from, to)) {
       BoardModifier boardModifier = new BoardModifier(peekBoard());
@@ -52,9 +54,8 @@ public class Game {
     }
   }
 
-  private void checkColorTurn(Coordinates from) {
-    if (!peekBoard().getColorAt(from).equals(playerTurn))
-      throw new IllegalArgumentException("Not your turn");
+  private boolean isYourTurn(Coordinates from) {
+    return peekBoard().getColorAt(from).equals(playerTurn);
   }
 
   private void changePlayerTurn() {

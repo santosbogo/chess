@@ -1,10 +1,11 @@
 package edu.austral.dissis.chess.engine.exam
 
-import edu.austral.dissis.chess.engine.buenos.Piece
 import edu.austral.dissis.chess.engine.board.Board
 import edu.austral.dissis.chess.engine.board.Coordinates
+import edu.austral.dissis.chess.engine.buenos.Piece
 import edu.austral.dissis.chess.engine.enums.PieceColor
 import edu.austral.dissis.chess.engine.enums.PieceName
+import edu.austral.dissis.chess.engine.games.classicChess.ClassicChessPieceFactory
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPiece
 import edu.austral.dissis.chess.test.TestPosition
@@ -60,7 +61,7 @@ class Translator {
         val color = translateColor(testPiece.playerColorSymbol)
         val type = translatePieceName(testPiece.pieceTypeSymbol)
 
-        return Piece(type, color)
+        return ClassicChessPieceFactory().generatePiece(type, color)
     }
 
     // Translate theirs piece name to my piece name

@@ -19,6 +19,10 @@ public class ClassicChess implements GameGenerator {
     return new Game(generateBoard(), endOfGameValidators, PieceColor.WHITE);
   }
 
+  public Game generateGame(Board board) {
+    return new Game(board, endOfGameValidators, PieceColor.WHITE);
+  }
+
   private Board generateBoard() {
     BoardGenerator boardGenerator = new ClassicChessBoardGenerator();
     return boardGenerator.generateBoard();

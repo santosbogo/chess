@@ -15,7 +15,7 @@ public class ClassicCastleMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
-    int row = pieceColor == PieceColor.BLACK ? 1 : 8;
+    int row = pieceColor == PieceColor.WHITE ? 1 : 8;
 
     if (to.getX() == 7 && to.getY() == row) return canCastleKingSide(from, to, board);
     else if (to.getX() == 3 && to.getY() == row) return canCastleQueenSide(from, to, board);
