@@ -25,7 +25,6 @@ public class Piece {
     moveValidators.addAll(moveValidator);
   }
 
-
   public void setFirstMove() {
     isFirstMove = false;
   }

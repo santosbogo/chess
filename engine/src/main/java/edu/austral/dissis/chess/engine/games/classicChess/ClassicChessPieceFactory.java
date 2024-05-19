@@ -7,17 +7,17 @@ import edu.austral.dissis.chess.engine.games.PieceFactory;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 import edu.austral.dissis.chess.engine.validators.moveValidators.OneOfMoveValidators;
 import edu.austral.dissis.chess.engine.validators.moveValidators.classicChess.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassicChessPieceFactory implements PieceFactory {
 
-  private final List<MoveValidator> sharedMoveValidators = List.of(
+  private final List<MoveValidator> sharedMoveValidators =
+      List.of(
           new InBoundsMoveValidator(),
-//          new CantLeaveTheKingThreatenedMoveValidator(),
-          new DiferentColorInTargetMoveValidator()
-  );
+          new CantLeaveTheKingThreatenedMoveValidator(),
+          new CantMoveFromEmptySquareMoveValidator(),
+          new DiferentColorInTargetMoveValidator());
 
   @Override
   public Piece generatePiece(PieceName pieceName, PieceColor pieceColor) {
@@ -36,8 +36,8 @@ public class ClassicChessPieceFactory implements PieceFactory {
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
-//    oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
-//    oneOfMoveValidators.add(new EnPassantMoveValidator());
+    //    oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
+    //    oneOfMoveValidators.add(new EnPassantMoveValidator());
 
     piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
     piece.addMoveValidators(sharedMoveValidators);
@@ -102,7 +102,7 @@ public class ClassicChessPieceFactory implements PieceFactory {
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
     oneOfMoveValidators.add(new HorizontalMoveValidator(1));
     oneOfMoveValidators.add(new DiagonalMoveValidator(1));
-    oneOfMoveValidators.add(new ClassicCastleMoveValidator(pieceColor));
+    //    oneOfMoveValidators.add(new ClassicCastleMoveValidator(pieceColor));
 
     piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
     piece.addMoveValidators(sharedMoveValidators);

@@ -15,7 +15,8 @@ public class EnPassantMoveValidator implements MoveValidator {
       return false;
     }
 
-    int enemyY = board.getColorAt(from).equals(PieceColor.BLACK) ? from.getY() - 1 : from.getY() + 1;
+    int enemyY =
+        board.getColorAt(from).equals(PieceColor.BLACK) ? from.getY() - 1 : from.getY() + 1;
     Coordinates enemyPosition = new Coordinates(to.getX(), enemyY);
     Piece movingPiece = board.getPieceAt(from);
     Piece enemyPiece = board.getPieceAt(enemyPosition);
@@ -32,7 +33,4 @@ public class EnPassantMoveValidator implements MoveValidator {
     // Necesito obtener el Board anterior y ver si el ultimo movimiento fue un doble paso de peon
     return true;
   }
-
-
-
 }

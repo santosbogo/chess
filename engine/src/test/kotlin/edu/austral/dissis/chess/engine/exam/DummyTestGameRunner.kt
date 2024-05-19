@@ -1,17 +1,47 @@
 package edu.austral.dissis.chess.engine.exam
 
 import edu.austral.dissis.chess.engine.Game
+import edu.austral.dissis.chess.engine.board.Coordinates
+import edu.austral.dissis.chess.engine.enums.StatusOptions
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPosition
-import edu.austral.dissis.chess.test.TestSize
 import edu.austral.dissis.chess.test.game.TestGameRunner
+import edu.austral.dissis.chess.test.game.TestMoveFailure
 import edu.austral.dissis.chess.test.game.TestMoveResult
+import edu.austral.dissis.chess.test.game.WhiteCheckMate
+import edu.austral.dissis.chess.test.game.BlackCheckMate
 import edu.austral.dissis.chess.test.game.TestMoveSuccess
+import edu.austral.dissis.chess.test.game.TestMoveDraw
 
-class DummyTestGameRunner(val game: Game) : TestGameRunner {
+class DummyTestGameRunner(private val game: Game) : TestGameRunner {
 
     override fun executeMove(from: TestPosition, to: TestPosition): TestMoveResult {
-        return TestMoveSuccess(this)//TODO
+//        return TestMoveSuccess(this)//TODO
+
+        val newFrom = Coordinates(from.col, from.row)
+        val newTo = Coordinates(to.col, to.row)
+
+        return when (val result = game.playTurn(newFrom, newTo)) {
+
+            StatusOptions.FAILURE -> {
+                TestMoveFailure(Translator().translateBoard(game.peekBoard()))
+            }
+            StatusOptions.WHITE_CHECKMATE -> {
+                WhiteCheckMate(Translator().translateBoard(game.peekBoard()))
+            }
+            StatusOptions.BLACK_CHECKMATE -> {
+                BlackCheckMate(Translator().translateBoard(game.peekBoard()))
+            }
+            StatusOptions.STALEMATE -> {
+                TestMoveDraw(Translator().translateBoard(game.peekBoard()))
+            }
+            StatusOptions.NORMAL -> {
+                TestMoveSuccess(this)
+            }
+        }
+
+
+
     }
 
     override fun getBoard(): TestBoard {
@@ -19,6 +49,6 @@ class DummyTestGameRunner(val game: Game) : TestGameRunner {
     }
 
     override fun withBoard(board: TestBoard): TestGameRunner { //getGameRunner
-        return this // De su board a mi board
+        return this
     }
 }

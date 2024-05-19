@@ -4,7 +4,6 @@ import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.referee.MoveReferee;
-
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -24,7 +23,10 @@ public class Board {
   }
 
   public boolean isInBounds(Coordinates coordinates) {
-    return coordinates.getX() > 0 && coordinates.getX() <= xSize && coordinates.getY() > 0  && coordinates.getY() <= ySize;
+    return coordinates.getX() > 0
+        && coordinates.getX() <= xSize
+        && coordinates.getY() > 0
+        && coordinates.getY() <= ySize;
   }
 
   public boolean isEmptySquare(Coordinates coordinates) {
@@ -46,7 +48,7 @@ public class Board {
     return false;
   }
 
-  public Coordinates getKingLocation(PieceColor color) {
+  public Coordinates getKingCoordinates(PieceColor color) {
     for (int x = 1; x <= getXSize(); x++)
       for (int y = 1; y <= getYSize(); y++) {
         Coordinates tempCoordinates = new Coordinates(x, y);
@@ -62,10 +64,12 @@ public class Board {
   }
 
   public boolean isKingThreatened(PieceColor color) {
-    return isSquareThreatened(getKingLocation(color));
+    return isSquareThreatened(getKingCoordinates(color));
   }
 
   public PieceColor getColorAt(Coordinates coordinates) {
+    if (getPieceAt(coordinates) == null)
+      throw new IllegalArgumentException("No piece at coordinates");
     return getPieceAt(coordinates).getColor();
   }
 

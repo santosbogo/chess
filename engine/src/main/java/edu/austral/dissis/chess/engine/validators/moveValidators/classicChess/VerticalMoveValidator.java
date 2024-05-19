@@ -21,10 +21,10 @@ public class VerticalMoveValidator implements MoveValidator {
   }
 
   private boolean isVerticalMove(Coordinates from, Coordinates to) {
-      return from.getX() == to.getX();
+    return from.getX() == to.getX();
   }
 
   private boolean isInRange(Coordinates from, Coordinates to) {
-      return Math.abs(to.getY() - from.getY()) <= maxSquares;
+    return Math.abs(to.getY() - from.getY()) <= maxSquares;
   }
 }

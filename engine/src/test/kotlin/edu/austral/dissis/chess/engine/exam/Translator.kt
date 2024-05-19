@@ -84,6 +84,4 @@ class Translator {
             else -> throw IllegalArgumentException("Invalid color symbol: $playerColorSymbol")
         }
     }
-
-
 }
