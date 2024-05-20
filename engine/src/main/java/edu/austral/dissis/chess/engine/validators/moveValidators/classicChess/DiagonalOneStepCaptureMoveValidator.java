@@ -3,10 +3,9 @@ package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 import edu.austral.dissis.chess.engine.board.Board;
 import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.buenos.Piece;
-import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
-public class EnPassantMoveValidator implements MoveValidator {
+public class DiagonalOneStepCaptureMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
@@ -14,15 +13,12 @@ public class EnPassantMoveValidator implements MoveValidator {
       return false;
     }
 
-    Coordinates enemyPosition = new Coordinates(to.getX(), from.getY());
-
+    Piece enemyPiece = board.getPieceAt(to);
     Piece movingPiece = board.getPieceAt(from);
-    Piece enemyPiece = board.getPieceAt(enemyPosition);
 
     if (enemyPiece == null
-        || enemyPiece.getPieceName() != PieceName.PAWN
-        || enemyPiece.getColor().equals(movingPiece.getColor())
-        || !enemyPiece.isFirstMove()) {
+        || movingPiece == null
+        || enemyPiece.getColor().equals(board.getPieceAt(from).getColor())) {
       return false;
     }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceName;
+import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +14,23 @@ public class ClassicChessValidMovesTests {
   public void movePawn() {
     Game game = new ClassicChess().generateGame();
 
-    game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 6)));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('F', 2), new Coordinates('F', 4)));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('F', 7), new Coordinates('F', 5)));
 
     assertEquals(
         PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());
+    assertEquals(
+        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('A', 6)).getPieceName());
+    assertEquals(
+        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('F', 4)).getPieceName());
+    assertEquals(
+        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('F', 5)).getPieceName());
   }
 
   @Test

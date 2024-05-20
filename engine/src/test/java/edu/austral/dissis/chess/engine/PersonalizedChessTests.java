@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
+import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.testChess.TestChess;
 import edu.austral.dissis.chess.engine.testChess.TestChessBoardGenerator;
@@ -51,5 +52,105 @@ public class PersonalizedChessTests {
 
     assertEquals(
         StatusOptions.STALEMATE, game.playTurn(new Coordinates('G', 2), new Coordinates('G', 6)));
+  }
+
+  @Test
+  public void testShortCastle() {
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('H', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)));
+
+    assertEquals(
+        PieceName.KING, game.peekBoard().getPieceAt(new Coordinates('G', 1)).getPieceName());
+    assertFalse(game.peekBoard().isEmptySquare(new Coordinates('F', 1)));
+    assertEquals(
+        PieceName.ROOK, game.peekBoard().getPieceAt(new Coordinates('F', 1)).getPieceName());
+  }
+
+  @Test
+  public void testInvalidShortCastleKingSide() {
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('H', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('F', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('G', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('E', 7), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(
+        StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)));
+  }
+
+  @Test
+  public void testLongCastle() {
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('A', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)));
+  }
+
+  @Test
+  public void testInvalidLongCastle() {
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('A', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('D', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('C', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('E', 7), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(
+        StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)));
+  }
+
+  @Test
+  public void testQueenMove() {
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+
+    testBoardGenerator.generateRook(new Coordinates('A', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKnight(new Coordinates('B', 1), PieceColor.WHITE);
+    testBoardGenerator.generateBishop(new Coordinates('C', 1), PieceColor.WHITE);
+    testBoardGenerator.generateQueen(new Coordinates('D', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateBishop(new Coordinates('F', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKnight(new Coordinates('G', 1), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('H', 1), PieceColor.WHITE);
+
+    testBoardGenerator.generateRook(new Coordinates('A', 8), PieceColor.BLACK);
+    testBoardGenerator.generateKnight(new Coordinates('B', 8), PieceColor.BLACK);
+    testBoardGenerator.generateBishop(new Coordinates('C', 8), PieceColor.BLACK);
+    testBoardGenerator.generateQueen(new Coordinates('D', 8), PieceColor.BLACK);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generateBishop(new Coordinates('F', 8), PieceColor.BLACK);
+    testBoardGenerator.generateKnight(new Coordinates('G', 8), PieceColor.BLACK);
+    testBoardGenerator.generateRook(new Coordinates('H', 8), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('D', 1), new Coordinates('G', 4)));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('D', 8), new Coordinates('D', 4)));
+    assertEquals(
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('G', 4), new Coordinates('D', 4)));
+
+    assertEquals(
+        PieceName.QUEEN, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getPieceName());
+    assertEquals(PieceColor.WHITE, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getColor());
   }
 }

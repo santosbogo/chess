@@ -44,6 +44,7 @@ public class Game {
     }
 
     if (moveReferee.isValidMove(from, to)) {
+      peekBoard().getPieceAt(from).setFirstMove();
       BoardModifier boardModifier = new BoardModifier(peekBoard());
       boardHistory.add(boardModifier.move(from, to));
       changePlayerTurn();

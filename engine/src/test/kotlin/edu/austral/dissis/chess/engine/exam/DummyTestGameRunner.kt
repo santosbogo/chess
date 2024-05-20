@@ -1,7 +1,6 @@
 package edu.austral.dissis.chess.engine.exam
 
 import edu.austral.dissis.chess.engine.Game
-import edu.austral.dissis.chess.engine.board.Board
 import edu.austral.dissis.chess.engine.board.Coordinates
 import edu.austral.dissis.chess.engine.enums.StatusOptions
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess

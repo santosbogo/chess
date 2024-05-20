@@ -27,7 +27,7 @@ public class ClassicChessBoardGenerator implements BoardGenerator {
   }
 
   private void generatePieces(
-          PieceColor pieceColor, PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+      PieceColor pieceColor, PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
     generatePawns(pieceColor, pieceGenerator, pieces);
     generateRooks(pieceColor, pieceGenerator, pieces);
     generateKnights(pieceColor, pieceGenerator, pieces);
@@ -37,7 +37,7 @@ public class ClassicChessBoardGenerator implements BoardGenerator {
   }
 
   private void generatePawns(
-          PieceColor pieceColor, PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
+      PieceColor pieceColor, PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
     int row = pieceColor.equals(PieceColor.WHITE) ? 2 : 7;
     for (char i = 'A'; i <= 'H'; i++) {
       pieces.put(new Coordinates(i, row), pieceGenerator.generatePiece(PieceName.PAWN, pieceColor));

@@ -11,6 +11,7 @@ public class Piece {
   private final PieceColor pieceColor;
   private final PieceName pieceName;
   boolean isFirstMove = true;
+  boolean isEnPassant = false;
 
   public Piece(PieceName pieceName, PieceColor pieceColor) {
     this.pieceName = pieceName;

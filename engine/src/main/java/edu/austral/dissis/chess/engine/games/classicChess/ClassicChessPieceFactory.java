@@ -36,7 +36,8 @@ public class ClassicChessPieceFactory implements PieceFactory {
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
-    //    oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
+    oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
+    oneOfMoveValidators.add(new DiagonalOneStepCaptureMoveValidator());
     //    oneOfMoveValidators.add(new EnPassantMoveValidator());
 
     piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
@@ -102,7 +103,8 @@ public class ClassicChessPieceFactory implements PieceFactory {
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
     oneOfMoveValidators.add(new HorizontalMoveValidator(1));
     oneOfMoveValidators.add(new DiagonalMoveValidator(1));
-    //    oneOfMoveValidators.add(new ClassicCastleMoveValidator(pieceColor));
+    oneOfMoveValidators.add(new ClassicShortCastleMoveValidator());
+    oneOfMoveValidators.add(new ClassicLongCastleMoveValidator());
 
     piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
     piece.addMoveValidators(sharedMoveValidators);
