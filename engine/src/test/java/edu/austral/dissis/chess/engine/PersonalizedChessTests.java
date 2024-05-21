@@ -6,6 +6,7 @@ import edu.austral.dissis.chess.engine.board.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
+import edu.austral.dissis.chess.engine.games.classicChess.ClassicChessBoardGenerator;
 import edu.austral.dissis.chess.engine.testChess.TestChess;
 import edu.austral.dissis.chess.engine.testChess.TestChessBoardGenerator;
 import org.junit.jupiter.api.Test;
@@ -21,11 +22,20 @@ public class PersonalizedChessTests {
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
-    assertEquals(
-        StatusOptions.WHITE_CHECKMATE,
-        game.playTurn(new Coordinates('G', 3), new Coordinates('G', 7)));
-    //        assertEquals(StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G',3), new
-    // Coordinates('H',3)));
+    assertEquals( StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G', 3), new Coordinates('G', 7)));
+//        assertEquals(StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G',3), new Coordinates('H',3)));
+  }
+
+  @Test
+  public void testDoubleStepPawn(){
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator(new ClassicChessBoardGenerator().generateBoard());
+    testBoardGenerator.generatePawn(new Coordinates('A', 3), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 4)));
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)));
+    assertEquals(StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 2), new Coordinates('B', 4)));
   }
 
   @Test

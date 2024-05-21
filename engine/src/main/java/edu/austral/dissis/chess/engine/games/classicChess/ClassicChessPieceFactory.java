@@ -44,6 +44,7 @@ public class ClassicChessPieceFactory implements PieceFactory {
     piece.addMoveValidators(sharedMoveValidators);
     piece.addMoveValidators(new ByClearPathMoveValidator());
     piece.addMoveValidators(new JustForwardMoveValidator(pieceColor));
+    piece.addMoveValidators(new CantEatVerticalMoveValidator());
 
     return piece;
   }

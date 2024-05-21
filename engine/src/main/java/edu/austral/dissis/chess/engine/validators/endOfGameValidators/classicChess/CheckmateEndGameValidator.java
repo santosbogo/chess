@@ -11,7 +11,8 @@ public class CheckmateEndGameValidator implements EndOfGameValidator {
   @Override
   public boolean isEndOfGame(PieceColor colorTurn, Board board) {
     if (board.isKingThreatened(colorTurn)) {
-      return new StatusReferee().colorDoesntHaveValidMoves(board, colorTurn);
+     boolean result = new StatusReferee().colorDoesntHaveValidMoves(board, colorTurn);
+      return result;
     }
     return false;
   }

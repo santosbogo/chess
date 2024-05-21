@@ -11,11 +11,13 @@ public class Piece {
   private final PieceColor pieceColor;
   private final PieceName pieceName;
   boolean isFirstMove = true;
-  boolean isEnPassant = false;
+  private static int ids = 1;
+  private final int id;
 
   public Piece(PieceName pieceName, PieceColor pieceColor) {
     this.pieceName = pieceName;
     this.pieceColor = pieceColor;
+    this.id = ids++;
   }
 
   public void addMoveValidators(MoveValidator moveValidator) {
@@ -44,5 +46,9 @@ public class Piece {
 
   public List<MoveValidator> getMoveValidators() {
     return moveValidators;
+  }
+
+  public int getId() {
+    return id;
   }
 }

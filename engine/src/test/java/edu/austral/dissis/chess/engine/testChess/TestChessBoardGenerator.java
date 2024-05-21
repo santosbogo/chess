@@ -9,10 +9,21 @@ import edu.austral.dissis.chess.engine.games.BoardGenerator;
 import edu.austral.dissis.chess.engine.games.PieceFactory;
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChessPieceFactory;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TestChessBoardGenerator implements BoardGenerator {
-  PieceFactory pieceGenerator = new ClassicChessPieceFactory();
-  HashMap<Coordinates, Piece> pieces = new HashMap<>();
+  PieceFactory pieceGenerator;
+  Map<Coordinates, Piece> pieces;
+
+  public TestChessBoardGenerator(){
+    this.pieceGenerator = new ClassicChessPieceFactory();
+    this.pieces = new HashMap<>();
+  }
+
+  public TestChessBoardGenerator(Board board){
+    this.pieceGenerator = new ClassicChessPieceFactory();
+    this.pieces = board.getPieceDistribution();
+  }
 
   @Override
   public Board generateBoard() {

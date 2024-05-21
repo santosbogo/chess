@@ -53,21 +53,18 @@ public class ClassicChessTests {
     game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3));
 
     // White tries to move the same pawn again
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          game.playTurn(new Coordinates('A', 3), new Coordinates('A', 4));
-        });
+    assertEquals(
+        StatusOptions.FAILURE,
+        game.playTurn(new Coordinates('A', 3), new Coordinates('A', 4)));
+
 
     // Black moves a pawn
     game.playTurn(new Coordinates('A', 7), new Coordinates('A', 6));
 
     // Black tries to move the same pawn again
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          game.playTurn(new Coordinates('A', 6), new Coordinates('A', 5));
-        });
+    assertEquals(
+        StatusOptions.FAILURE,
+        game.playTurn(new Coordinates('A', 6), new Coordinates('A', 5)));
   }
 
   @Test
