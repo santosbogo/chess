@@ -42,6 +42,13 @@ repositories {
             password = githubToken
         }
     }
+    maven {
+        url = uri("https://maven.pkg.github.com/austral-ingsis/simple-client-server")
+        credentials {
+            username = githubUser
+            password = githubToken
+        }
+    }
 }
 
 dependencies {
