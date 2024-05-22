@@ -184,4 +184,30 @@ public class PersonalizedChessTests {
 
     assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)));
   }
+
+  @Test
+  public void testCrowningPawn(){
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generatePawn(new Coordinates('A', 7), PieceColor.WHITE);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    game.playTurn(new Coordinates('A', 7), new Coordinates('A', 8));
+    assertEquals(PieceName.QUEEN, game.getBoard().getPieceAt(new Coordinates('A', 8)).getPieceName());
+  }
+
+  @Test
+  public void testCheckmateCrowning(){
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generateQueen(new Coordinates('A', 7), PieceColor.WHITE);
+    testBoardGenerator.generateRook(new Coordinates('B', 7), PieceColor.WHITE);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    assertEquals(StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 8)));
+  }
 }

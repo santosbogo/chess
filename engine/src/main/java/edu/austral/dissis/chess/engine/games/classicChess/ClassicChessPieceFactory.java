@@ -4,6 +4,7 @@ import edu.austral.dissis.chess.engine.components.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.games.PieceFactory;
+import edu.austral.dissis.chess.engine.validators.moveValidators.AllOfMoveValidators;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 import edu.austral.dissis.chess.engine.validators.moveValidators.OneOfMoveValidators;
 import edu.austral.dissis.chess.engine.validators.moveValidators.classicChess.*;
@@ -35,15 +36,22 @@ public class ClassicChessPieceFactory implements PieceFactory {
     List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
-    oneOfMoveValidators.add(new VerticalMoveValidator(1));
+    List<MoveValidator> allOfMoveValidators = new ArrayList<>();
+    allOfMoveValidators.add(new VerticalMoveValidator(1));
+    allOfMoveValidators.add(new CantEatMoveValidator());
+    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators));
+
+    allOfMoveValidators = new ArrayList<>();
+    allOfMoveValidators.add(new DiagonalMoveValidator(1));
+    allOfMoveValidators.add(new CanOnlyEatMoveValidator());
+    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators));
+
     oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
-    oneOfMoveValidators.add(new DiagonalOneStepCaptureMoveValidator());
     //    oneOfMoveValidators.add(new EnPassantMoveValidator());
 
     moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
     moveValidators.add(new ByClearPathMoveValidator());
     moveValidators.add(new JustForwardMoveValidator(pieceColor));
-    moveValidators.add(new CantEatVerticalMoveValidator());
 
     return new Piece(PieceName.PAWN, pieceColor, moveValidators);
   }

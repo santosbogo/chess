@@ -30,11 +30,20 @@ public class BoardModifier {
 
       Piece rook = pieceDistribution.remove(new Coordinates(to.getX() - 2, to.getY()));
       pieceDistribution.put(new Coordinates(to.getX() + 1, to.getY()), new Piece(PieceName.ROOK, rook.getColor(), rook.getMoveValidators(), rook.getId()));
-    } else {
+    }
+
+    else if(board.getPieceAt(from).getPieceName().equals(PieceName.PAWN) && (Math.abs(to.getY() - board.getYSize()) == 0)) {
+      Piece piece = pieceDistribution.remove(from);
+      pieceDistribution.put(to, new Piece(PieceName.QUEEN, piece.getColor(), piece.getMoveValidators(), piece.getId()));
+    }
+
+    else {
       Piece piece = pieceDistribution.remove(from);
       pieceDistribution.put(to, new Piece(piece.getPieceName(), piece.getColor(), piece.getMoveValidators(), piece.getId()));
     }
 
     return new Board(board.getXSize(), board.getYSize(), new HashMap<>(pieceDistribution));
   }
+
+
 }
