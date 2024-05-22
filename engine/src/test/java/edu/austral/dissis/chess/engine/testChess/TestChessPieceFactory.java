@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine.testChess;
 
-import edu.austral.dissis.chess.engine.buenos.Piece;
+import edu.austral.dissis.chess.engine.components.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.games.PieceFactory;

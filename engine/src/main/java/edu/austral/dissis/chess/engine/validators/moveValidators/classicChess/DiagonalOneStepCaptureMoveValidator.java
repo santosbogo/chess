@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.Coordinates;
-import edu.austral.dissis.chess.engine.buenos.Piece;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.Coordinates;
+import edu.austral.dissis.chess.engine.components.Piece;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
 public class DiagonalOneStepCaptureMoveValidator implements MoveValidator {

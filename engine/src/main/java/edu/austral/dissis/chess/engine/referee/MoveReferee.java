@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.referee;
 
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 import java.util.List;

@@ -2,8 +2,8 @@ package edu.austral.dissis.chess.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;

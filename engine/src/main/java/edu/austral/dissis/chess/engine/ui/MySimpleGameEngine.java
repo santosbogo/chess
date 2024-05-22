@@ -1,12 +1,12 @@
 package edu.austral.dissis.chess.engine.ui;
 
 import edu.austral.dissis.chess.engine.Game;
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.Coordinates;
-import edu.austral.dissis.chess.engine.buenos.Piece;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.Coordinates;
+import edu.austral.dissis.chess.engine.components.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
-import edu.austral.dissis.chess.engine.games.GameGenerator;
+import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,8 +16,8 @@ import java.util.List;
 public class MySimpleGameEngine implements GameEngine {
     private final Game game;
 
-    MySimpleGameEngine(GameGenerator gameGenerator){
-        this.game = gameGenerator.generateGame();
+    public MySimpleGameEngine(){
+        this.game = new ClassicChess().generateGame();
     }
 
     @NotNull
@@ -34,7 +34,7 @@ public class MySimpleGameEngine implements GameEngine {
             case FAILURE -> { yield new InvalidMove("Invalid move"); }
             case WHITE_CHECKMATE -> { yield new GameOver(PlayerColor.WHITE); }
             case BLACK_CHECKMATE -> { yield new GameOver(PlayerColor.BLACK); }
-            default -> { yield new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor()); }
+            default -> { yield new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(true, false)); }
         };
     }
 
@@ -79,6 +79,20 @@ public class MySimpleGameEngine implements GameEngine {
     public InitialState init() {
         List<ChessPiece> pieces = getListOfChessPieces(game.peekBoard());
         return new InitialState(new BoardSize(8, 8), pieces, PlayerColor.WHITE);
+    }
+
+    @NotNull
+    public NewGameState redo() {
+        game.redo();
+
+        return new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(true, game.canRedo()));
+    }
+
+    @NotNull
+    public NewGameState undo() {
+        game.redo();
+
+        return new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(game.canUndo(), true));
     }
 
 

@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.validators.moveValidators.classicChess;
 
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 
 public class DiferentColorInTargetMoveValidator implements MoveValidator {

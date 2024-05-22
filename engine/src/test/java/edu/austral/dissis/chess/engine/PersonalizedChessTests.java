@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
@@ -162,5 +162,23 @@ public class PersonalizedChessTests {
     assertEquals(
         PieceName.QUEEN, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getPieceName());
     assertEquals(PieceColor.WHITE, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getColor());
+  }
+
+  @Test
+  public void testUndoPawnMovementStillBlackTurn(){
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generatePawn(new Coordinates('E', 2), PieceColor.WHITE);
+    testBoardGenerator.generatePawn(new Coordinates('E', 7), PieceColor.BLACK);
+
+    Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
+
+    game.playTurn(new Coordinates('E', 2), new Coordinates('E', 3));
+    game.playTurn(new Coordinates('E', 7), new Coordinates('E', 6));
+    game.undo();
+    assertEquals(PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('E', 7)).getPieceName());
+
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)));
   }
 }

@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.engine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess;

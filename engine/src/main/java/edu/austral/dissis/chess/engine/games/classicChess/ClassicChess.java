@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.games.classicChess;
 
 import edu.austral.dissis.chess.engine.Game;
-import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.games.BoardGenerator;
 import edu.austral.dissis.chess.engine.games.GameGenerator;

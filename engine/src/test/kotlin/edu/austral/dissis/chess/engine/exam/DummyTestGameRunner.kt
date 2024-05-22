@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.engine.exam
 
 import edu.austral.dissis.chess.engine.Game
-import edu.austral.dissis.chess.engine.board.Coordinates
+import edu.austral.dissis.chess.engine.components.Coordinates
 import edu.austral.dissis.chess.engine.enums.StatusOptions
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess
 import edu.austral.dissis.chess.test.TestBoard
@@ -19,7 +19,6 @@ class DummyTestGameRunner(private val game: Game) : TestGameRunner {
         from: TestPosition,
         to: TestPosition,
     ): TestMoveResult {
-//        return TestMoveSuccess(this)//TODO
 
         val newFrom = Coordinates(from.col, from.row)
         val newTo = Coordinates(to.col, to.row)
@@ -49,5 +48,15 @@ class DummyTestGameRunner(private val game: Game) : TestGameRunner {
 
     override fun withBoard(board: TestBoard): TestGameRunner { // getGameRunner
         return DummyTestGameRunner(ClassicChess().generateGame(Translator().translateBoard(board)))
+    }
+
+    override fun undo(): TestMoveResult {
+        game.undo()
+        return TestMoveSuccess(this)
+    }
+
+    override fun redo(): TestMoveResult {
+        game.redo()
+        return TestMoveSuccess(this)
     }
 }

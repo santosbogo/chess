@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.engine.validators.endOfGameValidators;
 
-import edu.austral.dissis.chess.engine.board.Board;
+import edu.austral.dissis.chess.engine.components.Board;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
 

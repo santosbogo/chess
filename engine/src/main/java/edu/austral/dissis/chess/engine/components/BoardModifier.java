@@ -1,6 +1,5 @@
-package edu.austral.dissis.chess.engine.board;
+package edu.austral.dissis.chess.engine.components;
 
-import edu.austral.dissis.chess.engine.buenos.Piece;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import java.util.HashMap;
 import java.util.Map;

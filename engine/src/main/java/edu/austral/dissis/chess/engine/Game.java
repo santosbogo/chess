@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.engine;
 
-import edu.austral.dissis.chess.engine.board.Board;
-import edu.austral.dissis.chess.engine.board.BoardModifier;
-import edu.austral.dissis.chess.engine.board.Coordinates;
+import edu.austral.dissis.chess.engine.components.Board;
+import edu.austral.dissis.chess.engine.components.BoardModifier;
+import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess;
@@ -16,6 +16,7 @@ import java.util.Stack;
 public class Game {
 
   private final Stack<Board> boardHistory = new Stack<>();
+  private final Stack<Board> redoStack = new Stack<>();
 
   List<EndOfGameValidator> endOfGameValidators;
   private PieceColor playerTurn;
@@ -48,6 +49,7 @@ public class Game {
       BoardModifier boardModifier = new BoardModifier(peekBoard());
       boardHistory.push(boardModifier.move(from, to));
       changePlayerTurn();
+      redoStack.clear();
       return StatusReferee.getStatus(playerTurn, peekBoard(), endOfGameValidators);
     } else {
       return StatusOptions.FAILURE;
@@ -71,13 +73,26 @@ public class Game {
   }
 
   public Board undo() {
-    boardHistory.removeLast();
-    changePlayerTurn();
+    if (canUndo()) {
+      redoStack.push(boardHistory.pop());
+      changePlayerTurn();
+    }
     return peekBoard();
   }
 
+  public boolean canUndo() {
+    return boardHistory.size() > 1;
+  }
+
   public Board redo() {
-    changePlayerTurn();
+    if (canRedo()) {
+      boardHistory.push(redoStack.pop());
+      changePlayerTurn();
+    }
     return peekBoard();
+  }
+
+  public boolean canRedo() {
+    return !redoStack.isEmpty();
   }
 }

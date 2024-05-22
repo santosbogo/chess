@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.board;
+package edu.austral.dissis.chess.engine.components;
 
 import java.util.Objects;
 

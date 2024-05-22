@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.engine.buenos;
+package edu.austral.dissis.chess.engine.components;
 
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;

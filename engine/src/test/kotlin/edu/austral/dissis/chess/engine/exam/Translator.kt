@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.engine.exam
 
-import edu.austral.dissis.chess.engine.board.Board
-import edu.austral.dissis.chess.engine.board.Coordinates
-import edu.austral.dissis.chess.engine.buenos.Piece
+import edu.austral.dissis.chess.engine.components.Board
+import edu.austral.dissis.chess.engine.components.Coordinates
+import edu.austral.dissis.chess.engine.components.Piece
 import edu.austral.dissis.chess.engine.enums.PieceColor
 import edu.austral.dissis.chess.engine.enums.PieceName
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChessPieceFactory
@@ -48,12 +48,19 @@ class Translator {
         val newPieceDistribution = HashMap<Coordinates, Piece>()
 
         for ((testPosition, testPiece) in testBoard.pieces) {
-            val coordinates = Coordinates(testPosition.col, testPosition.row)
+            val coordinates = Coordinates(
+                testPosition.col,
+                testPosition.row
+            )
             val piece = translatePiece(testPiece)
             newPieceDistribution[coordinates] = piece
         }
 
-        return Board(testBoard.size.cols, testBoard.size.rows, newPieceDistribution)
+        return Board(
+            testBoard.size.cols,
+            testBoard.size.rows,
+            newPieceDistribution
+        )
     }
 
     // Translate theirs piece to my piece
