@@ -25,7 +25,7 @@ public class MySimpleGameEngine implements GameEngine {
     public MoveResult applyMove(@NotNull Move move) {
         Coordinates from = new Coordinates(move.getFrom().getColumn(), move.getFrom().getRow());
         Coordinates to = new Coordinates(move.getTo().getColumn(), move.getTo().getRow());
-        Board board = game.peekBoard();
+        Board board = game.getBoard();
         Piece piece = board.getPieceAt(from);
 
         StatusOptions status = game.playTurn(from, to);
@@ -34,7 +34,7 @@ public class MySimpleGameEngine implements GameEngine {
             case FAILURE -> { yield new InvalidMove("Invalid move"); }
             case WHITE_CHECKMATE -> { yield new GameOver(PlayerColor.WHITE); }
             case BLACK_CHECKMATE -> { yield new GameOver(PlayerColor.BLACK); }
-            default -> { yield new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(true, false)); }
+            default -> { yield new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(true, false)); }
         };
     }
 
@@ -77,7 +77,7 @@ public class MySimpleGameEngine implements GameEngine {
     @NotNull
     @Override
     public InitialState init() {
-        List<ChessPiece> pieces = getListOfChessPieces(game.peekBoard());
+        List<ChessPiece> pieces = getListOfChessPieces(game.getBoard());
         return new InitialState(new BoardSize(8, 8), pieces, PlayerColor.WHITE);
     }
 
@@ -85,14 +85,14 @@ public class MySimpleGameEngine implements GameEngine {
     public NewGameState redo() {
         game.redo();
 
-        return new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(true, game.canRedo()));
+        return new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(true, game.canRedo()));
     }
 
     @NotNull
     public NewGameState undo() {
         game.redo();
 
-        return new NewGameState(getListOfChessPieces(game.peekBoard()), getNextPlayerColor(), new UndoState(game.canUndo(), true));
+        return new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(game.canUndo(), true));
     }
 
 

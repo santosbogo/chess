@@ -8,7 +8,7 @@ import edu.austral.dissis.chess.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.engine.games.classicChess.ClassicChess;
 import org.junit.jupiter.api.Test;
 
-public class ClassicChessInvalidMovesTests {
+public class  ClassicChessInvalidMovesTests {
 
   @Test
   public void pawnInvalidMovesTest2() {
@@ -35,7 +35,7 @@ public class ClassicChessInvalidMovesTests {
     Game game = new ClassicChess().generateGame();
 
     assertEquals(
-        PieceName.ROOK, game.peekBoard().getPieceAt(new Coordinates('A', 1)).getPieceName());
+        PieceName.ROOK, game.getBoard().getPieceAt(new Coordinates('A', 1)).getPieceName());
 
     assertEquals(
         StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 1), new Coordinates('B', 1)));

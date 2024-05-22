@@ -15,7 +15,7 @@ public class ClassicChessTests {
   @Test
   public void testStartingBoard() {
     Game game = new ClassicChess().generateGame();
-    Board board = game.peekBoard();
+    Board board = game.getBoard();
 
     for (int i = 1; i <= 8; i++) {
       assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i, 8)));
@@ -75,7 +75,7 @@ public class ClassicChessTests {
     game.playTurn(new Coordinates('F', 7), new Coordinates('F', 6));
     game.playTurn(new Coordinates('D', 1), new Coordinates('H', 5));
 
-    assertTrue(game.peekBoard().isKingThreatened(PieceColor.BLACK));
+    assertTrue(game.getBoard().isKingThreatened(PieceColor.BLACK));
   }
 
   @Test

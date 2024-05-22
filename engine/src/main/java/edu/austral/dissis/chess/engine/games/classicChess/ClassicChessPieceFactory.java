@@ -32,7 +32,7 @@ public class ClassicChessPieceFactory implements PieceFactory {
   }
 
   private Piece generatePawn(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.PAWN, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
@@ -40,65 +40,60 @@ public class ClassicChessPieceFactory implements PieceFactory {
     oneOfMoveValidators.add(new DiagonalOneStepCaptureMoveValidator());
     //    oneOfMoveValidators.add(new EnPassantMoveValidator());
 
-    piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new ByClearPathMoveValidator());
-    piece.addMoveValidators(new JustForwardMoveValidator(pieceColor));
-    piece.addMoveValidators(new CantEatVerticalMoveValidator());
+    moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
+    moveValidators.add(new ByClearPathMoveValidator());
+    moveValidators.add(new JustForwardMoveValidator(pieceColor));
+    moveValidators.add(new CantEatVerticalMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.PAWN, pieceColor, moveValidators);
   }
 
   private Piece generateRook(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.ROOK, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator());
     oneOfMoveValidators.add(new HorizontalMoveValidator());
 
-    piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new ByClearPathMoveValidator());
+    moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
+    moveValidators.add(new ByClearPathMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.ROOK, pieceColor, moveValidators);
   }
 
   private Piece generateKnight(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.KNIGHT, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
 
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new ClassicKnightMoveValidator());
+     moveValidators.add(new ClassicKnightMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.KNIGHT, pieceColor, moveValidators);
   }
 
   private Piece generateBishop(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.BISHOP, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
 
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new DiagonalMoveValidator());
-    piece.addMoveValidators(new ByClearPathMoveValidator());
+    moveValidators.add(new DiagonalMoveValidator());
+    moveValidators.add(new ByClearPathMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.BISHOP, pieceColor, moveValidators);
   }
 
   private Piece generateQueen(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.QUEEN, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator());
     oneOfMoveValidators.add(new HorizontalMoveValidator());
     oneOfMoveValidators.add(new DiagonalMoveValidator());
 
-    piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new ByClearPathMoveValidator());
+     moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
+     moveValidators.add(new ByClearPathMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.QUEEN, pieceColor, moveValidators);
   }
 
   private Piece generateKing(PieceColor pieceColor) {
-    Piece piece = new Piece(PieceName.KING, pieceColor);
+    List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
     oneOfMoveValidators.add(new VerticalMoveValidator(1));
@@ -107,10 +102,9 @@ public class ClassicChessPieceFactory implements PieceFactory {
     oneOfMoveValidators.add(new ClassicShortCastleMoveValidator());
     oneOfMoveValidators.add(new ClassicLongCastleMoveValidator());
 
-    piece.addMoveValidators(new OneOfMoveValidators(oneOfMoveValidators));
-    piece.addMoveValidators(sharedMoveValidators);
-    piece.addMoveValidators(new ByClearPathMoveValidator());
+     moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
+     moveValidators.add(new ByClearPathMoveValidator());
 
-    return piece;
+    return new Piece(PieceName.KING, pieceColor, moveValidators);
   }
 }

@@ -3,6 +3,8 @@ package edu.austral.dissis.chess.engine.components;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.referee.MoveReferee;
+
+import java.util.Collections;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -12,7 +14,7 @@ public class Board {
   private final int ySize;
 
   public Board(int xSize, int ySize, Map<Coordinates, Piece> pieceDistribution) {
-    this.pieceDistribution = pieceDistribution;
+    this.pieceDistribution = Collections.unmodifiableMap(pieceDistribution);;
     this.xSize = xSize;
     this.ySize = ySize;
   }

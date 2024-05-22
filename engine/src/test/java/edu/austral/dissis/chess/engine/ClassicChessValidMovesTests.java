@@ -24,13 +24,13 @@ public class ClassicChessValidMovesTests {
         StatusOptions.NORMAL, game.playTurn(new Coordinates('F', 7), new Coordinates('F', 5)));
 
     assertEquals(
-        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());
+        PieceName.PAWN, game.getBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());
     assertEquals(
-        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('A', 6)).getPieceName());
+        PieceName.PAWN, game.getBoard().getPieceAt(new Coordinates('A', 6)).getPieceName());
     assertEquals(
-        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('F', 4)).getPieceName());
+        PieceName.PAWN, game.getBoard().getPieceAt(new Coordinates('F', 4)).getPieceName());
     assertEquals(
-        PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('F', 5)).getPieceName());
+        PieceName.PAWN, game.getBoard().getPieceAt(new Coordinates('F', 5)).getPieceName());
   }
 
   @Test
@@ -44,7 +44,7 @@ public class ClassicChessValidMovesTests {
     game.playTurn(new Coordinates('A', 1), new Coordinates('A', 3));
 
     assertEquals(
-        PieceName.ROOK, game.peekBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());
+        PieceName.ROOK, game.getBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());
   }
 
   @Test
@@ -60,10 +60,10 @@ public class ClassicChessValidMovesTests {
     // negro
     game.playTurn(new Coordinates('D', 1), new Coordinates('F', 3));
     assertEquals(
-        PieceName.QUEEN, game.peekBoard().getPieceAt(new Coordinates('F', 3)).getPieceName());
+        PieceName.QUEEN, game.getBoard().getPieceAt(new Coordinates('F', 3)).getPieceName());
     game.playTurn(new Coordinates('A', 6), new Coordinates('A', 5));
     game.playTurn(new Coordinates('F', 3), new Coordinates('D', 5));
     assertEquals(
-        PieceName.QUEEN, game.peekBoard().getPieceAt(new Coordinates('D', 5)).getPieceName());
+        PieceName.QUEEN, game.getBoard().getPieceAt(new Coordinates('D', 5)).getPieceName());
   }
 }

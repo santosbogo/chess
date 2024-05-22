@@ -8,19 +8,22 @@ import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.validators.moveValidators.MoveValidator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
 
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
     PieceColor color = board.getColorAt(from);
-    Board simulatedBoard =
-        new Board(board.getXSize(), board.getYSize(), new HashMap<>(board.getPieceDistribution()));
-    BoardModifier boardModifier = new BoardModifier(simulatedBoard);
-    simulatedBoard = boardModifier.move(from, to);
-    boolean leavesKingThreatened = leavesKingThreatened(simulatedBoard, color);
 
-    return !leavesKingThreatened;
+    Board simulatedBoard = new Board(board.getXSize(), board.getYSize(), new HashMap<>(board.getPieceDistribution()));
+    Map<Coordinates, Piece> simulatedPieceDistribution = new HashMap<>(simulatedBoard.getPieceDistribution());
+
+    Piece piece = simulatedPieceDistribution.remove(from);
+    simulatedPieceDistribution.put(to, new Piece(piece.getPieceName(), piece.getColor(), piece.getMoveValidators(), piece.getId()));
+    simulatedBoard = new Board(board.getXSize(), board.getYSize(), new HashMap<>(simulatedPieceDistribution));
+
+    return !leavesKingThreatened(simulatedBoard, color);
   }
 
   private boolean leavesKingThreatened(Board board, PieceColor kingColor) {

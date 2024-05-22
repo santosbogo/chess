@@ -25,16 +25,16 @@ class DummyTestGameRunner(private val game: Game) : TestGameRunner {
 
         return when (game.playTurn(newFrom, newTo)) {
             StatusOptions.FAILURE -> {
-                TestMoveFailure(Translator().translateBoard(game.peekBoard()))
+                TestMoveFailure(Translator().translateBoard(game.getBoard()))
             }
             StatusOptions.WHITE_CHECKMATE -> {
-                WhiteCheckMate(Translator().translateBoard(game.peekBoard()))
+                WhiteCheckMate(Translator().translateBoard(game.getBoard()))
             }
             StatusOptions.BLACK_CHECKMATE -> {
-                BlackCheckMate(Translator().translateBoard(game.peekBoard()))
+                BlackCheckMate(Translator().translateBoard(game.getBoard()))
             }
             StatusOptions.STALEMATE -> {
-                TestMoveDraw(Translator().translateBoard(game.peekBoard()))
+                TestMoveDraw(Translator().translateBoard(game.getBoard()))
             }
             else -> {
                 TestMoveSuccess(this)
@@ -43,7 +43,7 @@ class DummyTestGameRunner(private val game: Game) : TestGameRunner {
     }
 
     override fun getBoard(): TestBoard {
-        return Translator().translateBoard(game.peekBoard())
+        return Translator().translateBoard(game.getBoard())
     }
 
     override fun withBoard(board: TestBoard): TestGameRunner { // getGameRunner

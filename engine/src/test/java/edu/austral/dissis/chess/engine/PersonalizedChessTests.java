@@ -6,7 +6,6 @@ import edu.austral.dissis.chess.engine.components.Coordinates;
 import edu.austral.dissis.chess.engine.enums.PieceColor;
 import edu.austral.dissis.chess.engine.enums.PieceName;
 import edu.austral.dissis.chess.engine.enums.StatusOptions;
-import edu.austral.dissis.chess.engine.games.classicChess.ClassicChessBoardGenerator;
 import edu.austral.dissis.chess.engine.testChess.TestChess;
 import edu.austral.dissis.chess.engine.testChess.TestChessBoardGenerator;
 import org.junit.jupiter.api.Test;
@@ -28,8 +27,12 @@ public class PersonalizedChessTests {
 
   @Test
   public void testDoubleStepPawn(){
-    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator(new ClassicChessBoardGenerator().generateBoard());
-    testBoardGenerator.generatePawn(new Coordinates('A', 3), PieceColor.BLACK);
+    TestChessBoardGenerator testBoardGenerator = new TestChessBoardGenerator();
+    testBoardGenerator.generateKing(new Coordinates('E', 8), PieceColor.BLACK);
+    testBoardGenerator.generateKing(new Coordinates('E', 1), PieceColor.WHITE);
+    testBoardGenerator.generatePawn(new Coordinates('A', 3), PieceColor.WHITE);
+    testBoardGenerator.generatePawn(new Coordinates('A', 2), PieceColor.WHITE);
+    testBoardGenerator.generatePawn(new Coordinates('B', 2), PieceColor.WHITE);
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
@@ -77,10 +80,10 @@ public class PersonalizedChessTests {
         StatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)));
 
     assertEquals(
-        PieceName.KING, game.peekBoard().getPieceAt(new Coordinates('G', 1)).getPieceName());
-    assertFalse(game.peekBoard().isEmptySquare(new Coordinates('F', 1)));
+        PieceName.KING, game.getBoard().getPieceAt(new Coordinates('G', 1)).getPieceName());
+    assertFalse(game.getBoard().isEmptySquare(new Coordinates('F', 1)));
     assertEquals(
-        PieceName.ROOK, game.peekBoard().getPieceAt(new Coordinates('F', 1)).getPieceName());
+        PieceName.ROOK, game.getBoard().getPieceAt(new Coordinates('F', 1)).getPieceName());
   }
 
   @Test
@@ -160,8 +163,8 @@ public class PersonalizedChessTests {
         StatusOptions.NORMAL, game.playTurn(new Coordinates('G', 4), new Coordinates('D', 4)));
 
     assertEquals(
-        PieceName.QUEEN, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getPieceName());
-    assertEquals(PieceColor.WHITE, game.peekBoard().getPieceAt(new Coordinates('D', 4)).getColor());
+        PieceName.QUEEN, game.getBoard().getPieceAt(new Coordinates('D', 4)).getPieceName());
+    assertEquals(PieceColor.WHITE, game.getBoard().getPieceAt(new Coordinates('D', 4)).getColor());
   }
 
   @Test
@@ -177,7 +180,7 @@ public class PersonalizedChessTests {
     game.playTurn(new Coordinates('E', 2), new Coordinates('E', 3));
     game.playTurn(new Coordinates('E', 7), new Coordinates('E', 6));
     game.undo();
-    assertEquals(PieceName.PAWN, game.peekBoard().getPieceAt(new Coordinates('E', 7)).getPieceName());
+    assertEquals(PieceName.PAWN, game.getBoard().getPieceAt(new Coordinates('E', 7)).getPieceName());
 
     assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)));
   }

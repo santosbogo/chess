@@ -7,29 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Piece {
-  private final List<MoveValidator> moveValidators = new ArrayList<>();
+  private final List<MoveValidator> moveValidators;
   private final PieceColor pieceColor;
   private final PieceName pieceName;
-  boolean isFirstMove = true;
+  private final boolean isFirstMove;
   private static int ids = 1;
   private final int id;
 
-  public Piece(PieceName pieceName, PieceColor pieceColor) {
+  public Piece(PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators) {
     this.pieceName = pieceName;
     this.pieceColor = pieceColor;
+    this.moveValidators = moveValidators;
+    this.isFirstMove = true;
     this.id = ids++;
   }
 
-  public void addMoveValidators(MoveValidator moveValidator) {
-    moveValidators.add(moveValidator);
-  }
-
-  public void addMoveValidators(List<MoveValidator> moveValidator) {
-    moveValidators.addAll(moveValidator);
-  }
-
-  public void setFirstMove() {
-    isFirstMove = false;
+  // If i want to create a piece with a specific id, it means it is not the first move
+  public Piece (PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators, int id) {
+    this.pieceName = pieceName;
+    this.pieceColor = pieceColor;
+    this.moveValidators = moveValidators;
+    this.isFirstMove = false;
+    this.id = id;
   }
 
   public boolean isFirstMove() {
