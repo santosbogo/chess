@@ -24,7 +24,7 @@ public class ClassicChessPieceFactory implements PieceFactory {
     return switch (pieceName) {
       case PAWN -> generatePawn(pieceColor);
       case ROOK -> generateRook(pieceColor);
-      case KNIGHT -> generateKnight(pieceColor);
+      case HORSE -> generateKnight(pieceColor);
       case BISHOP -> generateBishop(pieceColor);
       case QUEEN -> generateQueen(pieceColor);
       case KING -> generateKing(pieceColor);
@@ -66,7 +66,7 @@ public class ClassicChessPieceFactory implements PieceFactory {
 
      moveValidators.add(new ClassicKnightMoveValidator());
 
-    return new Piece(PieceName.KNIGHT, pieceColor, moveValidators);
+    return new Piece(PieceName.HORSE, pieceColor, moveValidators);
   }
 
   private Piece generateBishop(PieceColor pieceColor) {

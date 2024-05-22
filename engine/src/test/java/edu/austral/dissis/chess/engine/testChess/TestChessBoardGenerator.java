@@ -39,7 +39,7 @@ public class TestChessBoardGenerator implements BoardGenerator {
   }
 
   public void generateKnight(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.HORSE, pieceColor));
   }
 
   public void generateBishop(Coordinates coordinates, PieceColor pieceColor) {

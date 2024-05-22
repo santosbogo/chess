@@ -32,7 +32,7 @@ class Translator {
             when (testPiece.pieceName) {
                 PieceName.PAWN -> 'P'
                 PieceName.ROOK -> 'R'
-                PieceName.KNIGHT -> 'N'
+                PieceName.HORSE -> 'N'
                 PieceName.BISHOP -> 'B'
                 PieceName.QUEEN -> 'Q'
                 PieceName.KING -> 'K'
@@ -76,7 +76,7 @@ class Translator {
         return when (pieceTypeSymbol) {
             'P' -> PieceName.PAWN
             'R' -> PieceName.ROOK
-            'N' -> PieceName.KNIGHT
+            'N' -> PieceName.HORSE
             'B' -> PieceName.BISHOP
             'Q' -> PieceName.QUEEN
             'K' -> PieceName.KING

@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.engine.enums;
 public enum PieceName {
   PAWN,
   ROOK,
-  KNIGHT,
+  HORSE,
   BISHOP,
   QUEEN,
   KING

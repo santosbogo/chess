@@ -38,26 +38,25 @@ public class Game {
   }
 
   public StatusOptions playTurn(Coordinates from, Coordinates to) {
-    MoveReferee moveReferee = new MoveReferee(playerTurn, peekBoard());
+    MoveReferee moveReferee = new MoveReferee(playerTurn, getBoard());
 
     if (!isYourTurn(from)) {
       return StatusOptions.FAILURE;
     }
 
     if (moveReferee.isValidMove(from, to)) {
-      peekBoard().getPieceAt(from).setFirstMove();
-      BoardModifier boardModifier = new BoardModifier(peekBoard());
+      BoardModifier boardModifier = new BoardModifier(getBoard());
       boardHistory.push(boardModifier.move(from, to));
       changePlayerTurn();
       redoStack.clear();
-      return StatusReferee.getStatus(playerTurn, peekBoard(), endOfGameValidators);
+      return StatusReferee.getStatus(playerTurn, getBoard(), endOfGameValidators);
     } else {
       return StatusOptions.FAILURE;
     }
   }
 
   private boolean isYourTurn(Coordinates from) {
-    return peekBoard().getColorAt(from).equals(playerTurn);
+    return getBoard().getColorAt(from).equals(playerTurn);
   }
 
   public PieceColor getPlayerTurnColor() {
@@ -68,7 +67,7 @@ public class Game {
     playerTurn = playerTurn == PieceColor.WHITE ? PieceColor.BLACK : PieceColor.WHITE;
   }
 
-  public Board peekBoard() {
+  public Board getBoard() {
     return boardHistory.peek();
   }
 
@@ -77,7 +76,7 @@ public class Game {
       redoStack.push(boardHistory.pop());
       changePlayerTurn();
     }
-    return peekBoard();
+    return getBoard();
   }
 
   public boolean canUndo() {
@@ -89,7 +88,7 @@ public class Game {
       boardHistory.push(redoStack.pop());
       changePlayerTurn();
     }
-    return peekBoard();
+    return getBoard();
   }
 
   public boolean canRedo() {

@@ -36,8 +36,8 @@ public class ClassicChessTests {
     for (int y = 1; y <= 8; y = y + 7) {
       assertEquals(PieceName.ROOK, board.getPieceAt(new Coordinates(1, y)).getPieceName());
       assertEquals(PieceName.ROOK, board.getPieceAt(new Coordinates(8, y)).getPieceName());
-      assertEquals(PieceName.KNIGHT, board.getPieceAt(new Coordinates(2, y)).getPieceName());
-      assertEquals(PieceName.KNIGHT, board.getPieceAt(new Coordinates(7, y)).getPieceName());
+      assertEquals(PieceName.HORSE, board.getPieceAt(new Coordinates(2, y)).getPieceName());
+      assertEquals(PieceName.HORSE, board.getPieceAt(new Coordinates(7, y)).getPieceName());
       assertEquals(PieceName.BISHOP, board.getPieceAt(new Coordinates(3, y)).getPieceName());
       assertEquals(PieceName.BISHOP, board.getPieceAt(new Coordinates(6, y)).getPieceName());
       assertEquals(PieceName.QUEEN, board.getPieceAt(new Coordinates(4, y)).getPieceName());

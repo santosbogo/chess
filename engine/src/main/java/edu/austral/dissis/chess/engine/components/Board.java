@@ -85,4 +85,39 @@ public class Board {
   public Map<Coordinates, Piece> getPieceDistribution() {
     return pieceDistribution;
   }
+
+  @Override
+  public String toString(){
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int y = 1; y <= getYSize(); y++){
+      for (int x = 1; x <= getXSize(); x++){
+        Coordinates coordinates = new Coordinates(x, getYSize()-y+1);
+       stringBuilder.append("|");
+        if(isEmptySquare(coordinates)){
+          stringBuilder.append("  ");
+        }
+        else {
+          stringBuilder.append(getPieceColorInitial(coordinates));
+          stringBuilder.append(getPieceNameInitial(coordinates));
+        }
+      }
+      stringBuilder.append("|\n");
+    }
+    stringBuilder.append("\n\n");
+
+    return stringBuilder.toString();
+  }
+
+  private String getPieceColorInitial(Coordinates coordinates){
+    if(getColorAt(coordinates).equals(PieceColor.WHITE)){
+      return "W";
+    }
+    else{
+      return "B";
+    }
+  }
+
+  private String getPieceNameInitial(Coordinates coordinates){
+    return getPieceAt(coordinates).getPieceName().toString().substring(0, 1);
+  }
 }

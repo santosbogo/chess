@@ -55,9 +55,9 @@ public class ClassicChessBoardGenerator implements BoardGenerator {
       PieceColor pieceColor, PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
     int row = pieceColor.equals(PieceColor.WHITE) ? 1 : 8;
     pieces.put(
-        new Coordinates('B', row), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
+        new Coordinates('B', row), pieceGenerator.generatePiece(PieceName.HORSE, pieceColor));
     pieces.put(
-        new Coordinates('G', row), pieceGenerator.generatePiece(PieceName.KNIGHT, pieceColor));
+        new Coordinates('G', row), pieceGenerator.generatePiece(PieceName.HORSE, pieceColor));
   }
 
   private void generateBishops(
