@@ -1,6 +1,6 @@
 package edu.austral.dissis.engine.components;
 
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 import java.util.HashMap;
 import java.util.Map;
 

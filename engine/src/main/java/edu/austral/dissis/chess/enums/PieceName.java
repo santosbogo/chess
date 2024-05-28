@@ -1,4 +1,4 @@
-package edu.austral.dissis.engine.enums;
+package edu.austral.dissis.chess.enums;
 
 public enum PieceName {
   PAWN,

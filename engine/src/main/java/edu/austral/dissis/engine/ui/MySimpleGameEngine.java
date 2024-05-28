@@ -5,7 +5,7 @@ import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.StatusOptions;
 import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;

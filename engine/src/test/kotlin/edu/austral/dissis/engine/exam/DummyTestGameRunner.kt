@@ -2,7 +2,7 @@ package edu.austral.dissis.engine.exam
 
 import edu.austral.dissis.engine.Game
 import edu.austral.dissis.engine.components.Coordinates
-import edu.austral.dissis.engine.enums.StatusOptions
+import edu.austral.dissis.chess.enums.StatusOptions
 import edu.austral.dissis.chess.games.classicChess.ClassicChess
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPosition

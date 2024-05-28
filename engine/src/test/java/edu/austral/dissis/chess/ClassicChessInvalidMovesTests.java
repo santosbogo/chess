@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.austral.dissis.engine.Game;
 import edu.austral.dissis.engine.components.Coordinates;
-import edu.austral.dissis.engine.enums.PieceName;
-import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.chess.enums.StatusOptions;
 import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import org.junit.jupiter.api.Test;
 

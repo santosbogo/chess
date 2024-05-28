@@ -5,7 +5,7 @@ import edu.austral.dissis.engine.components.BoardModifier;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.referee.MoveReferee;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 

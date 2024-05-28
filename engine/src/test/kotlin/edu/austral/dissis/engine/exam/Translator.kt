@@ -4,7 +4,7 @@ import edu.austral.dissis.engine.components.Board
 import edu.austral.dissis.engine.components.Coordinates
 import edu.austral.dissis.engine.components.Piece
 import edu.austral.dissis.engine.enums.PieceColor
-import edu.austral.dissis.engine.enums.PieceName
+import edu.austral.dissis.chess.enums.PieceName
 import edu.austral.dissis.chess.games.classicChess.ClassicChessPieceFactory
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPiece

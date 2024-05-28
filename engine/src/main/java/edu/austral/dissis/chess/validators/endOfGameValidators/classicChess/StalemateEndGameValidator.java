@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.validators.endOfGameValidators.classicChess;
 
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.StatusOptions;
 import edu.austral.dissis.engine.referee.StatusReferee;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
 

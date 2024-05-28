@@ -3,11 +3,12 @@ package edu.austral.dissis.chess.games.classicChess;
 import edu.austral.dissis.chess.validators.moveValidators.classicChess.*;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.games.PieceFactory;
 import edu.austral.dissis.engine.validators.moveValidators.AllOfMoveValidators;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 import edu.austral.dissis.engine.validators.moveValidators.OneOfMoveValidators;
+import edu.austral.dissis.engine.validators.moveValidators.sharedMoveValidators.DiagonalMoveValidator;
 
 import java.util.ArrayList;
 import java.util.List;

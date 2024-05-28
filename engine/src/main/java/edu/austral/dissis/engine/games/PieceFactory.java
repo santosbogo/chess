@@ -2,7 +2,7 @@ package edu.austral.dissis.engine.games;
 
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 
 public interface PieceFactory {
 

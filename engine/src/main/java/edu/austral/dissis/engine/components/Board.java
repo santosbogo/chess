@@ -1,7 +1,7 @@
 package edu.austral.dissis.engine.components;
 
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.referee.MoveReferee;
 
 import java.util.Collections;

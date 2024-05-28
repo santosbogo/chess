@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
-import edu.austral.dissis.engine.enums.PieceName;
+import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 
 public class EnPassantMoveValidator implements MoveValidator {
