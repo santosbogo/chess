@@ -1,12 +1,9 @@
 package edu.austral.dissis.engine.components;
 
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.PieceName;
-import edu.austral.dissis.engine.referee.MoveReferee;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class Board {
   private final Map<Coordinates, Piece> pieceDistribution;
@@ -14,7 +11,7 @@ public class Board {
   private final int ySize;
 
   public Board(int xSize, int ySize, Map<Coordinates, Piece> pieceDistribution) {
-    this.pieceDistribution = Collections.unmodifiableMap(pieceDistribution);;
+    this.pieceDistribution = Collections.unmodifiableMap(pieceDistribution);
     this.xSize = xSize;
     this.ySize = ySize;
   }
@@ -32,40 +29,6 @@ public class Board {
 
   public boolean isEmptySquare(Coordinates coordinates) {
     return !pieceDistribution.containsKey(coordinates);
-  }
-
-  public boolean isSquareThreatened(Coordinates coordinates) {
-    PieceColor targetColor = getColorAt(coordinates);
-    for (int x = 1; x <= getXSize(); x++) {
-      for (int y = 1; y <= getYSize(); y++) {
-        Coordinates from = new Coordinates(x, y);
-        if (!pieceDistribution.containsKey(from) || getColorAt(from).equals(targetColor)) continue;
-        MoveReferee moveReferee = new MoveReferee(getColorAt(from), this);
-        if (moveReferee.isValidMove(from, coordinates)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  public Coordinates getKingCoordinates(PieceColor color) {
-    for (int x = 1; x <= getXSize(); x++)
-      for (int y = 1; y <= getYSize(); y++) {
-        Coordinates tempCoordinates = new Coordinates(x, y);
-        Piece tempPiece = getPieceAt(tempCoordinates);
-
-        if (tempPiece == null) continue;
-
-        if (tempPiece.getPieceName().equals(PieceName.KING) && tempPiece.getColor().equals(color))
-          return tempCoordinates;
-      }
-
-    throw new NoSuchElementException("King not found");
-  }
-
-  public boolean isKingThreatened(PieceColor color) {
-    return isSquareThreatened(getKingCoordinates(color));
   }
 
   public PieceColor getColorAt(Coordinates coordinates) {
@@ -86,6 +49,7 @@ public class Board {
     return pieceDistribution;
   }
 
+  //Debugging purposes
   @Override
   public String toString(){
     StringBuilder stringBuilder = new StringBuilder();

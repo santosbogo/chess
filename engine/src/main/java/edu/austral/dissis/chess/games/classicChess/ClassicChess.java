@@ -25,19 +25,6 @@ public class ClassicChess implements GameGenerator {
   }
 
   private Board generateBoard() {
-    BoardGenerator boardGenerator = new ClassicChessBoardGenerator();
-    return boardGenerator.generateBoard();
-  }
-
-  public Board getStartingBoard() {
-    return generateBoard();
-  }
-
-  public List<EndOfGameValidator> getEndOfGameValidators() {
-    return endOfGameValidators;
-  }
-
-  public PieceColor getStartingPlayer() {
-    return PieceColor.WHITE;
+    return new ClassicChessBoardGenerator().generateBoard();
   }
 }

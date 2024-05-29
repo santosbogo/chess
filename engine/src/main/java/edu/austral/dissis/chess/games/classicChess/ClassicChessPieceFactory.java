@@ -4,6 +4,7 @@ import edu.austral.dissis.chess.validators.moveValidators.classicChess.*;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.engine.enums.PieceNameInterface;
 import edu.austral.dissis.engine.games.PieceFactory;
 import edu.austral.dissis.engine.validators.moveValidators.AllOfMoveValidators;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
@@ -12,6 +13,7 @@ import edu.austral.dissis.engine.validators.moveValidators.sharedMoveValidators.
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ClassicChessPieceFactory implements PieceFactory {
 
@@ -23,8 +25,8 @@ public class ClassicChessPieceFactory implements PieceFactory {
           new DiferentColorInTargetMoveValidator());
 
   @Override
-  public Piece generatePiece(PieceName pieceName, PieceColor pieceColor) {
-    return switch (pieceName) {
+  public Piece generatePiece(PieceNameInterface pieceName, PieceColor pieceColor) {
+    return switch ((PieceName) pieceName) {
       case PAWN -> generatePawn(pieceColor);
       case ROOK -> generateRook(pieceColor);
       case HORSE -> generateKnight(pieceColor);

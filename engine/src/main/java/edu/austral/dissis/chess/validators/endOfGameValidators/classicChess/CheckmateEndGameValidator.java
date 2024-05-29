@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.validators.endOfGameValidators.classicChess;
 
+import edu.austral.dissis.chess.ChessHelper;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.StatusOptions;
@@ -10,9 +11,8 @@ public class CheckmateEndGameValidator implements EndOfGameValidator {
 
   @Override
   public boolean isEndOfGame(PieceColor colorTurn, Board board) {
-    if (board.isKingThreatened(colorTurn)) {
-     boolean result = new StatusReferee().colorDoesntHaveValidMoves(board, colorTurn);
-      return result;
+    if (new ChessHelper().isKingThreatened(board, colorTurn)) {
+        return new StatusReferee().colorDoesntHaveValidMoves(board, colorTurn);
     }
     return false;
   }

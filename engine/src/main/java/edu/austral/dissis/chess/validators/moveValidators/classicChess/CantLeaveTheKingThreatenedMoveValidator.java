@@ -1,5 +1,7 @@
 package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
+import edu.austral.dissis.chess.ChessHelper;
+import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
@@ -8,6 +10,7 @@ import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
 
@@ -25,8 +28,21 @@ public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
     return !leavesKingThreatened(simulatedBoard, color);
   }
 
+  private boolean isValidMove(Coordinates from, Coordinates to, Board board) {
+    List<MoveValidator> validators = board.getPieceAt(from).getMoveValidators();
+
+    for (MoveValidator validator : validators) {
+      if (!(validator instanceof CantLeaveTheKingThreatenedMoveValidator)) {
+        if (!validator.validMove(from, to, board)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   private boolean leavesKingThreatened(Board board, PieceColor kingColor) {
-    Coordinates kingCoordinates = board.getKingCoordinates(kingColor);
+    Coordinates kingCoordinates = new ChessHelper().getKingCoordinates(board, kingColor);
 
     for (int x = 1; x <= board.getXSize(); x++) {
       for (int y = 1; y <= board.getYSize(); y++) {
@@ -39,18 +55,5 @@ public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
       }
     }
     return false;
-  }
-
-  private boolean isValidMove(Coordinates from, Coordinates to, Board board) {
-    List<MoveValidator> validators = board.getPieceAt(from).getMoveValidators();
-
-    for (MoveValidator validator : validators) {
-      if (!(validator instanceof CantLeaveTheKingThreatenedMoveValidator)) {
-        if (!validator.validMove(from, to, board)) {
-          return false;
-        }
-      }
-    }
-    return true;
   }
 }

@@ -1,12 +1,8 @@
-package edu.austral.dissis.chess.enums;
+package edu.austral.dissis.checkers.enums;
 
 import edu.austral.dissis.engine.enums.PieceNameInterface;
 
 public enum PieceName implements PieceNameInterface {
-  PAWN,
-  ROOK,
-  HORSE,
-  BISHOP,
-  QUEEN,
-  KING
+    CHECKER,
+    KING
 }

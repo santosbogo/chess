@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
+import edu.austral.dissis.chess.ChessHelper;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.BoardModifier;
 import edu.austral.dissis.engine.components.Coordinates;
@@ -20,7 +21,7 @@ public class ClassicShortCastleMoveValidator implements MoveValidator {
     if (king == null
         || king.getPieceName() != PieceName.KING
         || !king.isFirstMove()
-        || board.isSquareThreatened(from)) return false;
+        || new ChessHelper().isSquareThreatened(board, from)) return false;
 
     PieceColor color = king.getColor();
 

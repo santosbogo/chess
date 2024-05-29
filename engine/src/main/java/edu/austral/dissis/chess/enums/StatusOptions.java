@@ -1,6 +1,8 @@
 package edu.austral.dissis.chess.enums;
 
-public enum StatusOptions {
+import edu.austral.dissis.engine.enums.StatusOptionsInterface;
+
+public enum StatusOptions implements StatusOptionsInterface {
   NORMAL,
   FAILURE,
   WHITE_CHECKMATE,

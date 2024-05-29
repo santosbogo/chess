@@ -5,7 +5,6 @@ import edu.austral.dissis.engine.components.BoardModifier;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.StatusOptions;
-import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import edu.austral.dissis.engine.referee.MoveReferee;
 import edu.austral.dissis.engine.referee.StatusReferee;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
@@ -20,13 +19,6 @@ public class Game {
 
   List<EndOfGameValidator> endOfGameValidators;
   private PieceColor playerTurn;
-
-  public Game() { // Default constructor (Classic Chess)
-    ClassicChess classicChess = new ClassicChess();
-    this.boardHistory.push(classicChess.getStartingBoard());
-    this.endOfGameValidators = classicChess.getEndOfGameValidators();
-    this.playerTurn = classicChess.getStartingPlayer();
-  }
 
   public Game(
       Board startingPosition,
