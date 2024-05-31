@@ -4,6 +4,7 @@ import edu.austral.dissis.engine.ui.MySimpleGameEngine
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView
+import edu.austral.dissis.chess.gui.createGameViewFrom
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
@@ -19,13 +20,13 @@ class ChessGameApplication : Application() {
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {
-        const val GameTitle = "Chess"
+        const val GAME_TITLE = "Chess"
     }
 
     override fun start(primaryStage: Stage) {
-        primaryStage.title = GameTitle
+        primaryStage.title = GAME_TITLE
 
-        val root = GameView(imageResolver)
+        val root = createGameViewFrom(gameEngine, imageResolver)
 
         primaryStage.scene = Scene(root)
         primaryStage.show()

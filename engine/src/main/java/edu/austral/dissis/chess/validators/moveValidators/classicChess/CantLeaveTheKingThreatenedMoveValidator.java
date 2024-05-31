@@ -1,7 +1,6 @@
 package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
 import edu.austral.dissis.chess.ChessHelper;
-import edu.austral.dissis.chess.enums.PieceName;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
@@ -10,7 +9,6 @@ import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class CantLeaveTheKingThreatenedMoveValidator implements MoveValidator {
 

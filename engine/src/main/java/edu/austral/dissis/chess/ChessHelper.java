@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess;
 
-import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
@@ -34,11 +34,11 @@ public class ChessHelper {
         for (int x = 1; x <= board.getXSize(); x++)
             for (int y = 1; y <= board.getYSize(); y++) {
                 Coordinates tempCoordinates = new Coordinates(x, y);
-                Piece tempPiece = board.getPieceAt(tempCoordinates);
+                Piece tempPiece = board.getPieceAt(tempCoordinates); //FIXME: TIENE UNA EXCEPCION
 
                 if (tempPiece == null) continue;
 
-                if (tempPiece.getPieceName().equals(PieceName.KING) && tempPiece.getColor().equals(kingColor))
+                if (tempPiece.getPieceName().equals(ChessPieceNames.KING) && tempPiece.getColor().equals(kingColor))
                     return tempCoordinates;
             }
 

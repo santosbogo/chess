@@ -1,10 +1,11 @@
 package edu.austral.dissis.engine;
 
 import edu.austral.dissis.engine.components.Board;
-import edu.austral.dissis.engine.components.BoardModifier;
+import edu.austral.dissis.engine.move.Mover;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.ChessStatusOptions;
+import edu.austral.dissis.engine.move.sharedSpecialMovers.SpecialMover;
 import edu.austral.dissis.engine.referee.MoveReferee;
 import edu.austral.dissis.engine.referee.StatusReferee;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
@@ -16,34 +17,37 @@ public class Game {
 
   private final Stack<Board> boardHistory = new Stack<>();
   private final Stack<Board> redoStack = new Stack<>();
-
+  private final List<SpecialMover> specialMovers;
   List<EndOfGameValidator> endOfGameValidators;
   private PieceColor playerTurn;
 
   public Game(
       Board startingPosition,
       List<EndOfGameValidator> endOfGameValidators,
+      List<SpecialMover> specialMovers,
       PieceColor startingPlayer) {
     this.boardHistory.push(startingPosition);
     this.endOfGameValidators = endOfGameValidators;
+    this.specialMovers = specialMovers;
     this.playerTurn = startingPlayer;
   }
 
-  public StatusOptions playTurn(Coordinates from, Coordinates to) {
+  public ChessStatusOptions playTurn(Coordinates from, Coordinates to) {
     MoveReferee moveReferee = new MoveReferee(playerTurn, getBoard());
 
-    if (!isYourTurn(from)) {
-      return StatusOptions.FAILURE;
+    if (getBoard().isEmptySquare(from) || !isYourTurn(from)) {
+      return ChessStatusOptions.FAILURE;
     }
 
     if (moveReferee.isValidMove(from, to)) {
-      BoardModifier boardModifier = new BoardModifier(getBoard());
-      boardHistory.push(boardModifier.move(from, to));
+      Mover mover = new Mover(getBoard(), this.specialMovers);
+      boardHistory.push(mover.move(from, to));
       changePlayerTurn();
       redoStack.clear();
-      return StatusReferee.getStatus(playerTurn, getBoard(), endOfGameValidators);
+      Board board = getBoard();
+      return StatusReferee.getStatus(playerTurn, board, endOfGameValidators);
     } else {
-      return StatusOptions.FAILURE;
+      return ChessStatusOptions.FAILURE;
     }
   }
 

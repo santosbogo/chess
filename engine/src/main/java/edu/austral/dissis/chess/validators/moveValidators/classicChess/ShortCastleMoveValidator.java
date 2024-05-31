@@ -2,15 +2,17 @@ package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
 import edu.austral.dissis.chess.ChessHelper;
 import edu.austral.dissis.engine.components.Board;
-import edu.austral.dissis.engine.components.BoardModifier;
+import edu.austral.dissis.engine.move.Mover;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.referee.MoveReferee;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 
-public class ClassicShortCastleMoveValidator implements MoveValidator {
+import java.util.Collections;
+
+public class ShortCastleMoveValidator implements MoveValidator {
   @Override
   public boolean validMove(Coordinates from, Coordinates to, Board board) {
 
@@ -19,7 +21,7 @@ public class ClassicShortCastleMoveValidator implements MoveValidator {
     // From is a king, never moved, not in check
     Piece king = board.getPieceAt(from);
     if (king == null
-        || king.getPieceName() != PieceName.KING
+        || king.getPieceName() != ChessPieceNames.KING
         || !king.isFirstMove()
         || new ChessHelper().isSquareThreatened(board, from)) return false;
 
@@ -27,12 +29,12 @@ public class ClassicShortCastleMoveValidator implements MoveValidator {
 
     // In column F there is a rook, never moved
     Piece rook = board.getPieceAt(new Coordinates('H', from.getY()));
-    if (rook == null || rook.getPieceName() != PieceName.ROOK || !rook.isFirstMove()) return false;
+    if (rook == null || rook.getPieceName() != ChessPieceNames.ROOK || !rook.isFirstMove()) return false;
 
     // Can King move two valid steps to the right?
     if (new MoveReferee(color, board).isValidMove(from, new Coordinates('F', from.getY()))) {
-      BoardModifier boardModifier = new BoardModifier(board);
-      board = boardModifier.move(from, new Coordinates('F', from.getY()));
+      Mover mover = new Mover(board, Collections.emptyList());
+      board = mover.move(from, new Coordinates('F', from.getY()));
       from = new Coordinates('F', from.getY()); // Update king coordinates
       return new MoveReferee(color, board).isValidMove(from, new Coordinates('G', from.getY()));
     }

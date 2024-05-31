@@ -4,8 +4,8 @@ import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.PieceName;
-import edu.austral.dissis.chess.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.ChessPieceNames;
+import edu.austral.dissis.chess.enums.ChessStatusOptions;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
 
 import java.util.List;
@@ -22,16 +22,16 @@ public class StatusReferee {
     return false;
   }
 
-  public static StatusOptions getStatus(
+  public static ChessStatusOptions getStatus(
       PieceColor colorTurn, Board board, List<EndOfGameValidator> endOfGameValidators) {
     if (isEndOfGame(colorTurn, board, endOfGameValidators)) {
       for (EndOfGameValidator endOfGameValidator : endOfGameValidators) {
-        StatusOptions status = endOfGameValidator.getStatus(colorTurn, board);
+        ChessStatusOptions status = endOfGameValidator.getStatus(colorTurn, board);
         if (status == null) continue;
         return status;
       }
     }
-    return StatusOptions.NORMAL;
+    return ChessStatusOptions.NORMAL;
   }
 
   public boolean colorDoesntHaveValidMoves(Board board, PieceColor colorTurn) {
@@ -48,7 +48,7 @@ public class StatusReferee {
             Piece toPiece = board.getPieceAt(tempTo);
 
             if (toPiece != null
-                && (toPiece.getPieceName() == PieceName.KING
+                && (toPiece.getPieceName() == ChessPieceNames.KING
                     || toPiece.getColor().equals(colorTurn))) continue;
             if (new MoveReferee(colorTurn, board).isValidMove(tempFrom, tempTo)) {
               return false;

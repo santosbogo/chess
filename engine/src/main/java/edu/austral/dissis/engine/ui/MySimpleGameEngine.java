@@ -5,7 +5,7 @@ import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.StatusOptions;
+import edu.austral.dissis.chess.enums.ChessStatusOptions;
 import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +25,11 @@ public class MySimpleGameEngine implements GameEngine {
     public MoveResult applyMove(@NotNull Move move) {
         Coordinates from = new Coordinates(move.getFrom().getColumn(), move.getFrom().getRow());
         Coordinates to = new Coordinates(move.getTo().getColumn(), move.getTo().getRow());
-        Board board = game.getBoard();
-        Piece piece = board.getPieceAt(from);
+//        Board board = game.getBoard();
+//        Piece piece = board.getPieceAt(from);
 
-        StatusOptions status = game.playTurn(from, to);
+        ChessStatusOptions status = game.playTurn(from, to);
+
 
         return  switch (status) {
             case FAILURE -> { yield new InvalidMove("Invalid move"); }

@@ -1,7 +1,7 @@
 package edu.austral.dissis.engine.components;
 
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.engine.enums.PieceNameInterface;
+import edu.austral.dissis.engine.enums.PieceName;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.List;
 public class Piece {
   private final List<MoveValidator> moveValidators;
   private final PieceColor pieceColor;
-  private final PieceNameInterface pieceName;
+  private final PieceName pieceName;
   private final boolean isFirstMove;
   private static int ids = 1;
   private final int id;
 
-  public Piece(PieceNameInterface pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators) {
+  public Piece(PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators) {
     this.pieceName = pieceName;
     this.pieceColor = pieceColor;
     this.moveValidators = moveValidators;
@@ -23,7 +23,7 @@ public class Piece {
   }
 
   // If i want to create a piece with a specific id, it means it is not the first move
-  public Piece (PieceNameInterface pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators, int id) {
+  public Piece (PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators, int id) {
     this.pieceName = pieceName;
     this.pieceColor = pieceColor;
     this.moveValidators = moveValidators;
@@ -39,7 +39,7 @@ public class Piece {
     return pieceColor;
   }
 
-  public PieceNameInterface getPieceName() {
+  public PieceName getPieceName() {
     return pieceName;
   }
 

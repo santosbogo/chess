@@ -1,7 +1,6 @@
 package edu.austral.dissis.checkers.games;
 
-import edu.austral.dissis.checkers.enums.PieceName;
-import edu.austral.dissis.chess.games.classicChess.ClassicChessPieceFactory;
+import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
@@ -38,7 +37,7 @@ public class ClassicCheckersBoardGenerator implements BoardGenerator {
     for (int x = 1; x <= 8; x++) {
       for (int y = 1; y <= 3; y++) {
         if ((x + y) % 2 == 0) {
-          pieces.put(new Coordinates(x, y), pieceGenerator.generatePiece(PieceName.CHECKER, PieceColor.WHITE));
+          pieces.put(new Coordinates(x, y), pieceGenerator.generatePiece(CheckersPieceNames.CHECKER, PieceColor.WHITE));
         }
       }
     }
@@ -48,7 +47,7 @@ public class ClassicCheckersBoardGenerator implements BoardGenerator {
     for (int x = 1; x <= 8; x++) {
       for (int y = 6; y <= 8; y++) {
         if ((x + y) % 2 == 0) {
-          pieces.put(new Coordinates(x, y), pieceGenerator.generatePiece(PieceName.CHECKER, PieceColor.BLACK));
+          pieces.put(new Coordinates(x, y), pieceGenerator.generatePiece(CheckersPieceNames.CHECKER, PieceColor.BLACK));
         }
       }
     }

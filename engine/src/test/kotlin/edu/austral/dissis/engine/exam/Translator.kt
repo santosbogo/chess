@@ -4,7 +4,7 @@ import edu.austral.dissis.engine.components.Board
 import edu.austral.dissis.engine.components.Coordinates
 import edu.austral.dissis.engine.components.Piece
 import edu.austral.dissis.engine.enums.PieceColor
-import edu.austral.dissis.chess.enums.PieceName
+import edu.austral.dissis.chess.enums.ChessPieceNames
 import edu.austral.dissis.chess.games.classicChess.ClassicChessPieceFactory
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPiece
@@ -30,12 +30,12 @@ class Translator {
         val playerColorSymbol = if (testPiece.color.equals(PieceColor.WHITE)) 'W' else 'B'
         val pieceTypeSymbol =
             when (testPiece.pieceName) {
-                PieceName.PAWN -> 'P'
-                PieceName.ROOK -> 'R'
-                PieceName.HORSE -> 'N'
-                PieceName.BISHOP -> 'B'
-                PieceName.QUEEN -> 'Q'
-                PieceName.KING -> 'K'
+                ChessPieceNames.PAWN -> 'P'
+                ChessPieceNames.ROOK -> 'R'
+                ChessPieceNames.KNIGHT -> 'N'
+                ChessPieceNames.BISHOP -> 'B'
+                ChessPieceNames.QUEEN -> 'Q'
+                ChessPieceNames.KING -> 'K'
                 else -> {
                     throw IllegalArgumentException("Invalid piece type: ${testPiece.pieceName}")
                 }
@@ -73,14 +73,14 @@ class Translator {
     }
 
     // Translate theirs piece name to my piece name
-    private fun translatePieceName(pieceTypeSymbol: Char): PieceName {
+    private fun translatePieceName(pieceTypeSymbol: Char): ChessPieceNames {
         return when (pieceTypeSymbol) {
-            'P' -> PieceName.PAWN
-            'R' -> PieceName.ROOK
-            'N' -> PieceName.HORSE
-            'B' -> PieceName.BISHOP
-            'Q' -> PieceName.QUEEN
-            'K' -> PieceName.KING
+            'P' -> ChessPieceNames.PAWN
+            'R' -> ChessPieceNames.ROOK
+            'N' -> ChessPieceNames.KNIGHT
+            'B' -> ChessPieceNames.BISHOP
+            'Q' -> ChessPieceNames.QUEEN
+            'K' -> ChessPieceNames.KING
             else -> throw IllegalArgumentException("Invalid piece type: $pieceTypeSymbol")
         }
     }

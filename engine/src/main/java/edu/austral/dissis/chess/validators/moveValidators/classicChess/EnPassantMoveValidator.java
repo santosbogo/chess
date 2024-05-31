@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
-import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
 
 public class EnPassantMoveValidator implements MoveValidator {
@@ -20,7 +20,7 @@ public class EnPassantMoveValidator implements MoveValidator {
     Piece enemyPiece = board.getPieceAt(enemyPosition);
 
     if (enemyPiece == null
-        || enemyPiece.getPieceName() != PieceName.PAWN
+        || enemyPiece.getPieceName() != ChessPieceNames.PAWN
         || enemyPiece.getColor().equals(movingPiece.getColor())
         || !enemyPiece.isFirstMove()) {
       return false;

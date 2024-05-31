@@ -2,7 +2,7 @@ package edu.austral.dissis.engine.exam
 
 import edu.austral.dissis.engine.Game
 import edu.austral.dissis.engine.components.Coordinates
-import edu.austral.dissis.chess.enums.StatusOptions
+import edu.austral.dissis.chess.enums.ChessStatusOptions
 import edu.austral.dissis.chess.games.classicChess.ClassicChess
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPosition
@@ -24,16 +24,16 @@ class DummyTestGameRunner(private val game: Game) : TestGameRunner {
         val newTo = Coordinates(to.col, to.row)
 
         return when (game.playTurn(newFrom, newTo)) {
-            StatusOptions.FAILURE -> {
+            ChessStatusOptions.FAILURE -> {
                 TestMoveFailure(Translator().translateBoard(game.getBoard()))
             }
-            StatusOptions.WHITE_CHECKMATE -> {
+            ChessStatusOptions.WHITE_CHECKMATE -> {
                 WhiteCheckMate(Translator().translateBoard(game.getBoard()))
             }
-            StatusOptions.BLACK_CHECKMATE -> {
+            ChessStatusOptions.BLACK_CHECKMATE -> {
                 BlackCheckMate(Translator().translateBoard(game.getBoard()))
             }
-            StatusOptions.STALEMATE -> {
+            ChessStatusOptions.STALEMATE -> {
                 TestMoveDraw(Translator().translateBoard(game.getBoard()))
             }
             else -> {

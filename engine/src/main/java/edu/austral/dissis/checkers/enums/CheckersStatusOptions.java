@@ -1,6 +1,6 @@
 package edu.austral.dissis.checkers.enums;
 
-public enum StatusOptions {
+public enum CheckersStatusOptions {
     WHITE_WINS,
     BLACK_WINS,
     DRAW,

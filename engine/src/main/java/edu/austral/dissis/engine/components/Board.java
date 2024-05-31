@@ -32,8 +32,6 @@ public class Board {
   }
 
   public PieceColor getColorAt(Coordinates coordinates) {
-    if (getPieceAt(coordinates) == null)
-      throw new IllegalArgumentException("No piece at coordinates");
     return getPieceAt(coordinates).getColor();
   }
 

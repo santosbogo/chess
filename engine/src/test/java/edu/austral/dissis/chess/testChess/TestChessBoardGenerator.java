@@ -4,7 +4,7 @@ import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.PieceName;
+import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.games.BoardGenerator;
 import edu.austral.dissis.engine.games.PieceFactory;
 import edu.austral.dissis.chess.games.classicChess.ClassicChessPieceFactory;
@@ -31,26 +31,26 @@ public class TestChessBoardGenerator implements BoardGenerator {
   }
 
   public void generatePawn(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.PAWN, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.PAWN, pieceColor));
   }
 
   public void generateRook(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.ROOK, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.ROOK, pieceColor));
   }
 
   public void generateKnight(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.HORSE, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.KNIGHT, pieceColor));
   }
 
   public void generateBishop(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.BISHOP, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.BISHOP, pieceColor));
   }
 
   public void generateQueen(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.QUEEN, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.QUEEN, pieceColor));
   }
 
   public void generateKing(Coordinates coordinates, PieceColor pieceColor) {
-    pieces.put(coordinates, pieceGenerator.generatePiece(PieceName.KING, pieceColor));
+    pieces.put(coordinates, pieceGenerator.generatePiece(ChessPieceNames.KING, pieceColor));
   }
 }
