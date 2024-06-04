@@ -1,4 +1,4 @@
-package edu.austral.dissis.engine.move.sharedSpecialMovers;
+package edu.austral.dissis.engine.moves;
 
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;

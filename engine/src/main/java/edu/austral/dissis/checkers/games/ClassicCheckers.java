@@ -1,10 +1,12 @@
 package edu.austral.dissis.checkers.games;
 
+import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.engine.Game;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.engine.games.GameGenerator;
-import edu.austral.dissis.engine.move.sharedSpecialMovers.SpecialMover;
+import edu.austral.dissis.checkers.moves.specialMovers.CrownSpecialMover;
+import edu.austral.dissis.engine.moves.SpecialMover;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
 
 import java.util.ArrayList;
@@ -12,7 +14,8 @@ import java.util.List;
 
 public class ClassicCheckers implements GameGenerator {
     private final List<EndOfGameValidator> endOfGameValidators = new ArrayList<>();
-    private final List<SpecialMover> specialMovers = List.of();
+    private final List<SpecialMover> specialMovers = List.of(
+            new CrownSpecialMover(new ClassicCheckersPieceFactory().generatePiece(CheckersPieceNames.KING, PieceColor.WHITE)));
 
     @Override
     public Game generateGame() {

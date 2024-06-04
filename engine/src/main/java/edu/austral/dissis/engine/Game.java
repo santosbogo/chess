@@ -1,11 +1,11 @@
 package edu.austral.dissis.engine;
 
 import edu.austral.dissis.engine.components.Board;
-import edu.austral.dissis.engine.move.Mover;
+import edu.austral.dissis.engine.moves.Mover;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.ChessStatusOptions;
-import edu.austral.dissis.engine.move.sharedSpecialMovers.SpecialMover;
+import edu.austral.dissis.engine.moves.SpecialMover;
 import edu.austral.dissis.engine.referee.MoveReferee;
 import edu.austral.dissis.engine.referee.StatusReferee;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;

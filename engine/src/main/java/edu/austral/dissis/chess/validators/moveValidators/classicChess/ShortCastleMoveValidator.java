@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
 import edu.austral.dissis.chess.ChessHelper;
 import edu.austral.dissis.engine.components.Board;
-import edu.austral.dissis.engine.move.Mover;
+import edu.austral.dissis.engine.moves.Mover;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;

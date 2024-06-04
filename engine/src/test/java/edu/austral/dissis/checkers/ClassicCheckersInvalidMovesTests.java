@@ -37,7 +37,7 @@ public class ClassicCheckersInvalidMovesTests {
             ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('H', 2), new Coordinates('I', 3)));
 
     assertEquals(
-            CheckersPieceNames.CHECKER, game.getBoard().getPieceAt(new Coordinates('H', 2)).getPieceName());
+            CheckersPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('H', 2)).getPieceName());
 
   }
 

@@ -1,5 +1,6 @@
 package edu.austral.dissis.engine.ui;
 
+import edu.austral.dissis.checkers.games.ClassicCheckers;
 import edu.austral.dissis.engine.Game;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
@@ -17,7 +18,8 @@ public class MySimpleGameEngine implements GameEngine {
     private final Game game;
 
     public MySimpleGameEngine(){
-        this.game = new ClassicChess().generateGame();
+//        this.game = new ClassicChess().generateGame();
+        this.game = new ClassicCheckers().generateGame();
     }
 
     @NotNull
@@ -25,8 +27,6 @@ public class MySimpleGameEngine implements GameEngine {
     public MoveResult applyMove(@NotNull Move move) {
         Coordinates from = new Coordinates(move.getFrom().getColumn(), move.getFrom().getRow());
         Coordinates to = new Coordinates(move.getTo().getColumn(), move.getTo().getRow());
-//        Board board = game.getBoard();
-//        Piece piece = board.getPieceAt(from);
 
         ChessStatusOptions status = game.playTurn(from, to);
 

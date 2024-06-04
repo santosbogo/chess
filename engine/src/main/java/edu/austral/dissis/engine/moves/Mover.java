@@ -1,9 +1,8 @@
-package edu.austral.dissis.engine.move;
+package edu.austral.dissis.engine.moves;
 
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
-import edu.austral.dissis.engine.move.sharedSpecialMovers.SpecialMover;
 
 import java.util.HashMap;
 import java.util.List;

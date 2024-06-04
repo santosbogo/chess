@@ -1,10 +1,10 @@
-package edu.austral.dissis.chess.moves.specialMovers.classicChessSpecialMovers;
+package edu.austral.dissis.chess.moves.classicChessSpecialMovers;
 
 import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
-import edu.austral.dissis.engine.move.sharedSpecialMovers.SpecialMover;
+import edu.austral.dissis.engine.moves.SpecialMover;
 
 import java.util.HashMap;
 import java.util.Map;
