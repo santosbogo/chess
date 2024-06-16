@@ -2,8 +2,8 @@ package edu.austral.dissis.checkers;
 
 import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.checkers.games.ClassicCheckers;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
-import edu.austral.dissis.engine.Game;
+import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.components.Coordinates;
 import org.junit.jupiter.api.Test;
 
@@ -16,16 +16,16 @@ public class ClassicCheckersInvalidMovesTests {
     Game game = new ClassicCheckers().generateGame();
 
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)).getStatus());
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)).getStatus());
     assertEquals(
-            ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('B', 4), new Coordinates('A', 3)));
+            StatusOptions.FAILURE, game.playTurn(new Coordinates('B', 4), new Coordinates('A', 3)).getStatus());
 
     game.playTurn(new Coordinates('B', 4), new Coordinates('C', 5));
 
     assertEquals(
-            ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('A', 5), new Coordinates('B', 6)));
+            StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 5), new Coordinates('B', 6)).getStatus());
 
   }
 
@@ -34,7 +34,7 @@ public class ClassicCheckersInvalidMovesTests {
     Game game = new ClassicCheckers().generateGame();
 
     assertEquals(
-            ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('H', 2), new Coordinates('I', 3)));
+            StatusOptions.FAILURE, game.playTurn(new Coordinates('H', 2), new Coordinates('I', 3)).getStatus());
 
     assertEquals(
             CheckersPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('H', 2)).getPieceName());

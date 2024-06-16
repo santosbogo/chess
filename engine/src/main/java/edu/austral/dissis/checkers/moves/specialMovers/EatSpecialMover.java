@@ -1,6 +1,6 @@
 package edu.austral.dissis.checkers.moves.specialMovers;
 
-import edu.austral.dissis.checkers.enums.CheckersPieceNames;
+import edu.austral.dissis.checkers.CheckersHelper;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
@@ -10,30 +10,27 @@ import edu.austral.dissis.engine.move.SpecialMover;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrownSpecialMover implements SpecialMover {
-    private final Piece piece;
-
-    public CrownSpecialMover(Piece piece) {
-        this.piece = piece;
-    }
+public class EatSpecialMover implements SpecialMover {
 
     @Override
     public boolean isSpecialMove(Board board, Coordinates from, Coordinates to) {
-        return board.getPieceAt(from).getPieceName().equals(CheckersPieceNames.PAWN) && (Math.abs(to.getY() - board.getYSize()) == 0);
+        return new CheckersHelper().canPieceFromCoordinateEat(from, board);
     }
 
     @Override
     public Board modifyBoard(Board board, Coordinates from, Coordinates to) {
         Map<Coordinates, Piece> pieceDistribution = new HashMap<>(board.getPieceDistribution());
-
-        Piece oldPiece = pieceDistribution.remove(from);
-        pieceDistribution.put(to, new Piece(piece.getPieceName(), oldPiece.getColor(), piece.getMoveValidators(), oldPiece.getId()));
+        Piece piece = pieceDistribution.remove(from);
+        pieceDistribution.remove(new CheckersHelper().getOnlyEnemyPieceBetween(from, to, board));
+        pieceDistribution.put(to, new Piece(piece.getPieceName(), piece.getColor(), piece.getMoveValidators(), piece.getId()));
 
         return new Board(board.getXSize(), board.getYSize(), new HashMap<>(pieceDistribution));
     }
 
     @Override
     public PieceColor getNextTurnPieceColor(PieceColor currentTurn, Board nextBoard, Coordinates to) {
+        if(new CheckersHelper().canPieceFromCoordinateEat(to, nextBoard))
+            return currentTurn;
         return currentTurn.equals(PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;
     }
 }

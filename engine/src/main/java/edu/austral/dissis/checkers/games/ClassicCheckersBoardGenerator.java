@@ -28,11 +28,8 @@ public class ClassicCheckersBoardGenerator implements BoardGenerator {
   }
 
   private void generatePieces(PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {
-//    generateWhiteCheckers(pieceGenerator, pieces);
-//    generateBlackCheckers(pieceGenerator, pieces);
-
-    pieces.put(new Coordinates('C', 7), pieceGenerator.generatePiece(CheckersPieceNames.PAWN, PieceColor.WHITE));
-    pieces.put(new Coordinates('A', 7), pieceGenerator.generatePiece(CheckersPieceNames.PAWN, PieceColor.BLACK));
+    generateWhiteCheckers(pieceGenerator, pieces);
+    generateBlackCheckers(pieceGenerator, pieces);
   }
 
   private void generateWhiteCheckers(PieceFactory pieceGenerator, HashMap<Coordinates, Piece> pieces) {

@@ -2,8 +2,8 @@ package edu.austral.dissis.checkers;
 
 import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.checkers.games.ClassicCheckers;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
-import edu.austral.dissis.engine.Game;
+import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
@@ -45,13 +45,13 @@ public class ClassicCheckersTests {
         Game game = new ClassicCheckers().generateGame();
 
         assertEquals(
-                ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
+                StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
         assertEquals(
-                ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
+                StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
         assertEquals(
-                ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
+                StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
         assertEquals(
-                ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
+                StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
 
         assertEquals(
                 CheckersPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('B', 4)).getPieceName());
