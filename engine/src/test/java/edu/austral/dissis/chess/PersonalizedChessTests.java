@@ -185,8 +185,7 @@ public class PersonalizedChessTests {
     game.undo();
     assertEquals(ChessPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('E', 7)).getPieceName());
 
-//    FIXME: Revisar
-//    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)).getStatus());
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)).getStatus());
   }
 
   @Test

@@ -32,7 +32,7 @@ public class LongCastleSpecialMover implements SpecialMover {
     }
 
     @Override
-    public PieceColor getNextTurnPieceColor(PieceColor currentTurn) {
+    public PieceColor getNextTurnPieceColor(PieceColor currentTurn, Board nextBoard, Coordinates to) {
         return currentTurn.equals(PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;
     }
 }
