@@ -37,12 +37,12 @@ public class Mover {
     return new Board(board.getXSize(), board.getYSize(), new HashMap<>(pieceDistribution));
   }
 
-  public PieceColor getNextColorTurn() {
+  public PieceColor getNextColorTurn(Board nextBoard) {
     PieceColor colorTurn = board.getColorAt(this.from);
 
     for(SpecialMover specialBoardModifier : specialMovers){
       if(specialBoardModifier.isSpecialMove(board, from, to)){
-        return specialBoardModifier.getNextTurnPieceColor(colorTurn);
+        return specialBoardModifier.getNextTurnPieceColor(colorTurn, nextBoard, to);
       }
     }
     return colorTurn.equals(PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;

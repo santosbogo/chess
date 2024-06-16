@@ -44,10 +44,13 @@ public class Game {
 
     if (moveReferee.isValidMove(from, to)) {
       Mover mover = new Mover(getBoard(), this.specialMovers, from, to);
+
       Board nextBoard = mover.getNextBoard();
-      PieceColor nextTurn = mover.getNextColorTurn();
-      StatusOptions nextStatus = StatusReferee.getStatus(nextTurn, nextBoard, endOfGameValidators);
-      Game nextGame = new Game(nextBoard, endOfGameValidators, specialMovers, nextTurn, nextStatus, gameHistory);
+      PieceColor nextTurnColor = mover.getNextColorTurn(nextBoard);
+
+      StatusOptions nextStatus = StatusReferee.getStatus(nextTurnColor, nextBoard, endOfGameValidators);
+
+      Game nextGame = new Game(nextBoard, endOfGameValidators, specialMovers, nextTurnColor, nextStatus, gameHistory);
       gameHistory.save(this);
       return nextGame;
     } else {

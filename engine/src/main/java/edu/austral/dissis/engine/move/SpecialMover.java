@@ -10,5 +10,5 @@ public interface SpecialMover {
 
     public Board modifyBoard(Board board, Coordinates from, Coordinates to);
 
-    public PieceColor getNextTurnPieceColor(PieceColor currentTurn);
+    public PieceColor getNextTurnPieceColor(PieceColor currentTurn, Board nextBoard, Coordinates to);
 }
