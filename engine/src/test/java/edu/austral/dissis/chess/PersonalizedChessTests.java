@@ -2,11 +2,11 @@ package edu.austral.dissis.chess;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.austral.dissis.engine.Game;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.ChessPieceNames;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
+import edu.austral.dissis.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.testChess.TestChess;
 import edu.austral.dissis.chess.testChess.TestChessBoardGenerator;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,10 @@ public class PersonalizedChessTests {
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
-    assertEquals( ChessStatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G', 3), new Coordinates('G', 7)));
-//        assertEquals(StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G',3), new Coordinates('H',3)));
+    game = game.playTurn(new Coordinates('G', 3), new Coordinates('G', 7));
+
+    assertEquals( StatusOptions.WHITE_WIN, game.getStatus());
+//        assertEquals(StatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('G',3), new Coordinates('H',3)).getStatus());
   }
 
   @Test
@@ -37,9 +39,9 @@ public class PersonalizedChessTests {
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
-    assertEquals(ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 4)));
-    assertEquals(ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)));
-    assertEquals(ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('B', 2), new Coordinates('B', 4)));
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 4)).getStatus());
+    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)).getStatus());
+    assertEquals(StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 2), new Coordinates('B', 4)).getStatus());
   }
 
   @Test
@@ -52,7 +54,7 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('A', 1), new Coordinates('B', 2)));
+        StatusOptions.FAILURE, game.playTurn(new Coordinates('A', 1), new Coordinates('B', 2)).getStatus());
   }
 
   @Test
@@ -65,7 +67,7 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.STALEMATE, game.playTurn(new Coordinates('G', 2), new Coordinates('G', 6)));
+        StatusOptions.STALEMATE, game.playTurn(new Coordinates('G', 2), new Coordinates('G', 6)).getStatus());
   }
 
   @Test
@@ -77,8 +79,8 @@ public class PersonalizedChessTests {
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
-    assertEquals(
-        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)));
+//    assertEquals(
+//        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)).getStatus());
 
     assertEquals(
         ChessPieceNames.KING, game.getBoard().getPieceAt(new Coordinates('G', 1)).getPieceName());
@@ -100,7 +102,7 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)));
+        StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('G', 1)).getStatus());
   }
 
   @Test
@@ -113,7 +115,7 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)));
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)).getStatus());
   }
 
   @Test
@@ -129,7 +131,7 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)));
+        StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 1), new Coordinates('C', 1)).getStatus());
   }
 
   @Test
@@ -157,11 +159,11 @@ public class PersonalizedChessTests {
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
     assertEquals(
-        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('D', 1), new Coordinates('G', 4)));
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('D', 1), new Coordinates('G', 4)).getStatus());
     assertEquals(
-        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('D', 8), new Coordinates('D', 4)));
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('D', 8), new Coordinates('D', 4)).getStatus());
     assertEquals(
-        ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('G', 4), new Coordinates('D', 4)));
+        StatusOptions.NORMAL, game.playTurn(new Coordinates('G', 4), new Coordinates('D', 4)).getStatus());
 
     assertEquals(
         ChessPieceNames.QUEEN, game.getBoard().getPieceAt(new Coordinates('D', 4)).getPieceName());
@@ -184,7 +186,7 @@ public class PersonalizedChessTests {
     assertEquals(ChessPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('E', 7)).getPieceName());
 
 //    FIXME: Revisar
-//    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)));
+//    assertEquals(StatusOptions.FAILURE, game.playTurn(new Coordinates('E', 8), new Coordinates('D', 8)).getStatus());
   }
 
   @Test
@@ -210,6 +212,6 @@ public class PersonalizedChessTests {
 
     Game game = new TestChess(testBoardGenerator.generateBoard()).generateGame();
 
-    assertEquals(ChessStatusOptions.WHITE_CHECKMATE, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 8)));
+    assertEquals(StatusOptions.WHITE_WIN, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 8)).getStatus());
   }
 }

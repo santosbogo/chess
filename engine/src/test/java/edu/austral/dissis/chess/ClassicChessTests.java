@@ -2,12 +2,12 @@ package edu.austral.dissis.chess;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.austral.dissis.engine.Game;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.ChessPieceNames;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
+import edu.austral.dissis.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -56,8 +56,8 @@ public class ClassicChessTests {
 
     // White tries to move the same pawn again
     Assertions.assertEquals(
-        ChessStatusOptions.FAILURE,
-        game.playTurn(new Coordinates('A', 3), new Coordinates('A', 4)));
+        StatusOptions.FAILURE,
+        game.playTurn(new Coordinates('A', 3), new Coordinates('A', 4)).getStatus());
 
 
     // Black moves a pawn
@@ -65,8 +65,8 @@ public class ClassicChessTests {
 
     // Black tries to move the same pawn again
     assertEquals(
-        ChessStatusOptions.FAILURE,
-        game.playTurn(new Coordinates('A', 6), new Coordinates('A', 5)));
+        StatusOptions.FAILURE,
+        game.playTurn(new Coordinates('A', 6), new Coordinates('A', 5)).getStatus());
   }
 
   @Test
@@ -92,8 +92,8 @@ public class ClassicChessTests {
     game.playTurn(new Coordinates('G', 6), new Coordinates('G', 5));
 
     assertEquals(
-        ChessStatusOptions.WHITE_CHECKMATE,
-        game.playTurn(new Coordinates('D', 1), new Coordinates('H', 5)));
+        StatusOptions.WHITE_WIN,
+        game.playTurn(new Coordinates('D', 1), new Coordinates('H', 5)).getStatus());
   }
 
   @Test
@@ -109,8 +109,8 @@ public class ClassicChessTests {
     game.playTurn(new Coordinates('A', 3), new Coordinates('A', 4));
 
     assertEquals(
-        ChessStatusOptions.BLACK_CHECKMATE,
-        game.playTurn(new Coordinates('H', 4), new Coordinates('F', 2)));
+        StatusOptions.BLACK_WIN,
+        game.playTurn(new Coordinates('H', 4), new Coordinates('F', 2)).getStatus());
   }
 
 
@@ -119,13 +119,13 @@ public class ClassicChessTests {
     Game game = new ClassicChess().generateGame();
 
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 2), new Coordinates('A', 3)).getStatus());
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 6)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 7), new Coordinates('A', 6)).getStatus());
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('F', 2), new Coordinates('F', 4)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('F', 2), new Coordinates('F', 4)).getStatus());
     assertEquals(
-            ChessStatusOptions.NORMAL, game.playTurn(new Coordinates('F', 7), new Coordinates('F', 5)));
+            StatusOptions.NORMAL, game.playTurn(new Coordinates('F', 7), new Coordinates('F', 5)).getStatus());
 
     assertEquals(
             ChessPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('A', 3)).getPieceName());

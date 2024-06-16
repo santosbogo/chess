@@ -4,7 +4,8 @@ import edu.austral.dissis.chess.enums.ChessPieceNames;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
-import edu.austral.dissis.engine.moves.SpecialMover;
+import edu.austral.dissis.engine.enums.PieceColor;
+import edu.austral.dissis.engine.move.SpecialMover;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,5 +30,10 @@ public class CrownSpecialMover implements SpecialMover {
         pieceDistribution.put(to, new Piece(piece.getPieceName(), oldPiece.getColor(), piece.getMoveValidators(), oldPiece.getId()));
 
         return new Board(board.getXSize(), board.getYSize(), new HashMap<>(pieceDistribution));
+    }
+
+    @Override
+    public PieceColor getNextTurnPieceColor(PieceColor currentTurn) {
+        return currentTurn.equals(PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;
     }
 }

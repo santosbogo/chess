@@ -39,18 +39,28 @@ public class ClassicChessPieceFactory implements PieceFactory {
     List<MoveValidator> moveValidators = new ArrayList<>(sharedMoveValidators);
     List<MoveValidator> oneOfMoveValidators = new ArrayList<>();
 
-    List<MoveValidator> allOfMoveValidators = new ArrayList<>();
-    allOfMoveValidators.add(new VerticalMoveValidator(1));
-    allOfMoveValidators.add(new CantGoToOpponentsSquareMoveValidator());
-    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators));
+    //One step forward move
+    List<MoveValidator> allOfMoveValidators1 = new ArrayList<>();
+    allOfMoveValidators1.add(new VerticalMoveValidator(1));
+    allOfMoveValidators1.add(new CantGoToOpponentsSquareMoveValidator());
+    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators1));
 
-    allOfMoveValidators = new ArrayList<>();
-    allOfMoveValidators.add(new DiagonalMoveValidator(1));
-    allOfMoveValidators.add(new CanOnlyEatMoveValidator());
-    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators));
+    //Two steps forward first move
+    List<MoveValidator> allOfMoveValidators2 = new ArrayList<>();
+    allOfMoveValidators2.add(new VerticalMoveValidator(2, true));
+    allOfMoveValidators2.add(new CantGoToOpponentsSquareMoveValidator());
+    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators2));
 
-    oneOfMoveValidators.add(new FirstTwoStepsMoveValidator());
+    //One step forward eating move
+    List<MoveValidator> allOfMoveValidators3 = new ArrayList<>();
+    allOfMoveValidators3.add(new DiagonalMoveValidator(1));
+    allOfMoveValidators3.add(new CanOnlyEatMoveValidator());
+    oneOfMoveValidators.add(new AllOfMoveValidators(allOfMoveValidators3));
+
+
     //    oneOfMoveValidators.add(new EnPassantMoveValidator());
+
+
 
     moveValidators.add(new OneOfMoveValidators(oneOfMoveValidators));
     moveValidators.add(new ByClearPathMoveValidator());

@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.validators.moveValidators.classicChess;
 
 import edu.austral.dissis.chess.ChessHelper;
 import edu.austral.dissis.engine.components.Board;
-import edu.austral.dissis.engine.moves.Mover;
+import edu.austral.dissis.engine.move.Mover;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
@@ -33,8 +33,8 @@ public class ShortCastleMoveValidator implements MoveValidator {
 
     // Can King move two valid steps to the right?
     if (new MoveReferee(color, board).isValidMove(from, new Coordinates('F', from.getY()))) {
-      Mover mover = new Mover(board, Collections.emptyList());
-      board = mover.move(from, new Coordinates('F', from.getY()));
+      Mover mover = new Mover(board, Collections.emptyList(), from, new Coordinates('F', from.getY()));
+      board = mover.getNextBoard();
       from = new Coordinates('F', from.getY()); // Update king coordinates
       return new MoveReferee(color, board).isValidMove(from, new Coordinates('G', from.getY()));
     }
