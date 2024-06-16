@@ -1,23 +1,28 @@
-package edu.austral.dissis.engine.moves;
+package edu.austral.dissis.engine.move;
 
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
+import edu.austral.dissis.engine.enums.PieceColor;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Mover {
-  Board board;
-  List<SpecialMover> specialMovers;
+  private final Board board;
+  private final List<SpecialMover> specialMovers;
+  private final Coordinates from;
+  private final Coordinates to;
 
-  public Mover(Board board, List<SpecialMover> specialMovers){
+  public Mover(Board board, List<SpecialMover> specialMovers, Coordinates from, Coordinates to) {
     this.board = board;
     this.specialMovers = specialMovers;
+    this.from = from;
+    this.to = to;
   }
 
-  public Board move(Coordinates from, Coordinates to) {
+  public Board getNextBoard() {
 
     for(SpecialMover specialBoardModifier : specialMovers){
       if(specialBoardModifier.isSpecialMove(board, from, to)){
@@ -32,4 +37,14 @@ public class Mover {
     return new Board(board.getXSize(), board.getYSize(), new HashMap<>(pieceDistribution));
   }
 
+  public PieceColor getNextColorTurn() {
+    PieceColor colorTurn = board.getColorAt(this.from);
+
+    for(SpecialMover specialBoardModifier : specialMovers){
+      if(specialBoardModifier.isSpecialMove(board, from, to)){
+        return specialBoardModifier.getNextTurnPieceColor(colorTurn);
+      }
+    }
+    return colorTurn.equals(PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;
+  }
 }

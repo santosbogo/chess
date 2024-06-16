@@ -5,7 +5,7 @@ import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.chess.enums.ChessPieceNames;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
+import edu.austral.dissis.engine.enums.StatusOptions;
 import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
 
 import java.util.List;
@@ -22,16 +22,16 @@ public class StatusReferee {
     return false;
   }
 
-  public static ChessStatusOptions getStatus(
+  public static StatusOptions getStatus(
       PieceColor colorTurn, Board board, List<EndOfGameValidator> endOfGameValidators) {
     if (isEndOfGame(colorTurn, board, endOfGameValidators)) {
       for (EndOfGameValidator endOfGameValidator : endOfGameValidators) {
-        ChessStatusOptions status = endOfGameValidator.getStatus(colorTurn, board);
+        StatusOptions status = endOfGameValidator.getStatus(colorTurn, board);
         if (status == null) continue;
         return status;
       }
     }
-    return ChessStatusOptions.NORMAL;
+    return StatusOptions.NORMAL;
   }
 
   public boolean colorDoesntHaveValidMoves(Board board, PieceColor colorTurn) {

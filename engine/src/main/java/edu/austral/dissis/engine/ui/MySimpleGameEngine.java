@@ -1,12 +1,12 @@
 package edu.austral.dissis.engine.ui;
 
 import edu.austral.dissis.checkers.games.ClassicCheckers;
-import edu.austral.dissis.engine.Game;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
-import edu.austral.dissis.chess.enums.ChessStatusOptions;
+import edu.austral.dissis.engine.enums.StatusOptions;
 import edu.austral.dissis.chess.games.classicChess.ClassicChess;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySimpleGameEngine implements GameEngine {
-    private final Game game;
+    private Game game;
 
     public MySimpleGameEngine(){
 //        this.game = new ClassicChess().generateGame();
@@ -28,13 +28,13 @@ public class MySimpleGameEngine implements GameEngine {
         Coordinates from = new Coordinates(move.getFrom().getColumn(), move.getFrom().getRow());
         Coordinates to = new Coordinates(move.getTo().getColumn(), move.getTo().getRow());
 
-        ChessStatusOptions status = game.playTurn(from, to);
-
+        game = game.playTurn(from, to);
+        StatusOptions status = game.getStatus();
 
         return  switch (status) {
             case FAILURE -> { yield new InvalidMove("Invalid move"); }
-            case WHITE_CHECKMATE -> { yield new GameOver(PlayerColor.WHITE); }
-            case BLACK_CHECKMATE -> { yield new GameOver(PlayerColor.BLACK); }
+            case WHITE_WIN -> { yield new GameOver(PlayerColor.WHITE); }
+            case BLACK_WIN -> { yield new GameOver(PlayerColor.BLACK); }
             default -> { yield new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(true, false)); }
         };
     }
@@ -67,8 +67,8 @@ public class MySimpleGameEngine implements GameEngine {
         return new Position(coordinates.getY(), coordinates.getX());
     }
 
-    private PlayerColor getNextPlayerColor() {
-        if (game.getPlayerTurnColor().equals(PlayerColor.WHITE)) {
+    public PlayerColor getNextPlayerColor() {
+        if (game.getPlayerTurnColor().equals(PieceColor.WHITE)) {
             return PlayerColor.BLACK;
         } else {
             return PlayerColor.WHITE;
@@ -84,17 +84,20 @@ public class MySimpleGameEngine implements GameEngine {
 
     @NotNull
     public NewGameState redo() {
-        game.redo();
+        game = game.redo();
 
         return new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(true, game.canRedo()));
     }
 
     @NotNull
     public NewGameState undo() {
-        game.redo();
+        game = game.undo();
 
         return new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(game.canUndo(), true));
     }
 
 
+    public NewGameState getCurrentState() {
+        return new NewGameState(getListOfChessPieces(game.getBoard()), getNextPlayerColor(), new UndoState(game.canUndo(), game.canRedo()));
+    }
 }
