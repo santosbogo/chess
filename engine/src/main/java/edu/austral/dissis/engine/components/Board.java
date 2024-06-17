@@ -1,19 +1,18 @@
 package edu.austral.dissis.engine.components;
 
 import edu.austral.dissis.engine.enums.PieceColor;
-
 import java.util.Collections;
 import java.util.Map;
 
 public class Board {
   private final Map<Coordinates, Piece> pieceDistribution;
-  private final int xSize;
-  private final int ySize;
+  private final int sizeX;
+  private final int sizeY;
 
-  public Board(int xSize, int ySize, Map<Coordinates, Piece> pieceDistribution) {
+  public Board(int sizeX, int sizeY, Map<Coordinates, Piece> pieceDistribution) {
     this.pieceDistribution = Collections.unmodifiableMap(pieceDistribution);
-    this.xSize = xSize;
-    this.ySize = ySize;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
   }
 
   public Piece getPieceAt(Coordinates coordinates) {
@@ -22,9 +21,9 @@ public class Board {
 
   public boolean isInBounds(Coordinates coordinates) {
     return coordinates.getX() > 0
-        && coordinates.getX() <= xSize
+        && coordinates.getX() <= sizeX
         && coordinates.getY() > 0
-        && coordinates.getY() <= ySize;
+        && coordinates.getY() <= sizeY;
   }
 
   public boolean isEmptySquare(Coordinates coordinates) {
@@ -35,30 +34,29 @@ public class Board {
     return getPieceAt(coordinates).getColor();
   }
 
-  public int getXSize() {
-    return xSize;
+  public int getSizeX() {
+    return sizeX;
   }
 
-  public int getYSize() {
-    return ySize;
+  public int getSizeY() {
+    return sizeY;
   }
 
   public Map<Coordinates, Piece> getPieceDistribution() {
     return pieceDistribution;
   }
 
-  //Debugging purposes
+  // Debugging purposes
   @Override
-  public String toString(){
+  public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    for (int y = 1; y <= getYSize(); y++){
-      for (int x = 1; x <= getXSize(); x++){
-        Coordinates coordinates = new Coordinates(x, getYSize()-y+1);
-       stringBuilder.append("|");
-        if(isEmptySquare(coordinates)){
+    for (int y = 1; y <= getSizeY(); y++) {
+      for (int x = 1; x <= getSizeX(); x++) {
+        Coordinates coordinates = new Coordinates(x, getSizeY() - y + 1);
+        stringBuilder.append("|");
+        if (isEmptySquare(coordinates)) {
           stringBuilder.append("  ");
-        }
-        else {
+        } else {
           stringBuilder.append(getPieceColorInitial(coordinates));
           stringBuilder.append(getPieceNameInitial(coordinates));
         }
@@ -70,16 +68,15 @@ public class Board {
     return stringBuilder.toString();
   }
 
-  private String getPieceColorInitial(Coordinates coordinates){
-    if(getColorAt(coordinates).equals(PieceColor.WHITE)){
+  private String getPieceColorInitial(Coordinates coordinates) {
+    if (getColorAt(coordinates).equals(PieceColor.WHITE)) {
       return "W";
-    }
-    else{
+    } else {
       return "B";
     }
   }
 
-  private String getPieceNameInitial(Coordinates coordinates){
+  private String getPieceNameInitial(Coordinates coordinates) {
     return getPieceAt(coordinates).getPieceName().toString().substring(0, 1);
   }
 }

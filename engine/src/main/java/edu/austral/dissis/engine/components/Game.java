@@ -1,14 +1,14 @@
 package edu.austral.dissis.engine.components;
 
-import edu.austral.dissis.engine.move.Mover;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.engine.enums.StatusOptions;
+import edu.austral.dissis.engine.move.Mover;
 import edu.austral.dissis.engine.move.SpecialMover;
-import edu.austral.dissis.engine.referee.MoveReferee;
-import edu.austral.dissis.engine.referee.StatusReferee;
-import edu.austral.dissis.engine.validators.endOfGameValidators.EndOfGameValidator;
-
+import edu.austral.dissis.engine.referees.MoveReferee;
+import edu.austral.dissis.engine.referees.StatusReferee;
+import edu.austral.dissis.engine.validators.endofgamevalidators.EndOfGameValidator;
 import java.util.List;
+
 public class Game {
   private final List<SpecialMover> specialMovers;
   private final List<EndOfGameValidator> endOfGameValidators;
@@ -17,7 +17,11 @@ public class Game {
   private final StatusOptions status;
   private final GameHistory gameHistory;
 
-  public Game(Board startingPosition, List<EndOfGameValidator> endOfGameValidators, List<SpecialMover> specialMovers, PieceColor startingColor) {
+  public Game(
+      Board startingPosition,
+      List<EndOfGameValidator> endOfGameValidators,
+      List<SpecialMover> specialMovers,
+      PieceColor startingColor) {
     this.board = startingPosition;
     this.endOfGameValidators = endOfGameValidators;
     this.specialMovers = specialMovers;
@@ -26,7 +30,13 @@ public class Game {
     this.gameHistory = new GameHistory();
   }
 
-  private Game(Board board, List<EndOfGameValidator> endOfGameValidators, List<SpecialMover> specialMovers, PieceColor playerTurn, StatusOptions status, GameHistory gameHistory) {
+  private Game(
+      Board board,
+      List<EndOfGameValidator> endOfGameValidators,
+      List<SpecialMover> specialMovers,
+      PieceColor playerTurn,
+      StatusOptions status,
+      GameHistory gameHistory) {
     this.board = board;
     this.endOfGameValidators = endOfGameValidators;
     this.specialMovers = specialMovers;
@@ -39,7 +49,13 @@ public class Game {
     MoveReferee moveReferee = new MoveReferee(playerTurn, getBoard());
 
     if (getBoard().isEmptySquare(from) || !isYourTurn(from)) {
-      return new Game(getBoard(), endOfGameValidators, specialMovers, playerTurn, StatusOptions.FAILURE, gameHistory);
+      return new Game(
+          getBoard(),
+          endOfGameValidators,
+          specialMovers,
+          playerTurn,
+          StatusOptions.FAILURE,
+          gameHistory);
     }
 
     if (moveReferee.isValidMove(from, to)) {
@@ -48,13 +64,27 @@ public class Game {
       Board nextBoard = mover.getNextBoard();
       PieceColor nextTurnColor = mover.getNextColorTurn(nextBoard);
 
-      StatusOptions nextStatus = StatusReferee.getStatus(nextTurnColor, nextBoard, endOfGameValidators);
+      StatusOptions nextStatus =
+          StatusReferee.getStatus(nextTurnColor, nextBoard, endOfGameValidators);
 
-      Game nextGame = new Game(nextBoard, endOfGameValidators, specialMovers, nextTurnColor, nextStatus, gameHistory);
+      Game nextGame =
+          new Game(
+              nextBoard,
+              endOfGameValidators,
+              specialMovers,
+              nextTurnColor,
+              nextStatus,
+              gameHistory);
       gameHistory.save(this);
       return nextGame;
     } else {
-      return new Game(getBoard(), endOfGameValidators, specialMovers, playerTurn, StatusOptions.FAILURE, gameHistory);
+      return new Game(
+          getBoard(),
+          endOfGameValidators,
+          specialMovers,
+          playerTurn,
+          StatusOptions.FAILURE,
+          gameHistory);
     }
   }
 

@@ -1,63 +1,70 @@
 package edu.austral.dissis.checkers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import edu.austral.dissis.checkers.enums.CheckersPieceNames;
-import edu.austral.dissis.checkers.games.ClassicCheckers;
-import edu.austral.dissis.engine.enums.StatusOptions;
-import edu.austral.dissis.engine.components.Game;
+import edu.austral.dissis.checkers.games.classic.ClassicCheckers;
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.engine.enums.PieceColor;
+import edu.austral.dissis.engine.enums.StatusOptions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ClassicCheckersTests {
 
-    @Test
-    public void testStartingBoard() {
-        Game game = new ClassicCheckers().generateGame();
-        Board board = game.getBoard();
+  @Test
+  public void testStartingBoard() {
+    Game game = new ClassicCheckers().generateGame();
+    Board board = game.getBoard();
 
-//        for (int i = 1; i <= 8; i++) {
-//            Assertions.assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i, 8)));
-//            Assertions.assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i, 7)));
-//        }
-//
-//        for (int i = 1; i <= 8; i++) {
-//            Assertions.assertEquals(PieceColor.WHITE, board.getColorAt(new Coordinates(i, 2)));
-//            Assertions.assertEquals(PieceColor.WHITE, board.getColorAt(new Coordinates(i, 1)));
-//        }
+    for (int i = 1; i <= 8; i += 2) {
+      Assertions.assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i + 1, 8)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i + 1, 8)).getPieceName());
 
-//        Assertions.assertEquals(PieceName.CHECKER, board.getPieceAt(new Coordinates('A', 1)).getPieceName());
+      Assertions.assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i, 7)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i, 7)).getPieceName());
 
-        game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4));
-        game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5));
-        game.playTurn(new Coordinates('B', 4), new Coordinates('C', 5));
-
-        game.playTurn(new Coordinates('A', 5), new Coordinates('B', 6));
-
-        System.out.println(game.getBoard());
-
+      Assertions.assertEquals(PieceColor.BLACK, board.getColorAt(new Coordinates(i + 1, 6)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i + 1, 6)).getPieceName());
     }
 
-    @Test
-    public void moveChecker() {
-        Game game = new ClassicCheckers().generateGame();
+    for (int i = 1; i <= 8; i += 2) {
+      Assertions.assertEquals(PieceColor.WHITE, board.getColorAt(new Coordinates(i, 1)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i, 1)).getPieceName());
 
-        assertEquals(
-                StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
-        assertEquals(
-                StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
-        assertEquals(
-                StatusOptions.NORMAL, game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4)));
-        assertEquals(
-                StatusOptions.NORMAL, game.playTurn(new Coordinates('B', 6), new Coordinates('A', 5)));
+      Assertions.assertEquals(PieceColor.WHITE, board.getColorAt(new Coordinates(i + 1, 2)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i + 1, 2)).getPieceName());
 
-        assertEquals(
-                CheckersPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('B', 4)).getPieceName());
-        assertEquals(PieceColor.WHITE, game.getBoard().getColorAt(new Coordinates('B', 4)));
-        assertEquals(
-                CheckersPieceNames.PAWN, game.getBoard().getPieceAt(new Coordinates('A', 5)).getPieceName());
-        assertEquals(PieceColor.BLACK, game.getBoard().getColorAt(new Coordinates('A', 5)));
+      Assertions.assertEquals(PieceColor.WHITE, board.getColorAt(new Coordinates(i, 3)));
+      Assertions.assertEquals(
+          CheckersPieceNames.PAWN, board.getPieceAt(new Coordinates(i, 3)).getPieceName());
     }
+  }
+
+  @Test
+  public void checkerObligationToEat() {
+    Game game = new ClassicCheckers().generateGame();
+
+    game = game.playTurn(new Coordinates('A', 3), new Coordinates('B', 4));
+    assertEquals(StatusOptions.NORMAL, game.getStatus());
+
+    game = game.playTurn(new Coordinates('B', 6), new Coordinates('C', 5));
+    assertEquals(StatusOptions.NORMAL, game.getStatus());
+
+    game = game.playTurn(new Coordinates('G', 3), new Coordinates('H', 4));
+    assertEquals(StatusOptions.NORMAL, game.getStatus());
+
+    game = game.playTurn(new Coordinates('C', 5), new Coordinates('D', 4));
+    assertEquals(StatusOptions.FAILURE, game.getStatus());
+
+    game = game.playTurn(new Coordinates('C', 5), new Coordinates('A', 3));
+    assertEquals(StatusOptions.NORMAL, game.getStatus());
+  }
 }

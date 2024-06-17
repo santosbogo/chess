@@ -1,4 +1,3 @@
 package edu.austral.dissis.engine.enums;
 
-public interface PieceName {
-}
+public interface PieceName {}

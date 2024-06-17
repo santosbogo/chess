@@ -2,8 +2,7 @@ package edu.austral.dissis.engine.components;
 
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.engine.enums.PieceName;
-import edu.austral.dissis.engine.validators.moveValidators.MoveValidator;
-
+import edu.austral.dissis.engine.validators.movevalidators.MoveValidator;
 import java.util.List;
 
 public class Piece {
@@ -23,7 +22,8 @@ public class Piece {
   }
 
   // If i want to create a piece with a specific id, it means it is not the first move
-  public Piece (PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators, int id) {
+  public Piece(
+      PieceName pieceName, PieceColor pieceColor, List<MoveValidator> moveValidators, int id) {
     this.pieceName = pieceName;
     this.pieceColor = pieceColor;
     this.moveValidators = moveValidators;

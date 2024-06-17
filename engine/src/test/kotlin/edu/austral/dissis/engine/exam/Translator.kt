@@ -1,15 +1,15 @@
 package edu.austral.dissis.engine.exam
 
-import edu.austral.dissis.engine.components.Board
-import edu.austral.dissis.engine.components.Coordinates
-import edu.austral.dissis.engine.components.Piece
-import edu.austral.dissis.engine.enums.PieceColor
 import edu.austral.dissis.chess.enums.ChessPieceNames
-import edu.austral.dissis.chess.games.classicChess.ClassicChessPieceFactory
+import edu.austral.dissis.chess.games.classic.ClassicChessPieceFactory
 import edu.austral.dissis.chess.test.TestBoard
 import edu.austral.dissis.chess.test.TestPiece
 import edu.austral.dissis.chess.test.TestPosition
 import edu.austral.dissis.chess.test.TestSize
+import edu.austral.dissis.engine.components.Board
+import edu.austral.dissis.engine.components.Coordinates
+import edu.austral.dissis.engine.components.Piece
+import edu.austral.dissis.engine.enums.PieceColor
 
 class Translator {
     // Translate my board to theirs board
@@ -22,7 +22,7 @@ class Translator {
             newPieceDistribution[testCoordinates] = testPiece
         }
 
-        return TestBoard(TestSize(board.ySize, board.xSize), newPieceDistribution)
+        return TestBoard(TestSize(board.sizeY, board.sizeX), newPieceDistribution)
     }
 
     // Translate my piece to theirs piece
@@ -48,10 +48,11 @@ class Translator {
         val newPieceDistribution = HashMap<Coordinates, Piece>()
 
         for ((testPosition, testPiece) in testBoard.pieces) {
-            val coordinates = Coordinates(
-                testPosition.col,
-                testPosition.row
-            )
+            val coordinates =
+                Coordinates(
+                    testPosition.col,
+                    testPosition.row,
+                )
             val piece = translatePiece(testPiece)
             newPieceDistribution[coordinates] = piece
         }
@@ -59,7 +60,7 @@ class Translator {
         return Board(
             testBoard.size.cols,
             testBoard.size.rows,
-            newPieceDistribution
+            newPieceDistribution,
         )
     }
 
