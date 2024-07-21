@@ -1,5 +1,6 @@
-package edu.austral.dissis.engine.ui;
+package edu.austral.dissis.ui;
 
+import edu.austral.dissis.checkers.games.classic.ClassicCheckers;
 import edu.austral.dissis.chess.games.classic.ClassicChess;
 import edu.austral.dissis.chess.gui.BoardSize;
 import edu.austral.dissis.chess.gui.ChessPiece;
@@ -27,9 +28,10 @@ public class MySimpleGameEngine implements GameEngine {
   private Game game;
 
   public MySimpleGameEngine() {
-    this.game = new ClassicChess().generateGame();
-    //        this.game = new ClassicCheckers().generateGame();
+//    this.game = new ClassicChess().generateGame();
+    this.game = new ClassicCheckers().generateGame();
   }
+
 
   @NotNull
   @Override
@@ -42,7 +44,7 @@ public class MySimpleGameEngine implements GameEngine {
 
     return switch (status) {
       case FAILURE -> {
-        yield new InvalidMove("Invalid move");
+        yield new InvalidMove("Invalid move!");
       }
       case WHITE_WIN -> {
         yield new GameOver(PlayerColor.WHITE);
@@ -98,7 +100,7 @@ public class MySimpleGameEngine implements GameEngine {
   @Override
   public InitialState init() {
     List<ChessPiece> pieces = getListOfChessPieces(game.getBoard());
-    return new InitialState(new BoardSize(8, 8), pieces, PlayerColor.WHITE);
+    return new InitialState(new BoardSize(8, 8), pieces, getPlayerTurnColor());
   }
 
   @NotNull

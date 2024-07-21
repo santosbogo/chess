@@ -3,7 +3,7 @@ package edu.austral.dissis.checkers.games.classic;
 import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.checkers.validators.movevalidators.classic.IsOneEnemyPieceBetweenMoveValidator;
 import edu.austral.dissis.checkers.validators.movevalidators.classic.ObligationToEatMoveValidator;
-import edu.austral.dissis.chess.validators.movevalidators.classic.JustForwardMoveValidator;
+import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.engine.enums.PieceName;

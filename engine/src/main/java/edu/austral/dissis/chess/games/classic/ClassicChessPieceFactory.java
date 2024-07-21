@@ -5,7 +5,7 @@ import edu.austral.dissis.chess.validators.movevalidators.classic.CanOnlyEatMove
 import edu.austral.dissis.chess.validators.movevalidators.classic.CantLeaveTheKingThreatenedMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.ClassicKnightMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.HorizontalMoveValidator;
-import edu.austral.dissis.chess.validators.movevalidators.classic.JustForwardMoveValidator;
+import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.LongCastleMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.ShortCastleMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.VerticalMoveValidator;

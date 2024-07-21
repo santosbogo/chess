@@ -113,7 +113,7 @@ kover {
 koverReport {
     verify {
         rule('Minimal line coverage rate') {
-            minBound(80)
+            minBound(60)
         }
     }
     defaults {

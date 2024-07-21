@@ -7,8 +7,8 @@ import edu.austral.dissis.engine.validators.movevalidators.MoveValidator;
 import java.util.List;
 
 public class MoveReferee {
-  PieceColor colorTurn;
-  Board board;
+  final PieceColor colorTurn;
+  final Board board;
 
   public MoveReferee(PieceColor colorTurn, Board board) {
     this.colorTurn = colorTurn;

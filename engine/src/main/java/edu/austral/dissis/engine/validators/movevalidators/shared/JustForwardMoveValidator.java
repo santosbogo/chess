@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.validators.movevalidators.classic;
+package edu.austral.dissis.engine.validators.movevalidators.shared;
 
 import edu.austral.dissis.engine.components.Board;
 import edu.austral.dissis.engine.components.Coordinates;
