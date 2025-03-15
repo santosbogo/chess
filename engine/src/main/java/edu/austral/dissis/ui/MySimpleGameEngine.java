@@ -28,8 +28,8 @@ public class MySimpleGameEngine implements GameEngine {
   private Game game;
 
   public MySimpleGameEngine() {
-//    this.game = new ClassicChess().generateGame();
-    this.game = new ClassicCheckers().generateGame();
+    this.game = new ClassicChess().generateGame();
+//    this.game = new ClassicCheckers().generateGame();
   }
 
 

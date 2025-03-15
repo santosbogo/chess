@@ -14,3 +14,4 @@ dependencies {
     implementation libs.kover.gradle.plugin
     implementation libs.detekt.gradle.plugin
 }
+
