@@ -1,6 +1,6 @@
 package edu.austral.dissis.clientserver.listeners;
 
-import static edu.austral.dissis.clientserver.Client.clientId;
+import static edu.austral.dissis.clientserver.ClientExample.clientId;
 
 import edu.austral.dissis.chess.gui.GameEventListener;
 import edu.austral.dissis.chess.gui.Move;

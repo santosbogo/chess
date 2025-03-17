@@ -3,6 +3,7 @@ package edu.austral.dissis.ui
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.createGameViewFrom
+import edu.austral.dissis.engine.GameProvider
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.scene.Scene
