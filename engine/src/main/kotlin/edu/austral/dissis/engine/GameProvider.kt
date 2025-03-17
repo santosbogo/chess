@@ -1,4 +1,4 @@
-package edu.austral.dissis.ui
+package edu.austral.dissis.engine
 
 import edu.austral.dissis.engine.components.Game
 

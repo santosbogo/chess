@@ -1,4 +1,4 @@
-package edu.austral.dissis.server.listeners;
+package edu.austral.dissis.clientserver.listeners;
 
 public class ClientConnectionListener
     implements edu.austral.ingsis.clientserver.ClientConnectionListener {

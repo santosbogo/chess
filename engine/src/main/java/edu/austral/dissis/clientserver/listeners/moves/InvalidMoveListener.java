@@ -1,8 +1,8 @@
-package edu.austral.dissis.server.listeners.moves;
+package edu.austral.dissis.clientserver.listeners.moves;
 
 import edu.austral.dissis.chess.gui.GameView;
 import edu.austral.dissis.chess.gui.InvalidMove;
-import edu.austral.dissis.server.payloads.moves.InvalidMovePayload;
+import edu.austral.dissis.clientserver.payloads.moves.InvalidMovePayload;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;
 import org.jetbrains.annotations.NotNull;

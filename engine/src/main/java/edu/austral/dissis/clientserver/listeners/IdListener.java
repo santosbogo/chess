@@ -1,6 +1,6 @@
-package edu.austral.dissis.server.listeners;
+package edu.austral.dissis.clientserver.listeners;
 
-import static edu.austral.dissis.server.ClientExample.clientId;
+import static edu.austral.dissis.clientserver.Client.clientId;
 
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;
