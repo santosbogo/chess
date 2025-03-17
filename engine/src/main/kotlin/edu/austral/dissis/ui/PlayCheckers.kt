@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.ui
+package edu.austral.dissis.ui
 
 import edu.austral.dissis.checkers.games.classic.ClassicCheckers
 import javafx.application.Application

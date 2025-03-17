@@ -24,13 +24,20 @@ application {
 tasks.register("playChess", JavaExec) {
     group = "application"
     description = "Start UI for a chess game"
-    mainClass = "edu.austral.dissis.chess.ui.PlayChessKt"
+    mainClass = "edu.austral.dissis.ui.PlayChessKt"
     classpath = sourceSets.main.runtimeClasspath
 }
 
 tasks.register("playCheckers", JavaExec) {
     group = "application"
     description = "Start UI for a checkers game"
-    mainClass = "edu.austral.dissis.chess.ui.PlayCheckersKt"
+    mainClass = "edu.austral.dissis.ui.PlayCheckersKt"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register("startServer", JavaExec) {
+    group = "application"
+    description = "Start UI for a checkers game"
+    mainClass = "edu.austral.dissis.clientserver.ClientServerMainKt"
     classpath = sourceSets.main.runtimeClasspath
 }
