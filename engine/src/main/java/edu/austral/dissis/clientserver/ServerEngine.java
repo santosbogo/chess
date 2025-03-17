@@ -1,7 +1,6 @@
 package edu.austral.dissis.clientserver;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import edu.austral.dissis.chess.games.classic.ClassicChess;
 import edu.austral.dissis.chess.gui.GameOver;
 import edu.austral.dissis.chess.gui.InitialState;
 import edu.austral.dissis.chess.gui.InvalidMove;
