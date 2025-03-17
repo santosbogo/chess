@@ -10,11 +10,11 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 
 fun main() {
-    launch(ChessGameApplication::class.java)
+    launch(GameApplication::class.java)
 }
 
-class ChessGameApplication : Application() {
-    private val gameEngine = MySimpleGameEngine()
+class GameApplication : Application() {
+    private val gameEngine = MySimpleGameEngine(GameProvider.game)
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

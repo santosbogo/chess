@@ -1,6 +1,7 @@
 package edu.austral.dissis.server;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import edu.austral.dissis.chess.games.classic.ClassicChess;
 import edu.austral.dissis.chess.gui.GameOver;
 import edu.austral.dissis.chess.gui.InitialState;
 import edu.austral.dissis.chess.gui.InvalidMove;
@@ -8,12 +9,12 @@ import edu.austral.dissis.chess.gui.Move;
 import edu.austral.dissis.chess.gui.MoveResult;
 import edu.austral.dissis.chess.gui.NewGameState;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import edu.austral.dissis.ui.MySimpleGameEngine;
 import edu.austral.dissis.server.listeners.ServerConnectionListener;
 import edu.austral.dissis.server.listeners.moves.MoveListener;
 import edu.austral.dissis.server.listeners.moves.RedoListener;
 import edu.austral.dissis.server.listeners.moves.UndoListener;
 import edu.austral.dissis.server.payloads.game.StartingGamePayload;
+import edu.austral.dissis.ui.MySimpleGameEngine;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.Server;
 import edu.austral.ingsis.clientserver.netty.server.NettyServerBuilder;
@@ -25,7 +26,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServerEngine {
 
-  public static final MySimpleGameEngine gameEngine = new MySimpleGameEngine();
+  public static final MySimpleGameEngine gameEngine =
+      new MySimpleGameEngine(new ClassicChess().generateGame());
   public static Server server;
   public static List<String> players = new CopyOnWriteArrayList<>();
   public static Map<String, String> clientRoles = new ConcurrentHashMap<>();

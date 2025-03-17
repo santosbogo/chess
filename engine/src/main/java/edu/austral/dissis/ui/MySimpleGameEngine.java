@@ -1,7 +1,5 @@
 package edu.austral.dissis.ui;
 
-import edu.austral.dissis.checkers.games.classic.ClassicCheckers;
-import edu.austral.dissis.chess.games.classic.ClassicChess;
 import edu.austral.dissis.chess.gui.BoardSize;
 import edu.austral.dissis.chess.gui.ChessPiece;
 import edu.austral.dissis.chess.gui.GameEngine;
@@ -27,11 +25,9 @@ import org.jetbrains.annotations.NotNull;
 public class MySimpleGameEngine implements GameEngine {
   private Game game;
 
-  public MySimpleGameEngine() {
-    this.game = new ClassicChess().generateGame();
-//    this.game = new ClassicCheckers().generateGame();
+  public MySimpleGameEngine(Game game) {
+    this.game = game;
   }
-
 
   @NotNull
   @Override

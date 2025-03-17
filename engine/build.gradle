@@ -21,3 +21,16 @@ application {
 //    mainClass = 'edu.austral.dissis.chess.engine.AppKt'
 }
 
+tasks.register("playChess", JavaExec) {
+    group = "application"
+    description = "Start UI for a chess game"
+    mainClass = "edu.austral.dissis.chess.ui.PlayChessKt"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register("playCheckers", JavaExec) {
+    group = "application"
+    description = "Start UI for a checkers game"
+    mainClass = "edu.austral.dissis.chess.ui.PlayCheckersKt"
+    classpath = sourceSets.main.runtimeClasspath
+}
