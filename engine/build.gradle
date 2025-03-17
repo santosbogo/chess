@@ -35,9 +35,23 @@ tasks.register("playCheckers", JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-tasks.register("startServer", JavaExec) {
+tasks.register("startChessServer", JavaExec) {
     group = "application"
-    description = "Start UI for a checkers game"
+    description = "Start chess server for multiplayer"
+    mainClass = "edu.austral.dissis.clientserver.StartChessServerKt"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register("startCheckersServer", JavaExec) {
+    group = "application"
+    description = "Start checkers server for multiplayer"
+    mainClass = "edu.austral.dissis.clientserver.ClientServerMainKt"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register("startClient", JavaExec) {
+    group = "application"
+    description = "Start UI client that connects to server"
     mainClass = "edu.austral.dissis.clientserver.ClientServerMainKt"
     classpath = sourceSets.main.runtimeClasspath
 }
