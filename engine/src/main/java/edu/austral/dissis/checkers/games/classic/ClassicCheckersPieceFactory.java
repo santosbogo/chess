@@ -3,7 +3,6 @@ package edu.austral.dissis.checkers.games.classic;
 import edu.austral.dissis.checkers.enums.CheckersPieceNames;
 import edu.austral.dissis.checkers.validators.movevalidators.classic.IsOneEnemyPieceBetweenMoveValidator;
 import edu.austral.dissis.checkers.validators.movevalidators.classic.ObligationToEatMoveValidator;
-import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import edu.austral.dissis.engine.components.Piece;
 import edu.austral.dissis.engine.enums.PieceColor;
 import edu.austral.dissis.engine.enums.PieceName;
@@ -16,6 +15,7 @@ import edu.austral.dissis.engine.validators.movevalidators.shared.CantGoToAllies
 import edu.austral.dissis.engine.validators.movevalidators.shared.CantGoToOpponentsSquareMoveValidator;
 import edu.austral.dissis.engine.validators.movevalidators.shared.DiagonalMoveValidator;
 import edu.austral.dissis.engine.validators.movevalidators.shared.InBoundsMoveValidator;
+import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import java.util.ArrayList;
 import java.util.List;
 

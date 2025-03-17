@@ -5,7 +5,6 @@ import edu.austral.dissis.chess.validators.movevalidators.classic.CanOnlyEatMove
 import edu.austral.dissis.chess.validators.movevalidators.classic.CantLeaveTheKingThreatenedMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.ClassicKnightMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.HorizontalMoveValidator;
-import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.LongCastleMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.ShortCastleMoveValidator;
 import edu.austral.dissis.chess.validators.movevalidators.classic.VerticalMoveValidator;
@@ -21,6 +20,7 @@ import edu.austral.dissis.engine.validators.movevalidators.shared.CantGoToAllies
 import edu.austral.dissis.engine.validators.movevalidators.shared.CantGoToOpponentsSquareMoveValidator;
 import edu.austral.dissis.engine.validators.movevalidators.shared.DiagonalMoveValidator;
 import edu.austral.dissis.engine.validators.movevalidators.shared.InBoundsMoveValidator;
+import edu.austral.dissis.engine.validators.movevalidators.shared.JustForwardMoveValidator;
 import java.util.ArrayList;
 import java.util.List;
 
