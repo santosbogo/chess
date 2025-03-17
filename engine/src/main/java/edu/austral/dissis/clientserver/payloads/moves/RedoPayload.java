@@ -1,4 +1,4 @@
-package edu.austral.dissis.server.payloads.moves;
+package edu.austral.dissis.clientserver.payloads.moves;
 
 public class RedoPayload {
   private String clientId;

@@ -1,11 +1,11 @@
-package edu.austral.dissis.server.listeners.game;
+package edu.austral.dissis.clientserver.listeners.game;
 
 import edu.austral.dissis.chess.gui.BoardSize;
 import edu.austral.dissis.chess.gui.ChessPiece;
 import edu.austral.dissis.chess.gui.GameView;
 import edu.austral.dissis.chess.gui.InitialState;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import edu.austral.dissis.server.payloads.game.StartingGamePayload;
+import edu.austral.dissis.clientserver.payloads.game.StartingGamePayload;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;
 import java.util.List;

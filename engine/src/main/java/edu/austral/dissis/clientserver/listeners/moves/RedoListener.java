@@ -1,7 +1,7 @@
-package edu.austral.dissis.server.listeners.moves;
+package edu.austral.dissis.clientserver.listeners.moves;
 
-import edu.austral.dissis.server.ServerEngine;
-import edu.austral.dissis.server.payloads.moves.RedoPayload;
+import edu.austral.dissis.clientserver.ServerEngine;
+import edu.austral.dissis.clientserver.payloads.moves.RedoPayload;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;
 import org.jetbrains.annotations.NotNull;

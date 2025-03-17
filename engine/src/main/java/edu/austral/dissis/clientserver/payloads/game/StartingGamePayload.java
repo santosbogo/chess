@@ -1,4 +1,4 @@
-package edu.austral.dissis.server.payloads.game;
+package edu.austral.dissis.clientserver.payloads.game;
 
 import edu.austral.dissis.chess.gui.BoardSize;
 import edu.austral.dissis.chess.gui.ChessPiece;

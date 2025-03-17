@@ -1,4 +1,4 @@
-package edu.austral.dissis.server;
+package edu.austral.dissis.clientserver;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import edu.austral.dissis.chess.games.classic.ClassicChess;
@@ -9,11 +9,12 @@ import edu.austral.dissis.chess.gui.Move;
 import edu.austral.dissis.chess.gui.MoveResult;
 import edu.austral.dissis.chess.gui.NewGameState;
 import edu.austral.dissis.chess.gui.PlayerColor;
-import edu.austral.dissis.server.listeners.ServerConnectionListener;
-import edu.austral.dissis.server.listeners.moves.MoveListener;
-import edu.austral.dissis.server.listeners.moves.RedoListener;
-import edu.austral.dissis.server.listeners.moves.UndoListener;
-import edu.austral.dissis.server.payloads.game.StartingGamePayload;
+import edu.austral.dissis.clientserver.listeners.ServerConnectionListener;
+import edu.austral.dissis.clientserver.listeners.moves.MoveListener;
+import edu.austral.dissis.clientserver.listeners.moves.RedoListener;
+import edu.austral.dissis.clientserver.listeners.moves.UndoListener;
+import edu.austral.dissis.clientserver.payloads.game.StartingGamePayload;
+import edu.austral.dissis.engine.components.Game;
 import edu.austral.dissis.ui.MySimpleGameEngine;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.Server;
@@ -26,8 +27,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServerEngine {
 
-  public static final MySimpleGameEngine gameEngine =
-      new MySimpleGameEngine(new ClassicChess().generateGame());
+  public static MySimpleGameEngine gameEngine;
   public static Server server;
   public static List<String> players = new CopyOnWriteArrayList<>();
   public static Map<String, String> clientRoles = new ConcurrentHashMap<>();
@@ -35,7 +35,11 @@ public class ServerEngine {
   public static boolean gameStarted = false;
   static InitialState initialState;
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void initialize(Game game) {
+    gameEngine = new MySimpleGameEngine(game);
+  }
+
+  public static void start() {
     server =
         NettyServerBuilder.Companion.createDefault()
             .withPort(8095)

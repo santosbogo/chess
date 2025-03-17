@@ -1,12 +1,12 @@
-package edu.austral.dissis.server.listeners;
+package edu.austral.dissis.clientserver.listeners;
 
-import static edu.austral.dissis.server.ClientExample.clientId;
+import static edu.austral.dissis.clientserver.Client.clientId;
 
 import edu.austral.dissis.chess.gui.GameEventListener;
 import edu.austral.dissis.chess.gui.Move;
-import edu.austral.dissis.server.payloads.moves.MovePayload;
-import edu.austral.dissis.server.payloads.moves.RedoPayload;
-import edu.austral.dissis.server.payloads.moves.UndoPayload;
+import edu.austral.dissis.clientserver.payloads.moves.MovePayload;
+import edu.austral.dissis.clientserver.payloads.moves.RedoPayload;
+import edu.austral.dissis.clientserver.payloads.moves.UndoPayload;
 import edu.austral.ingsis.clientserver.Client;
 import edu.austral.ingsis.clientserver.Message;
 import org.jetbrains.annotations.NotNull;

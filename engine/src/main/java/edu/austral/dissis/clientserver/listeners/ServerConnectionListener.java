@@ -1,7 +1,7 @@
-package edu.austral.dissis.server.listeners;
+package edu.austral.dissis.clientserver.listeners;
 
-import static edu.austral.dissis.server.ServerEngine.addPlayer;
-import static edu.austral.dissis.server.ServerEngine.removePlayer;
+import static edu.austral.dissis.clientserver.ServerEngine.addPlayer;
+import static edu.austral.dissis.clientserver.ServerEngine.removePlayer;
 
 import org.jetbrains.annotations.NotNull;
 
