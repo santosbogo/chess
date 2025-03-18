@@ -1,35 +1,72 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/bl6zRdaa)
-# Chess Template
+# Chess System Design
 
+📚 **Course:** System Design  
+👤 **Author:** Santos Bogo (https://github.com/santosbogo)  
+🎓 **University:** Austral University
 
-This is the template for your chess project. You will use this template to create your own chess game.
+## 📖 Repository Overview
+This project is a highly modular and extensible chess engine that allows for the easy addition of new rules and chess variants. The same core architecture was also used to implement a checkers game. The entire system is immutable, enabling robust **undo/redo** functionality without risk of state corruption.
 
-This template comes with configurations for:
+Additionally, a **client-server architecture** was implemented, allowing two clients to play chess asynchronously over a network. The server processes all game logic, ensuring no shared memory communication between clients.
 
-- Static code analysis 
-- Coverage
+## 🛠 Key Features
 
-It supports both Java code and Kotlin code
+### 🔹 Modularity & Extensibility
+- Easily **add new rules** and **create chess variants** with minimal modifications.
+- The same system was extended to implement **Checkers**.
 
-## Where should you include your code?
+### 🔹 Immutability
+- The entire game state is **immutable**, allowing for:
+  - **Undo/Redo** operations without errors.
+  - **Thread safety** and easy debugging.
 
-Your code should be included in the `engine/src/main/java` or `engine/src/main/kotlin` directory.
+### 🔹 Client-Server Architecture
+- Implemented a **UI-based** chess client.
+- Uses **asynchronous communication** between clients.
+- **All processing is done on the server**, avoiding in-memory client interactions.
 
-## How to build the project?
+## 🎯 Applied Software Design Principles
 
-You can build the project using the following command:
+### 🔹 SOLID Principles
+- **Single Responsibility:** Each class has a well-defined role.
+- **Open/Closed:** New rules and variants can be added without modifying existing code.
+- **Liskov Substitution:** Different game components can be interchanged seamlessly.
+- **Interface Segregation:** Clients depend only on the interfaces they need.
+- **Dependency Inversion:** High-level modules depend on abstractions rather than concrete implementations.
 
-```./gradlew build```
+### 🔹 Design Patterns
+- **Composite:** Used for structuring board elements and move handling.
+- **Strategy:** Allows dynamic selection of movement rules and game variations.
 
-## Testing
+## 🚀 Installation & Usage
+```sh
+git clone https://github.com/yourusername/chess-system-design.git
+cd chess-system-design
+./gradlew build
+```
 
-### Requirements
+### 🔹 Running the Games
+- **Play Chess (Standalone):**
+  ```sh
+  ./gradlew playChess
+  ```
+- **Play Checkers (Standalone):**
+  ```sh
+  ./gradlew playCheckers
+  ```
 
-This project depends on a package published in the GitHub Packages Registry. In order to download it a GitHub token must be used.
-Instruction on how to create a GitHub personal token are [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). 
-Once created the following environment variables must be defined:
-* GITHUB_USER
-* GITHUB_TOKEN
-Or in a file `gradle.properties` the following values must be defined: 
-* github.user 
-* github.token
+### 🔹 Running the Server-Client Mode
+To play using a server, first start the server of the desired game and then launch clients. The first two clients connected will be assigned a color automatically, while any additional clients will act as spectators.
+
+- **Start Chess Server:**
+  ```sh
+  ./gradlew startChessServer
+  ```
+- **Start Checkers Server:**
+  ```sh
+  ./gradlew startCheckersServer
+  ```
+- **Start Client:**
+  ```sh
+  ./gradlew startClient
+  ```

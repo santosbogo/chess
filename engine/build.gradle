@@ -45,7 +45,7 @@ tasks.register("startChessServer", JavaExec) {
 tasks.register("startCheckersServer", JavaExec) {
     group = "application"
     description = "Start checkers server for multiplayer"
-    mainClass = "edu.austral.dissis.clientserver.ClientServerMainKt"
+    mainClass = "edu.austral.dissis.clientserver.StartCheckersServerKt"
     classpath = sourceSets.main.runtimeClasspath
 }
 
