@@ -42,6 +42,10 @@ Additionally, a **client-server architecture** was implemented, allowing two cli
 ```sh
 git clone https://github.com/yourusername/chess-system-design.git
 cd chess-system-design
+````
+
+#### 👷Build the project
+```sh
 ./gradlew build
 ```
 
